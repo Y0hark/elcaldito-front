@@ -11,21 +11,21 @@
           <img src="/public/favicon.ico" alt="Pozole Rouge" class="w-full h-48 object-cover rounded-xl mb-4" />
           <h2 class="text-2xl font-semibold text-primary mb-2">Comment préparer un vrai pozole rouge ?</h2>
           <p class="text-primary/80 mb-4">Découvrez les étapes pour préparer un pozole rouge authentique, comme le faisait ma grand-mère.</p>
-          <NuxtLink to="/blog/comment-preparer-un-vrai-pozole-rouge" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-primary/90 transition-colors duration-300">Lire l'article</NuxtLink>
+          <NuxtLink to="/blog/comment-preparer-un-vrai-pozole-rouge" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">Lire l'article</NuxtLink>
         </div>
 
         <div class="bg-crema rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
           <img src="/public/favicon.ico" alt="Maïs Hominy" class="w-full h-48 object-cover rounded-xl mb-4" />
           <h2 class="text-2xl font-semibold text-primary mb-2">Le maïs hominy, ingrédient sacré du Mexique</h2>
           <p class="text-primary/80 mb-4">Le maïs hominy est un ingrédient essentiel dans la cuisine mexicaine. Apprenez-en plus sur son histoire et son utilisation.</p>
-          <NuxtLink to="/blog/le-mais-hominy-ingredient-sacre-du-mexique" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-primary/90 transition-colors duration-300">Lire l'article</NuxtLink>
+          <NuxtLink to="/blog/le-mais-hominy-ingredient-sacre-du-mexique" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">Lire l'article</NuxtLink>
         </div>
 
         <div class="bg-crema rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300">
           <img src="/public/favicon.ico" alt="Cuisine Mixte" class="w-full h-48 object-cover rounded-xl mb-4" />
           <h2 class="text-2xl font-semibold text-primary mb-2">De Mexico à Marseille : cuisiner entre deux cultures</h2>
           <p class="text-primary/80 mb-4">Comment nous avons fusionné nos traditions culinaires pour créer une expérience unique à Marseille.</p>
-          <NuxtLink to="/blog/de-mexico-a-marseille-cuisiner-entre-deux-cultures" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-primary/90 transition-colors duration-300">Lire l'article</NuxtLink>
+          <NuxtLink to="/blog/de-mexico-a-marseille-cuisiner-entre-deux-cultures" class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">Lire l'article</NuxtLink>
         </div>
       </div>
 

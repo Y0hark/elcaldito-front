@@ -5,9 +5,10 @@ export default {
     extend: {
       colors: {
         primary: '#9b1c1c', // rouge mexicain
-        secondary: '#f6c90e', // jaune soleil
+        secondary: '#bea6a1', // sable nude
         crema: '#fdf6ec', // blanc cassé
-        accent: '#34a853', // vert cactus
+        accent: '#275b00', // vert cactus
+        charcoal: '#2F2F2F',     // Negro Tostado
       },
       fontFamily: {
         sans: ['\'Josefin Sans\'', 'ui-sans-serif', 'system-ui', 'sans-serif'],

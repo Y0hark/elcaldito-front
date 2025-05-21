@@ -5,7 +5,7 @@
       <h1 class="text-4xl md:text-5xl font-bold text-primary drop-shadow-lg text-center">El Caldito</h1>
       <h2 class="text-xl md:text-2xl font-semibold text-secondary text-center">La dark kitchen mexicaine à Marseille</h2>
       <p class="text-lg text-primary/80 text-center max-w-2xl mt-2">Des saveurs authentiques, une ambiance chaleureuse, et la passion du Mexique dans chaque plat.</p>
-      <NuxtLink to="/commander" class="mt-6 px-8 py-3 bg-primary text-crema rounded-xl text-xl font-semibold shadow-lg hover:bg-secondary hover:text-primary transition-colors duration-300">Commander</NuxtLink>
+      <NuxtLink to="/commander" class="mt-6 px-8 py-3 bg-primary text-crema rounded-xl text-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300">Commander</NuxtLink>
     </section>
 
     <!-- Présentation Section -->
@@ -42,7 +42,7 @@
     <section class="container max-w-screen-lg mx-auto bg-primary rounded-xl p-6 md:p-10 shadow-xl flex flex-col items-center mb-10">
       <h3 class="text-2xl font-semibold text-crema mb-2">Contact & Commande</h3>
       <p class="text-crema/90 text-center mb-4">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
-      <a href="mailto:contact@elcaldito.fr" class="px-6 py-2 bg-secondary text-primary rounded-xl font-semibold shadow hover:bg-crema hover:text-primary transition-colors duration-300">Nous écrire</a>
+      <a href="mailto:contact@elcaldito.fr" class="px-6 py-2 bg-secondary text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">Nous écrire</a>
     </section>
   </div>
 </template>

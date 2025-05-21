@@ -10,20 +10,20 @@
         <div>
           <h3 class="text-lg font-semibold mb-2">Liens utiles</h3>
           <ul class="space-y-2">
-            <li><NuxtLink to="/" class="hover:text-secondary transition-all duration-300">Accueil</NuxtLink></li>
-            <li><NuxtLink to="/commander" class="hover:text-secondary transition-all duration-300">Commander</NuxtLink></li>
-            <li><NuxtLink to="/blog" class="hover:text-secondary transition-all duration-300">Blog</NuxtLink></li>
-            <li><NuxtLink to="/a-propos" class="hover:text-secondary transition-all duration-300">À propos</NuxtLink></li>
-            <li><NuxtLink to="/contact" class="hover:text-secondary transition-all duration-300">Contact</NuxtLink></li>
+            <li><NuxtLink to="/" class="hover:text-accent transition-all duration-300">Accueil</NuxtLink></li>
+            <li><NuxtLink to="/commander" class="hover:text-accent transition-all duration-300">Commander</NuxtLink></li>
+            <li><NuxtLink to="/blog" class="hover:text-accent transition-all duration-300">Blog</NuxtLink></li>
+            <li><NuxtLink to="/a-propos" class="hover:text-accent transition-all duration-300">À propos</NuxtLink></li>
+            <li><NuxtLink to="/contact" class="hover:text-accent transition-all duration-300">Contact</NuxtLink></li>
           </ul>
         </div>
 
         <div>
           <h3 class="text-lg font-semibold mb-2">Suivez-nous</h3>
           <div class="flex space-x-4">
-            <a href="#" class="hover:text-secondary transition-all duration-300">Instagram</a>
-            <a href="#" class="hover:text-secondary transition-all duration-300">WhatsApp</a>
-            <a href="mailto:contact@elcaldito.fr" class="hover:text-secondary transition-all duration-300">Email</a>
+            <a href="#" class="hover:text-accent transition-all duration-300">Instagram</a>
+            <a href="#" class="hover:text-accent transition-all duration-300">WhatsApp</a>
+            <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-300">Email</a>
           </div>
         </div>
       </div>

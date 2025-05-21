@@ -25,7 +25,7 @@
               <label for="message" class="block text-sm font-medium text-primary">Message</label>
               <textarea id="message" v-model="form.message" rows="5" placeholder="Votre message" class="rounded-md border border-gray-300 p-3 w-full mt-1 focus:ring-secondary focus:border-secondary"></textarea>
             </div>
-            <button type="submit" class="bg-secondary text-primary font-bold py-3 px-6 rounded-xl hover:bg-accent transition">Envoyer</button>
+            <button type="submit" class="bg-secondary text-primary font-bold py-3 px-6 rounded-xl hover:bg-accent hover:text-crema transition">Envoyer</button>
           </form>
           <p v-if="successMessage" class="text-green-600">{{ successMessage }}</p>
         </div>

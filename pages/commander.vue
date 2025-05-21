@@ -8,7 +8,7 @@
 
       <div class="bg-secondary rounded-xl p-6 shadow-md mb-6">
         <h2 class="text-2xl font-semibold text-primary mb-2">Prochaine distribution : 1er juin – Marseille Centre</h2>
-        <button class="mt-4 px-6 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-primary/90 transition-colors duration-300">
+        <button class="mt-4 px-6 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
           Voir les prochaines disponibilités
         </button>
       </div>

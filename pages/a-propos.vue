@@ -56,7 +56,7 @@
       </section>
 
       <div class="text-center">
-        <NuxtLink to="/commander" class="bg-secondary text-primary font-bold px-6 py-3 rounded-xl hover:bg-accent transition">
+        <NuxtLink to="/commander" class="bg-secondary text-primary font-bold px-6 py-3 rounded-xl hover:bg-accent hover:text-crema transition">
           Commander notre prochain Caldito !
         </NuxtLink>
       </div>
