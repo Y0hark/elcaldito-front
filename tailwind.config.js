@@ -8,7 +8,7 @@ export default {
         secondary: '#bea6a1', // sable nude
         crema: '#fdf6ec', // blanc cassé
         accent: '#275b00', // vert cactus
-        charcoal: '#2F2F2F',     // Negro Tostado
+        charcoal: '#2F2F2F', // Negro Tostado
       },
       fontFamily: {
         sans: ['\'Josefin Sans\'', 'ui-sans-serif', 'system-ui', 'sans-serif'],

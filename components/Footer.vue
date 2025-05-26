@@ -13,6 +13,7 @@
             <li><NuxtLink to="/" class="hover:text-accent transition-all duration-300">Accueil</NuxtLink></li>
             <li><NuxtLink to="/commander" class="hover:text-accent transition-all duration-300">Commander</NuxtLink></li>
             <li><NuxtLink to="/blog" class="hover:text-accent transition-all duration-300">Blog</NuxtLink></li>
+            <li><NuxtLink to="/actus" class="hover:text-accent transition-all duration-300">Actus</NuxtLink></li>
             <li><NuxtLink to="/a-propos" class="hover:text-accent transition-all duration-300">À propos</NuxtLink></li>
             <li><NuxtLink to="/contact" class="hover:text-accent transition-all duration-300">Contact</NuxtLink></li>
           </ul>

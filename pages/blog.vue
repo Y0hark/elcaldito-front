@@ -1,9 +1,35 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
     <div class="max-w-4xl mx-auto p-6">
-      <h1 class="text-4xl font-bold text-primary text-center mb-4">Le Caldito – le blog</h1>
-      <p class="text-lg text-primary/80 text-center mb-6">
-        C'est ici que nous partageons les secrets de la cuisine mexicaine, nos histoires de famille, nos conseils d'ingrédients, et nos réflexions sur la vie de cuisine à Marseille en couple mixte.
+      <h1 class="text-4xl font-bold text-primary text-center mb-4">Le chaudron et le clavier</h1>
+      
+      <div class="bg-charcoal rounded-xl p-8 shadow-xl mb-8">
+        <p class="text-lg text-crema/90 text-center mb-6">
+          Entre deux tétées de nos jumelles et un brassage de bouillon, on écrit ici :
+        </p>
+        
+        <ul class="space-y-4 max-w-2xl mx-auto">
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">🌶️</span>
+            <p class="text-crema/90">Histoires d'ingrédients mexicains introuvables au Panier</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">✈️</span>
+            <p class="text-crema/90">Carnets de voyage culinaire entre Guadalajara et la Bonne Mère</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">🥘</span>
+            <p class="text-crema/90">Conseils pour préparer votre garniture de pozole parfaite (radis, origan, citron vert)</p>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-2xl">❤️</span>
+            <p class="text-crema/90">Billets d'humeur sur la vie de couple mixte en cuisine</p>
+          </li>
+        </ul>
+      </div>
+
+      <p class="text-lg text-primary/80 text-center italic max-w-2xl mx-auto">
+        Prenez une cuillère, servez-vous d'un article, et laissez un commentaire – on répond toujours !
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,8 +1,9 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
     <div class="max-w-4xl mx-auto px-4 py-12">
-      <h1 class="text-4xl font-bold text-primary text-center mb-4">Contactez-nous</h1>
-      <p class="text-lg text-primary/80 text-center mb-8">Une question ? Une envie de discuter ? On vous répond avec plaisir (et un peu de piment 🌶️) !</p>
+      <h1 class="text-4xl font-bold text-primary text-center mb-4">Vous avez une question ? Un craving ? Écrivez-nous !</h1>
+      <p class="text-lg text-primary/80 text-center mb-8">Suggestions, partenariats, envie de réserver pour un événement privé ?
+        Remplissez le formulaire ou contactez-nous directement.</p>
 
       <div class="md:grid md:grid-cols-2 gap-8">
         <div class="space-y-8">
@@ -54,6 +55,9 @@
         </div>
       </div>
     </div>
+    <p class="text-lg text-primary/80 text-center italic">
+      On répond entre deux siestes de nos bébés et deux bouillonnements de marmite !
+      </p>
   </div>
 </template>
 
