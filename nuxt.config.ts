@@ -7,9 +7,19 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
-    },
-    strapi: {
-      token: process.env.STRAPI_API_TOKEN,
+      strapiToken: process.env.STRAPI_API_TOKEN,
+    }
+  },
+
+  // Add route rules
+  routeRules: {
+    '/blog/**': { ssr: true }
+  },
+
+  // Add nitro configuration
+  nitro: {
+    routeRules: {
+      '/blog/**': { cors: true }
     }
   }
 })

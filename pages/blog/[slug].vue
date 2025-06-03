@@ -1,168 +1,128 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary">
-    <!-- Loading State -->
-    <div v-if="pending" class="container max-w-3xl mx-auto py-12 px-4">
-      <div class="animate-pulse">
-        <div class="h-8 bg-charcoal/10 rounded w-3/4 mb-4"></div>
-        <div class="h-4 bg-charcoal/10 rounded w-1/2 mb-8"></div>
-        <div class="h-96 bg-charcoal/10 rounded-xl mb-8"></div>
-        <div class="space-y-4">
-          <div class="h-4 bg-charcoal/10 rounded w-full"></div>
-          <div class="h-4 bg-charcoal/10 rounded w-5/6"></div>
-          <div class="h-4 bg-charcoal/10 rounded w-4/6"></div>
-        </div>
+    <div class="max-w-4xl mx-auto p-6">
+      <div v-if="pending" class="text-center py-12">
+        <p class="text-xl text-primary/60">Chargement de l'article...</p>
       </div>
-    </div>
 
-    <!-- Error State -->
-    <div v-else-if="error" class="container max-w-3xl mx-auto py-12 px-4">
-      <div class="bg-charcoal/10 rounded-xl p-8 text-center">
-        <h2 class="text-2xl font-semibold text-primary mb-4">Oups !</h2>
-        <p class="text-charcoal/80 mb-6">L'article que vous recherchez n'existe pas ou a été déplacé.</p>
-        <NuxtLink to="/blog" class="text-accent hover:underline">← Retour au blog</NuxtLink>
-      </div>
-    </div>
-
-    <!-- Article Content -->
-    <article v-else class="container max-w-3xl mx-auto py-12 px-4 animate-fade-in">
-      <!-- Navigation -->
-      <div class="flex justify-between items-center mb-8">
-        <NuxtLink to="/blog" class="text-accent hover:underline flex items-center gap-2">
-          <span>←</span> Retour au blog
+      <div v-else-if="error" class="text-center py-12">
+        <p class="text-xl text-primary/60">Une erreur est survenue lors du chargement de l'article.</p>
+        <NuxtLink to="/blog" 
+                class="mt-4 inline-block px-6 py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
+          Retour aux articles
         </NuxtLink>
-        <div class="flex gap-4">
-          <button @click="shareOnFacebook" class="text-charcoal/60 hover:text-primary transition-colors">
-            <span class="text-xl">📘</span>
-          </button>
-          <button @click="shareOnWhatsApp" class="text-charcoal/60 hover:text-primary transition-colors">
-            <span class="text-xl">💬</span>
-          </button>
-          <button @click="shareOnInstagram" class="text-charcoal/60 hover:text-primary transition-colors">
-            <span class="text-xl">📸</span>
-          </button>
-        </div>
       </div>
 
-      <!-- Article Header -->
-      <header class="mb-8">
-        <h1 class="text-4xl font-bold text-secondary mb-4">{{ article.title }}</h1>
-        <p v-if="article.excerpt" class="text-xl text-charcoal/80 mb-4">{{ article.excerpt }}</p>
-        <div class="flex items-center gap-4 text-sm text-charcoal/60">
-          <time>{{ formatDate(article.publishedAt) }}</time>
-          <span>•</span>
-          <span>Par {{ article.author }}</span>
+      <div v-else-if="article" class="bg-white rounded-xl p-8 shadow-xl">
+        <img :src="`${config.public.strapiBaseUrl}${article.cover?.url}`" 
+             :alt="article.cover?.alternativeText || article.title"
+             class="w-full h-96 object-cover rounded-xl mb-8" />
+        
+        <h1 class="text-4xl font-bold text-primary mb-4">{{ article.title }}</h1>
+        
+        <div class="flex items-center gap-4 text-primary/60 mb-8">
+          <span>{{ new Date(article.publishedAt).toLocaleDateString('fr-FR') }}</span>
+          <span>{{ article.likes }} ❤️</span>
         </div>
-      </header>
 
-      <!-- Featured Image -->
-      <img 
-        v-if="article.featuredImage" 
-        :src="article.featuredImage" 
-        :alt="article.title"
-        class="w-full h-[400px] object-cover rounded-xl shadow-md mb-8"
-      />
-
-      <!-- Article Content -->
-      <div class="prose prose-lg max-w-none">
-        <div v-html="article.content"></div>
-      </div>
-
-      <!-- Similar Articles -->
-      <section v-if="similarArticles.length" class="mt-16">
-        <h2 class="text-2xl font-semibold text-primary mb-6">Articles similaires</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div v-for="similar in similarArticles" :key="similar.slug" class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow">
-            <img 
-              v-if="similar.featuredImage" 
-              :src="similar.featuredImage" 
-              :alt="similar.title"
-              class="w-full h-48 object-cover rounded-xl mb-4"
-            />
-            <h3 class="text-xl font-semibold text-primary mb-2">{{ similar.title }}</h3>
-            <p class="text-charcoal/80 mb-4">{{ similar.excerpt }}</p>
-            <NuxtLink :to="`/blog/${similar.slug}`" class="text-accent hover:underline">Lire l'article →</NuxtLink>
+        <div class="prose prose-lg max-w-none">
+          <div v-for="(block, index) in article.content" :key="index">
+            <p v-if="block.type === 'paragraph'" class="mb-4">
+              <span v-for="(child, childIndex) in block.children" :key="childIndex">
+                {{ child.text }}
+              </span>
+            </p>
           </div>
         </div>
-      </section>
-    </article>
+
+        <div class="mt-8 pt-8 border-t border-primary/10">
+          <h2 class="text-2xl font-semibold mb-4">Commentaires</h2>
+          <div v-if="article.commentaires && article.commentaires.length > 0">
+            <div v-for="comment in article.commentaires" :key="comment.id" class="mb-4 p-4 bg-crema/50 rounded-lg">
+              <p class="text-primary/80">{{ comment.content }}</p>
+            </div>
+          </div>
+          <p v-else class="text-primary/60 italic">Soyez le premier à commenter cet article !</p>
+        </div>
+      </div>
+
+      <div v-else class="text-center py-12">
+        <p class="text-xl text-primary/60">Article non trouvé</p>
+        <NuxtLink to="/blog" 
+                class="mt-4 inline-block px-6 py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
+          Retour aux articles
+        </NuxtLink>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
+definePageMeta({
+  validate: async (route) => {
+    return typeof route.params.slug === 'string'
+  }
+})
 
 const route = useRoute()
-const slug = route.params.slug
+const config = useRuntimeConfig()
+const { fetchFromStrapi } = useStrapi()
+
+const article = ref(null)
+const pending = ref(true)
+const error = ref(null)
 
 // Fetch article data
-const { data: article, pending, error } = await useFetch(`/api/articles/${slug}`)
+const fetchArticle = async () => {
+  try {
+    console.log('Article page - Starting fetch')
+    console.log('Article page - Route params:', route.params)
 
-// Fetch similar articles
-const { data: similarArticles } = await useFetch(`/api/articles/similar/${slug}`)
+    const { data: articleData, error: fetchError } = await fetchFromStrapi(`/articles?filters[slug][$eq]=${route.params.slug}&populate=*`)
+    
+    if (fetchError.value) {
+      console.error('Article page - Fetch error:', fetchError.value)
+      throw fetchError.value
+    }
 
-// Format date
-const formatDate = (date) => {
-  return new Intl.DateTimeFormat('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  }).format(new Date(date))
+    if (articleData.value?.data?.[0]) {
+      article.value = articleData.value.data[0]
+      console.log('Article page - Found article:', {
+        title: article.value.title,
+        slug: article.value.slug,
+        content: article.value.content
+      })
+    } else {
+      console.log('Article page - No article found')
+    }
+  } catch (e) {
+    console.error('Article page - Error:', e)
+    error.value = e
+  } finally {
+    pending.value = false
+  }
 }
 
-// Share functions
-const shareOnFacebook = () => {
-  const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`
-  window.open(url, '_blank')
-}
+// Fetch article on component mount
+onMounted(() => {
+  console.log('Article page mounted')
+  fetchArticle()
+})
 
-const shareOnWhatsApp = () => {
-  const url = `https://wa.me/?text=${encodeURIComponent(window.location.href)}`
-  window.open(url, '_blank')
-}
-
-const shareOnInstagram = () => {
-  // Instagram doesn't support direct sharing via URL
-  // You might want to copy the link to clipboard instead
-  navigator.clipboard.writeText(window.location.href)
-  alert('Lien copié ! Vous pouvez maintenant le partager sur Instagram.')
-}
-
-// Add custom styles for the article content
+// Set the page title
 useHead({
-  style: [
+  title: article.value ? article.value.title : 'Article non trouvé',
+  meta: [
     {
-      children: `
-        .prose h2, .prose h3 {
-          @apply text-2xl font-semibold text-primary mt-8 mb-4;
-        }
-        .prose p {
-          @apply text-lg leading-relaxed text-charcoal mb-4;
-        }
-        .prose ul {
-          @apply list-disc ml-6 mb-4;
-        }
-        .prose img {
-          @apply rounded-md my-4;
-        }
-        .prose blockquote {
-          @apply italic text-accent border-l-2 pl-4 my-4;
-        }
-        .prose .recipe {
-          @apply bg-crema p-4 border-l-4 border-primary shadow-sm rounded-md my-4;
-        }
-      `
+      name: 'description',
+      content: article.value ? article.value.content[0]?.children[0]?.text : 'Article non trouvé'
     }
   ]
 })
 </script>
 
 <style>
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out;
+.prose {
+  max-width: none;
 }
 </style> 
