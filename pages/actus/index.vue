@@ -54,30 +54,55 @@
             <!-- Post content -->
             <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300">
               <!-- Date -->
-              <time :datetime="post.date" class="text-sm text-charcoal/60 block mb-2">
+              <time 
+                v-if="post.date" 
+                :datetime="post.date" 
+                class="text-sm text-charcoal/60 block mb-2"
+              >
                 {{ formatDate(post.date) }}
               </time>
 
-              <!-- Message -->
-              <p class="text-lg text-charcoal">
-                {{ post.message }}
-              </p>
+              <!-- Title -->
+              <h2 v-if="post.title" class="text-xl font-semibold text-charcoal mb-2">
+                {{ post.title }}
+              </h2>
+
+              <!-- Featured Image -->
+              <div v-if="post.image" class="mb-4 rounded-lg overflow-hidden">
+                <img 
+                  :src="getImageUrl(post.image)" 
+                  :alt="post.image.alternativeText || post.title"
+                  class="w-full h-48 object-cover"
+                  loading="lazy"
+                />
+              </div>
+
+              <!-- Description -->
+              <div v-if="post.description" class="text-lg text-charcoal">
+                <div v-for="(block, blockIndex) in post.description" :key="blockIndex">
+                  <p v-if="block.type === 'paragraph'" class="mb-2">
+                    <span v-for="(child, childIndex) in block.children" :key="childIndex">
+                      {{ child.text }}
+                    </span>
+                  </p>
+                </div>
+              </div>
 
               <!-- Tags -->
               <div v-if="post.tags && post.tags.length" class="flex flex-wrap gap-2 mt-3">
                 <span 
                   v-for="tag in post.tags" 
-                  :key="tag"
+                  :key="tag.id"
                   class="bg-accent/10 text-accent text-xs rounded-full px-2 py-1"
                 >
-                  #{{ tag }}
+                  #{{ tag.name }}
                 </span>
               </div>
 
-              <!-- Link if exists -->
+              <!-- Link to full post -->
               <NuxtLink 
-                v-if="post.link"
-                :to="post.link"
+                v-if="post.slug"
+                :to="`/actus/${post.slug}`"
                 class="mt-3 text-accent hover:underline inline-flex items-center text-sm"
               >
                 En savoir plus
@@ -104,17 +129,24 @@
 </template>
 
 <script setup>
-// Fetch posts data
-const { data: posts, pending, error, refresh } = await useFetch('/api/posts')
+const config = useRuntimeConfig()
+const { fetchFromStrapi } = useStrapi()
+
+const { data: posts, pending, error, refresh } = await fetchFromStrapi('/actus?populate=*')
 
 // Sort posts by date (newest first)
 const sortedPosts = computed(() => {
-  if (!posts.value) return []
-  return [...posts.value].sort((a, b) => new Date(b.date) - new Date(a.date))
+  if (!posts?.value?.data) return []
+  return [...posts.value.data].sort((a, b) => {
+    const dateA = a.date ? new Date(a.date) : new Date(0)
+    const dateB = b.date ? new Date(b.date) : new Date(0)
+    return dateB - dateA
+  })
 })
 
 // Format date in French
 const formatDate = (date) => {
+  if (!date) return ''
   return new Date(date).toLocaleDateString('fr-FR', {
     year: 'numeric',
     month: 'long',
@@ -122,6 +154,14 @@ const formatDate = (date) => {
     hour: '2-digit',
     minute: '2-digit'
   })
+}
+
+// Get image URL with proper format
+const getImageUrl = (image) => {
+  if (!image) return ''
+  // Use medium format if available, otherwise fallback to original
+  const imageUrl = image.formats?.medium?.url || image.url
+  return `${config.public.strapiBaseUrl}${imageUrl}`
 }
 </script>
 
