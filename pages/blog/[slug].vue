@@ -2,15 +2,17 @@
   <div class="min-h-screen bg-crema font-sans text-primary">
     <div class="max-w-4xl mx-auto p-6">
       <div v-if="pending" class="text-center py-12">
-        <p class="text-xl text-primary/60">Chargement de l'article...</p>
+        <LoadingSpinner text="Chargement de l'article..." />
       </div>
 
       <div v-else-if="error" class="text-center py-12">
-        <p class="text-xl text-primary/60">Une erreur est survenue lors du chargement de l'article.</p>
-        <NuxtLink to="/blog" 
-                class="mt-4 inline-block px-6 py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
-          Retour aux articles
-        </NuxtLink>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-6 max-w-md mx-auto">
+          <p class="text-red-600 mb-4">Une erreur est survenue lors du chargement de l'article.</p>
+          <NuxtLink to="/blog" 
+                  class="mt-4 inline-block px-6 py-3 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300">
+            Retour aux articles
+          </NuxtLink>
+        </div>
       </div>
 
       <div v-else-if="article" class="bg-white rounded-xl p-8 shadow-xl">

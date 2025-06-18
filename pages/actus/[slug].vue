@@ -1,28 +1,21 @@
 <template>
   <div class="min-h-screen bg-crema">
     <!-- Loading State -->
-    <div v-if="pending" class="flex justify-center items-center min-h-screen">
-      <div class="animate-pulse flex space-x-4">
-        <div class="h-12 w-12 bg-charcoal/20 rounded-full"></div>
-        <div class="flex-1 space-y-4 py-1">
-          <div class="h-4 bg-charcoal/20 rounded w-3/4"></div>
-          <div class="space-y-2">
-            <div class="h-4 bg-charcoal/20 rounded"></div>
-            <div class="h-4 bg-charcoal/20 rounded w-5/6"></div>
-          </div>
-        </div>
-      </div>
+    <div v-if="pending" class="text-center py-12">
+      <LoadingSpinner text="Chargement de l'article..." />
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error" class="min-h-screen flex flex-col items-center justify-center px-4">
-      <p class="text-charcoal/70 text-center mb-4">Désolé, une erreur est survenue lors du chargement de l'article.</p>
-      <button 
-        @click="refresh"
-        class="px-6 py-2 bg-secondary text-primary rounded-lg hover:bg-accent hover:text-crema transition-colors"
-      >
-        Réessayer
-      </button>
+    <div v-else-if="error" class="text-center py-12">
+      <div class="bg-red-50 border border-red-200 rounded-xl p-6 max-w-md mx-auto">
+        <p class="text-red-600 mb-4">Une erreur est survenue lors du chargement de l'article.</p>
+        <button 
+          @click="refresh"
+          class="px-6 py-2 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300"
+        >
+          Réessayer
+        </button>
+      </div>
     </div>
 
     <!-- Article Content -->

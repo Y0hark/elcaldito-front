@@ -2,7 +2,7 @@
   <nav class="bg-crema text-primary sticky top-0 z-50 shadow-md border-b border-primary/10">
     <div class="flex items-center justify-between px-6 py-4">
       <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity">
-        <img src="/public/favicon.ico" alt="El Caldito Logo" class="w-8 h-8 mr-2" />
+        <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-8 h-8 mr-2" />
         <span class="text-xl font-semibold">El Caldito</span>
       </NuxtLink>
       <div class="hidden md:flex items-center space-x-4">
@@ -21,7 +21,7 @@
     <div v-show="isMenuOpen" class="md:hidden fixed inset-0 bg-crema/95 backdrop-blur-sm flex flex-col items-center justify-center">
       <div class="flex flex-col items-center space-y-4">
         <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity" @click="closeMenu">
-          <img src="/public/favicon.ico" alt="El Caldito Logo" class="w-12 h-12 mb-4" />
+          <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-12 h-12 mb-4" />
         </NuxtLink>
         <NuxtLink to="/" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Accueil</NuxtLink>
         <NuxtLink to="/commander" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Commander</NuxtLink>

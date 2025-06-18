@@ -11,28 +11,29 @@
     <!-- Main Content -->
     <main class="max-w-3xl mx-auto px-4 pb-16">
       <!-- Loading State -->
-      <div v-if="pending" class="flex justify-center items-center py-12">
-        <div class="animate-pulse flex space-x-4">
-          <div class="h-12 w-12 bg-charcoal/20 rounded-full"></div>
-          <div class="flex-1 space-y-4 py-1">
-            <div class="h-4 bg-charcoal/20 rounded w-3/4"></div>
-            <div class="space-y-2">
-              <div class="h-4 bg-charcoal/20 rounded"></div>
-              <div class="h-4 bg-charcoal/20 rounded w-5/6"></div>
-            </div>
-          </div>
-        </div>
+      <div v-if="pending" class="text-center py-12">
+        <LoadingSpinner text="Chargement des actualités..." />
       </div>
 
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-12">
-        <p class="text-charcoal/70">Désolé, une erreur est survenue lors du chargement des actualités.</p>
-        <button 
-          @click="refresh"
-          class="mt-4 px-6 py-2 bg-secondary text-primary rounded-lg hover:bg-accent hover:text-crema transition-colors"
-        >
-          Réessayer
-        </button>
+        <div class="bg-red-50 border border-red-200 rounded-xl p-6 max-w-md mx-auto">
+          <p class="text-red-600 mb-4">Une erreur est survenue lors du chargement des actualités.</p>
+          <button 
+            @click="refresh"
+            class="px-6 py-2 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300"
+          >
+            Réessayer
+          </button>
+        </div>
+      </div>
+
+      <!-- No Posts -->
+      <div v-else-if="!posts || posts.length === 0" class="text-center py-12">
+        <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-md mx-auto">
+          <p class="text-yellow-800 mb-4">Aucune actualité pour le moment.</p>
+          <p class="text-yellow-700 text-sm">Revenez bientôt pour découvrir nos dernières nouvelles !</p>
+        </div>
       </div>
 
       <!-- Timeline -->
@@ -45,7 +46,7 @@
           <article 
             v-for="(post, index) in sortedPosts" 
             :key="post.id"
-            class="relative pl-12 animate-fade-in"
+            class="relative pl-12 animate-on-scroll card-hover"
             :style="{ animationDelay: `${index * 100}ms` }"
           >
             <!-- Timeline dot -->
@@ -129,19 +130,18 @@
 </template>
 
 <script setup>
+import { ref, computed, onMounted, nextTick } from 'vue'
 const config = useRuntimeConfig()
 const { fetchFromStrapi } = useStrapi()
+const { animateOnScroll } = useScrollAnimation()
 
-const { data: posts, pending, error, refresh } = await fetchFromStrapi('/actus?populate=*')
+// Fetch posts data
+const { data: posts, pending, error, refresh } = await fetchFromStrapi('/actus?populate=*&sort=date:desc')
 
-// Sort posts by date (newest first)
+// Sort posts by date
 const sortedPosts = computed(() => {
-  if (!posts?.value?.data) return []
-  return [...posts.value.data].sort((a, b) => {
-    const dateA = a.date ? new Date(a.date) : new Date(0)
-    const dateB = b.date ? new Date(b.date) : new Date(0)
-    return dateB - dateA
-  })
+  if (!posts.value?.data) return []
+  return posts.value.data.sort((a, b) => new Date(b.date) - new Date(a.date))
 })
 
 // Format date in French
@@ -163,6 +163,13 @@ const getImageUrl = (image) => {
   const imageUrl = image.formats?.medium?.url || image.url
   return `${config.public.strapiBaseUrl}${imageUrl}`
 }
+
+onMounted(() => {
+  // Initialiser les animations au scroll
+  nextTick(() => {
+    animateOnScroll()
+  })
+})
 </script>
 
 <style scoped>
