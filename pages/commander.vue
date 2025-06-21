@@ -463,5 +463,6 @@ input[type="number"]::-webkit-inner-spin-button {
 /* Hide number input spinners for Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 </style> 
