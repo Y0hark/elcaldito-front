@@ -6,49 +6,49 @@
         Remplissez le formulaire ou contactez-nous directement.</p>
 
       <div class="md:grid md:grid-cols-2 gap-8">
-        <div class="space-y-8">
+        <div class="bg-white p-8 rounded-xl shadow-md border border-primary/10">
           <form @submit.prevent="submitForm" class="space-y-4">
             <div>
               <label for="firstName" class="block text-sm font-medium text-primary">Prénom</label>
-              <input type="text" id="firstName" v-model="form.firstName" required placeholder="Votre prénom" class="rounded-md border border-gray-300 p-3 w-full mt-1 focus:ring-secondary focus:border-secondary" />
+              <input type="text" id="firstName" v-model="form.firstName" required placeholder="Votre prénom" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none mt-1" />
               <p v-if="errors.firstName" class="text-sm text-red-500 mt-1">{{ errors.firstName }}</p>
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-primary">Email</label>
-              <input type="email" id="email" v-model="form.email" required placeholder="Votre email" class="rounded-md border border-gray-300 p-3 w-full mt-1 focus:ring-secondary focus:border-secondary" />
+              <input type="email" id="email" v-model="form.email" required placeholder="Votre email" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none mt-1" />
               <p v-if="errors.email" class="text-sm text-red-500 mt-1">{{ errors.email }}</p>
             </div>
             <div>
               <label for="subject" class="block text-sm font-medium text-primary">Sujet</label>
-              <input type="text" id="subject" v-model="form.subject" placeholder="Sujet de votre message" class="rounded-md border border-gray-300 p-3 w-full mt-1 focus:ring-secondary focus:border-secondary" />
+              <input type="text" id="subject" v-model="form.subject" placeholder="Sujet de votre message" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none mt-1" />
             </div>
             <div>
               <label for="message" class="block text-sm font-medium text-primary">Message</label>
-              <textarea id="message" v-model="form.message" rows="5" placeholder="Votre message" class="rounded-md border border-gray-300 p-3 w-full mt-1 focus:ring-secondary focus:border-secondary"></textarea>
+              <textarea id="message" v-model="form.message" rows="5" placeholder="Votre message" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none mt-1"></textarea>
             </div>
-            <button type="submit" class="bg-secondary text-primary font-bold py-3 px-6 rounded-xl hover:bg-accent hover:text-crema transition">Envoyer</button>
+            <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Envoyer</button>
           </form>
-          <p v-if="successMessage" class="text-green-600">{{ successMessage }}</p>
+          <p v-if="successMessage" class="text-green-600 mt-4">{{ successMessage }}</p>
         </div>
 
-        <div class="space-y-8">
+        <div class="bg-white p-8 rounded-xl shadow-md border border-primary/10 mt-8 md:mt-0">
           <h2 class="text-2xl font-semibold text-primary mb-4">Informations de contact</h2>
           <p class="text-lg text-primary/80">On cuisine depuis notre maison, mais on est toujours à portée de message !</p>
-          <ul class="space-y-4">
+          <ul class="space-y-4 mt-6">
             <li class="flex items-center">
-              <span class="text-2xl mr-2">📍</span>
+              <span class="text-2xl mr-3">📍</span>
               <span>Marseille (quartier à préciser)</span>
             </li>
             <li class="flex items-center">
-              <span class="text-2xl mr-2">📧</span>
+              <span class="text-2xl mr-3">📧</span>
               <span>contact@elcaldito.fr</span>
             </li>
             <li class="flex items-center">
-              <span class="text-2xl mr-2">📱</span>
+              <span class="text-2xl mr-3">📱</span>
               <span>WhatsApp (si disponible)</span>
             </li>
             <li class="flex items-center">
-              <span class="text-2xl mr-2">📷</span>
+              <span class="text-2xl mr-3">📷</span>
               <span>Instagram</span>
             </li>
           </ul>

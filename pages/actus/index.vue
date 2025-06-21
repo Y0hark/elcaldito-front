@@ -2,8 +2,8 @@
   <div class="min-h-screen bg-crema">
     <!-- Header -->
     <header class="py-12 px-4 text-center">
-      <h1 class="text-4xl font-bold text-secondary">Le coin des nouvelles fraîches (et bien chaudes)</h1>
-      <p class="text-charcoal/70 text-center text-lg mt-2">
+      <h1 class="text-4xl font-bold text-primary">Le coin des nouvelles fraîches (et bien chaudes)</h1>
+      <p class="text-primary/70 text-center text-lg mt-2">
         Suivez l'actualité d'El Caldito en temps réel
       </p>
     </header>
@@ -39,7 +39,7 @@
       <!-- Timeline -->
       <div v-else class="relative">
         <!-- Timeline line -->
-        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-charcoal/20"></div>
+        <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/20"></div>
 
         <!-- Posts -->
         <div class="space-y-8">
@@ -53,18 +53,18 @@
             <div class="absolute left-3 top-2 w-3 h-3 rounded-full bg-accent"></div>
 
             <!-- Post content -->
-            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300">
+            <div class="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-primary/10">
               <!-- Date -->
               <time 
                 v-if="post.date" 
                 :datetime="post.date" 
-                class="text-sm text-charcoal/60 block mb-2"
+                class="text-sm text-primary/60 block mb-2"
               >
                 {{ formatDate(post.date) }}
               </time>
 
               <!-- Title -->
-              <h2 v-if="post.title" class="text-xl font-semibold text-charcoal mb-2">
+              <h2 v-if="post.title" class="text-xl font-semibold text-primary mb-2">
                 {{ post.title }}
               </h2>
 
@@ -79,7 +79,7 @@
               </div>
 
               <!-- Description -->
-              <div v-if="post.description" class="text-lg text-charcoal">
+              <div v-if="post.description" class="text-lg text-primary">
                 <div v-for="(block, blockIndex) in post.description" :key="blockIndex">
                   <p v-if="block.type === 'paragraph'" class="mb-2">
                     <span v-for="(child, childIndex) in block.children" :key="childIndex">

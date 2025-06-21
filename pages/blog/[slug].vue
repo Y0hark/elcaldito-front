@@ -40,7 +40,7 @@
         <div class="mt-8 pt-8 border-t border-primary/10">
           <h2 class="text-2xl font-semibold mb-4">Commentaires</h2>
           <div v-if="article.commentaires && article.commentaires.length > 0">
-            <div v-for="comment in article.commentaires" :key="comment.id" class="mb-4 p-4 bg-crema/50 rounded-lg">
+            <div v-for="comment in article.commentaires" :key="comment.id" class="mb-4 p-4 bg-primary/5 rounded-lg">
               <p class="text-primary/80">{{ comment.content }}</p>
             </div>
           </div>
@@ -51,7 +51,7 @@
       <div v-else class="text-center py-12">
         <p class="text-xl text-primary/60">Article non trouvé</p>
         <NuxtLink to="/blog" 
-                class="mt-4 inline-block px-6 py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
+                class="mt-4 inline-block px-8 py-3 bg-primary text-crema rounded-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300">
           Retour aux articles
         </NuxtLink>
       </div>

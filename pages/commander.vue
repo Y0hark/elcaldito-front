@@ -1,5 +1,11 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
+    <Notification
+      :visible="notification.visible"
+      :message="notification.message"
+      :type="notification.type"
+      @close="closeNotification"
+    />
     <div class="max-w-4xl mx-auto p-6">
       <h1 class="text-4xl font-bold text-primary text-center mb-4">Réservez votre bol de bonheur</h1>
       <p class="text-lg text-primary/80 text-center mb-6">
@@ -33,7 +39,7 @@
       </div>
 
       <!-- Next Distribution -->
-      <div v-else-if="nextDistribution" class="bg-secondary rounded-xl p-6 shadow-md mb-6">
+      <div v-else-if="nextDistribution" class="bg-primary rounded-xl p-6 shadow-md mb-6">
         <div class="flex flex-col md:flex-row items-center gap-6">
           <!-- Image -->
           <div class="w-full md:w-1/3">
@@ -47,88 +53,90 @@
           
           <!-- Info -->
           <div class="flex-1 text-center md:text-left">
-            <h2 class="text-2xl font-semibold text-primary mb-2">{{ nextDistribution.title }}</h2>
-            <p class="text-primary/80 mb-4">{{ formatDate(nextDistribution.date) }}</p>
+            <h2 class="text-2xl font-semibold text-white mb-2">{{ nextDistribution.title }}</h2>
+            <p class="text-white/80 mb-4">{{ formatDate(nextDistribution.date) }}</p>
             <div class="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
-              <div class="bg-primary/10 rounded-lg p-3">
-                <span class="block text-sm text-primary/60">Prix</span>
-                <span class="text-xl font-semibold text-primary">{{ nextDistribution.prix }}€</span>
+              <div class="bg-white/20 rounded-lg p-3">
+                <span class="block text-sm text-white/80">Prix</span>
+                <span class="text-xl font-semibold text-white">{{ nextDistribution.prix }}€</span>
               </div>
-              <div class="bg-primary/10 rounded-lg p-3">
-                <span class="block text-sm text-primary/60">Disponibilités</span>
-                <span class="text-xl font-semibold text-primary">{{ nextDistribution.disponibilite }} bols</span>
+              <div class="bg-white/20 rounded-lg p-3">
+                <span class="block text-sm text-white/80">Disponibilités</span>
+                <span class="text-xl font-semibold text-white">{{ nextDistribution.disponibilite }} bols</span>
               </div>
             </div>
             <button 
               @click="openOrderPanel"
-              class="mt-4 px-6 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition"
+              :disabled="nextDistribution.disponibilite <= 0"
+              class="mt-4 px-6 py-2 bg-white text-primary rounded-xl font-semibold shadow hover:bg-crema transition-colors duration-300 btn-transition disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
             >
-              Réserver maintenant
+              <span v-if="nextDistribution.disponibilite > 0">Réserver maintenant</span>
+              <span v-else>Complet</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="bg-charcoal rounded-xl p-6 shadow-md mb-6">
-        <h2 class="text-2xl font-semibold text-crema mb-4">Comment se passe la commande ?</h2>
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md mb-6">
+        <h2 class="text-2xl font-semibold text-primary mb-4">Comment se passe la commande ?</h2>
         <ul class="space-y-4">
           <li class="flex items-start gap-3">
             <span class="text-2xl">📅</span>
             <div>
-              <span class="font-semibold text-crema">Choisissez la date disponible</span>
-              <p class="text-crema/90">et réservez votre bol.</p>
+              <span class="font-semibold text-primary">Choisissez la date disponible</span>
+              <p class="text-primary/90">et réservez votre bol.</p>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-2xl">🥘</span>
             <div>
-              <span class="font-semibold text-crema">Indiquez le nombre de portions</span>
-              <p class="text-crema/90">(max : 6 par personne).</p>
+              <span class="font-semibold text-primary">Indiquez le nombre de portions</span>
+              <p class="text-primary/90">(max : 6 par personne).</p>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-2xl">💳</span>
             <div>
-              <span class="font-semibold text-crema">Payez en ligne ou en liquide</span>
-              <p class="text-crema/90">(carte via Stripe, bientôt PayPal).</p>
+              <span class="font-semibold text-primary">Payez en ligne ou en liquide</span>
+              <p class="text-primary/90">(carte via Stripe, bientôt PayPal).</p>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-2xl">✉️</span>
             <div>
-              <span class="font-semibold text-crema">Recevez votre confirmation</span>
-              <p class="text-crema/90">par email + SMS.</p>
+              <span class="font-semibold text-primary">Recevez votre confirmation</span>
+              <p class="text-primary/90">par email + SMS.</p>
             </div>
           </li>
           <li class="flex items-start gap-3">
             <span class="text-2xl">🚚</span>
             <div>
-              <span class="font-semibold text-crema">Dégustez</span>
-              <p class="text-crema/90">le jour J : Samuel arrive jusqu'à votre porte ou point-relais.</p>
+              <span class="font-semibold text-primary">Dégustez</span>
+              <p class="text-primary/90">le jour J : Samuel arrive jusqu'à votre porte ou point-relais.</p>
             </div>
           </li>
         </ul>
       </div>
 
-      <div class="bg-charcoal/80 rounded-xl p-6 shadow-md mb-6">
-        <h2 class="text-xl font-semibold text-crema mb-3">Informations pratiques</h2>
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md mb-6">
+        <h2 class="text-xl font-semibold text-primary mb-3">Informations pratiques</h2>
         <div class="flex flex-col md:flex-row gap-6">
           <div class="flex-1">
-            <h3 class="text-lg font-semibold text-crema mb-2">Allergènes</h3>
+            <h3 class="text-lg font-semibold text-primary mb-2">Allergènes</h3>
             <ul class="space-y-2">
-              <li class="flex items-center gap-2 text-crema/90">
+              <li class="flex items-center gap-2 text-primary/90">
                 <span class="text-xl">🌾</span>
                 <span>Sans gluten</span>
               </li>
-              <li class="flex items-center gap-2 text-crema/90">
+              <li class="flex items-center gap-2 text-primary/90">
                 <span class="text-xl">🌶️</span>
                 <span>Peut contenir traces de piment fort</span>
               </li>
             </ul>
           </div>
           <div class="flex-1">
-            <h3 class="text-lg font-semibold text-crema mb-2">Zone de livraison</h3>
-            <p class="text-crema/90 flex items-center gap-2">
+            <h3 class="text-lg font-semibold text-primary mb-2">Zone de livraison</h3>
+            <p class="text-primary/90 flex items-center gap-2">
               <span class="text-xl">📍</span>
               <span>Marseille intra-muros & proches environs</span>
             </p>
@@ -255,32 +263,70 @@
 <script setup>
 import { ref, computed, onMounted, nextTick } from 'vue'
 import { useHead } from '#app'
+import Notification from '~/components/Notification.vue'
 import { useStrapi } from '../composables/useStrapi'
+import { useAuth } from '../composables/useAuth'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
 
 const config = useRuntimeConfig()
-const { fetchFromStrapi } = useStrapi()
+const { fetchFromStrapi, postToStrapi } = useStrapi()
+const { user, isLoggedIn } = useAuth()
 const { animateOnScroll } = useScrollAnimation()
 
 // Fetch next distribution data
 const { data: distribution, pending, error, refresh } = await fetchFromStrapi('/prochaine-marmites?populate=*')
 
 // Get the next distribution
-const nextDistribution = computed(() => distribution.value?.data?.[0])
+const nextDistribution = computed(() => {
+  if (!distribution.value?.data?.length) {
+    return null
+  }
+
+  const now = new Date()
+
+  const upcomingDistributions = distribution.value.data
+    .filter(d => d.date && new Date(d.date) > now)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+
+  return upcomingDistributions.length > 0 ? upcomingDistributions[0] : null
+})
+
+// Total price computed property
+const totalPrice = computed(() => {
+  const prix = nextDistribution.value?.prix || 0
+  const quantite = orderForm.value.quantite || 0
+  return prix * quantite
+})
 
 // Order form state
 const isOrderPanelOpen = ref(false)
 const isSubmitting = ref(false)
 const orderForm = ref({
-  nom: '',
-  email: '',
-  telephone: '',
   quantite: 1,
-  message: ''
+  livraison: false,
+  commentaire: ''
 })
+
+const notification = ref({
+  visible: false,
+  message: '',
+  type: 'success'
+})
+
+const showNotification = (message, type = 'success', duration = 5000) => {
+  notification.value = { visible: true, message, type }
+  setTimeout(() => {
+    closeNotification()
+  }, duration)
+}
+
+const closeNotification = () => {
+  notification.value.visible = false
+}
 
 // Open order panel
 const openOrderPanel = () => {
+  console.log(isLoggedIn.value)
   isOrderPanelOpen.value = true
   document.body.style.overflow = 'hidden'
 }
@@ -298,34 +344,32 @@ const submitOrder = async () => {
   isSubmitting.value = true
 
   try {
-    const response = await fetch('/api/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...orderForm.value,
-        distributionId: nextDistribution.value?.id
-      })
+    const { data: response, error } = await postToStrapi('/commandes', {
+      quantite: orderForm.value.quantite,
+      livraison: orderForm.value.livraison,
+      commentaire: orderForm.value.commentaire,
+      event: nextDistribution.value?.id,
+      state: 'Validée'
     })
 
-    if (response.ok) {
-      alert('Votre commande a été enregistrée avec succès ! Nous vous contacterons bientôt.')
+    if (error.value) {
+      throw new Error(error.value?.data?.error?.message || 'Erreur lors de l\'enregistrement')
+    }
+
+    if (response.value) {
+      showNotification('Votre commande a été enregistrée avec succès ! Nous vous contacterons bientôt.', 'success')
       closeOrderPanel()
       // Reset form
       orderForm.value = {
-        nom: '',
-        email: '',
-        telephone: '',
         quantite: 1,
-        message: ''
+        livraison: false,
+        commentaire: ''
       }
-    } else {
-      throw new Error('Erreur lors de l\'enregistrement')
+      await refresh()
     }
   } catch (error) {
     console.error('Error submitting order:', error)
-    alert('Une erreur est survenue lors de l\'enregistrement de votre commande. Veuillez réessayer.')
+    showNotification(error.message || 'Une erreur est survenue. Veuillez réessayer.', 'error')
   } finally {
     isSubmitting.value = false
   }
@@ -348,6 +392,19 @@ const formatDate = (date) => {
     hour: '2-digit',
     minute: '2-digit'
   }).format(new Date(date))
+}
+
+// Add these functions
+const incrementQuantity = () => {
+  if (orderForm.value.quantite < 6) {
+    orderForm.value.quantite++
+  }
+}
+
+const decrementQuantity = () => {
+  if (orderForm.value.quantite > 1) {
+    orderForm.value.quantite--
+  }
 }
 
 onMounted(() => {
@@ -394,5 +451,17 @@ useHead({
   to {
     transform: translateY(100%);
   }
+}
+
+/* Hide number input spinners for Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide number input spinners for Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 </style> 

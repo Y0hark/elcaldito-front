@@ -50,12 +50,12 @@
     </section>
 
     <!-- Présentation Section -->
-    <section class="container max-w-screen-lg mx-auto bg-charcoal/95 rounded-xl p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-12 items-center mb-10">
+    <section class="container max-w-screen-lg mx-auto bg-white border border-primary/10 rounded-xl p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-12 items-center mb-10">
       <div class="flex-1">
-        <h3 class="text-2xl font-semibold text-crema mb-2">Bienvenue chez El Caldito</h3>
-        <p class="text-crema/90 text-lg leading-relaxed">
-          Nous sommes <span class="font-semibold">Viviana</span>, Mexicaine jusqu'au bout des épices, et <span class="font-semibold">Samuel</span>, Marseillais amoureux de tout ce qui se mange avec du piment (et fou amoureux de Viviana).<br><br>
-          Ensemble, nous mijotons un <span class="font-semibold text-crema">pozole maison</span> – ce "caldito" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d'un goût familial ou la curiosité d'une <span class="italic">fiesta de saveurs</span>.
+        <h3 class="text-2xl font-semibold text-primary mb-2">Bienvenue chez El Caldito</h3>
+        <p class="text-primary/90 text-lg leading-relaxed">
+          Nous sommes <span class="font-semibold text-primary">Viviana</span>, Mexicaine jusqu'au bout des épices, et <span class="font-semibold text-primary">Samuel</span>, Marseillais amoureux de tout ce qui se mange avec du piment (et fou amoureux de Viviana).<br><br>
+          Ensemble, nous mijotons un <span class="font-semibold text-primary">pozole maison</span> – ce "caldito" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d'un goût familial ou la curiosité d'une <span class="italic">fiesta de saveurs</span>.
         </p>
       </div>
       <div class="flex-1 flex justify-center">
@@ -65,33 +65,33 @@
 
     <!-- Valeurs/Avantages Section -->
     <section class="container max-w-screen-lg mx-auto grid md:grid-cols-4 gap-6 mb-10">
-      <div class="bg-charcoal rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
         <span class="text-3xl mb-2">👨‍🍳</span>
-        <h4 class="text-xl font-semibold text-crema mb-1">Recette unique</h4>
-        <p class="text-crema/90 text-center">Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis.</p>
+        <h4 class="text-xl font-semibold text-primary mb-1">Recette unique</h4>
+        <p class="text-primary/90 text-center">Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis.</p>
       </div>
-      <div class="bg-charcoal rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
         <span class="text-3xl mb-2">🌍</span>
-        <h4 class="text-xl font-semibold text-crema mb-1">Ingrédients sourcés</h4>
-        <p class="text-crema/90 text-center">On marie les saveurs du Mexique avec les trésors de la France.</p>
+        <h4 class="text-xl font-semibold text-primary mb-1">Ingrédients sourcés</h4>
+        <p class="text-primary/90 text-center">On marie les saveurs du Mexique avec les trésors de la France.</p>
       </div>
-      <div class="bg-charcoal rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
         <span class="text-3xl mb-2">⏳</span>
-        <h4 class="text-xl font-semibold text-crema mb-1">Cuisson lente</h4>
-        <p class="text-crema/90 text-center">Qui parfume toute la maison (et bientôt la vôtre).</p>
+        <h4 class="text-xl font-semibold text-primary mb-1">Cuisson lente</h4>
+        <p class="text-primary/90 text-center">Qui parfume toute la maison (et bientôt la vôtre).</p>
       </div>
-      <div class="bg-charcoal rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
+      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
         <span class="text-3xl mb-2">🚚</span>
-        <h4 class="text-xl font-semibold text-crema mb-1">Samuel vous livre</h4>
-        <p class="text-crema/90 text-center">Sourire compris.</p>
+        <h4 class="text-xl font-semibold text-primary mb-1">Samuel vous livre</h4>
+        <p class="text-primary/90 text-center">Sourire compris.</p>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="container max-w-screen-lg mx-auto bg-charcoal rounded-xl p-6 md:p-10 shadow-xl flex flex-col items-center mb-10 animate-on-scroll">
-      <h3 class="text-2xl font-semibold text-crema mb-2">Contact & Commande</h3>
-      <p class="text-crema/90 text-center mb-4">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
-      <a href="mailto:contact@elcaldito.fr" class="px-6 py-2 bg-secondary text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Nous écrire</a>
+    <section class="container max-w-screen-lg mx-auto bg-white border border-primary/10 rounded-xl p-6 md:p-10 shadow-xl flex flex-col items-center mb-10 animate-on-scroll">
+      <h3 class="text-2xl font-semibold text-primary mb-2">Contact & Commande</h3>
+      <p class="text-primary/90 text-center mb-4">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
+      <a href="mailto:contact@elcaldito.fr" class="px-8 py-3 bg-primary text-crema rounded-xl text-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Nous écrire</a>
     </section>
   </div>
 </template>
@@ -109,7 +109,19 @@ const { animateOnScroll, addStaggeredAnimation } = useScrollAnimation()
 const { data: distribution, pending, error, refresh } = await fetchFromStrapi('/prochaine-marmites?populate=*')
 
 // Get the next distribution
-const nextDistribution = computed(() => distribution.value?.data?.[0])
+const nextDistribution = computed(() => {
+  if (!distribution.value?.data?.length) {
+    return null
+  }
+
+  const now = new Date()
+
+  const upcomingDistributions = distribution.value.data
+    .filter(d => d.date && new Date(d.date) > now)
+    .sort((a, b) => new Date(a.date) - new Date(b.date))
+
+  return upcomingDistributions.length > 0 ? upcomingDistributions[0] : null
+})
 
 // Variables pour le compte à rebours
 const days = ref(0)
