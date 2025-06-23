@@ -1,5 +1,26 @@
 <template>
-  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
+  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
+    <div class="w-full max-w-xl mx-auto p-3 mobiledesktop:p-6">
+      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">Contactez-nous</h1>
+      <p class="text-base text-primary/80 text-center mb-4 mobiledesktop:text-lg mobiledesktop:mb-6">
+        Une question, une demande spéciale ou juste envie de nous dire hola ? Remplissez le formulaire ci-dessous ou écrivez-nous directement à <a href="mailto:contact@elcaldito.fr" class="text-accent underline">contact@elcaldito.fr</a>.
+      </p>
+      <form class="bg-white border border-primary/10 rounded-xl p-4 shadow-md space-y-4 mobiledesktop:p-6 mobiledesktop:space-y-6">
+        <div>
+          <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Nom</label>
+          <input type="text" required class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base mobiledesktop:text-lg" />
+        </div>
+        <div>
+          <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Email</label>
+          <input type="email" required class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base mobiledesktop:text-lg" />
+        </div>
+        <div>
+          <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Message</label>
+          <textarea rows="5" required class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base mobiledesktop:text-lg"></textarea>
+        </div>
+        <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg">Envoyer</button>
+      </form>
+    </div>
     <div class="max-w-4xl mx-auto px-4 py-12">
       <h1 class="text-4xl font-bold text-primary text-center mb-4">Vous avez une question ? Un craving ? Écrivez-nous !</h1>
       <p class="text-lg text-primary/80 text-center mb-8">Suggestions, partenariats, envie de réserver pour un événement privé ?

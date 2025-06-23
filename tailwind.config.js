@@ -13,6 +13,9 @@ export default {
       fontFamily: {
         sans: ['\'Josefin Sans\'', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
+      screens: {
+        'mobiledesktop': '1000px',
+      },
     },
   },
   plugins: [],

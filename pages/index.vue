@@ -1,97 +1,97 @@
 <template>
-  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
+  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <!-- Hero Section -->
-    <section class="container max-w-screen-lg mx-auto flex flex-col items-center justify-center flex-1 gap-6 py-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-primary drop-shadow-lg text-center">Le Pozole qui réchauffe Marseille.</h1>
-      <h2 class="text-xl md:text-2xl font-semibold text-secondary text-center">Une marmite. Deux cœurs. Un seul goût d'authenticité.</h2>
+    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-none flex flex-col items-center justify-center flex-1 gap-6 py-10 mobiledesktop:py-16 px-2 mobiledesktop:px-0">
+      <h1 class="text-2xl font-bold text-primary drop-shadow-lg text-center mobiledesktop:text-4xl">Le Pozole qui réchauffe Marseille.</h1>
+      <h2 class="text-base font-semibold text-secondary text-center mobiledesktop:text-xl">Une marmite. Deux cœurs. Un seul goût d'authenticité.</h2>
       
       <!-- Loading State -->
-      <div v-if="pending" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl">
+      <div v-if="pending" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
         <LoadingSpinner text="Préparation de la prochaine marmite..." />
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl">
+      <div v-else-if="error" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
         <p class="text-crema text-center mb-4">Désolé, une erreur est survenue lors du chargement des disponibilités.</p>
         <button 
           @click="refresh"
-          class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300"
+          class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block"
         >
           Réessayer
         </button>
       </div>
 
       <!-- Countdown Widget -->
-      <div v-else-if="nextDistribution" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl">
-        <h3 class="text-xl font-semibold text-crema text-center mb-4">Prochaine cuisson dans :</h3>
-        <div class="grid grid-cols-4 gap-4 text-center">
-          <div class="bg-crema rounded-lg p-3">
-            <div class="text-2xl font-bold text-primary">{{ days }}</div>
-            <div class="text-sm text-primary/80">Jours</div>
+      <div v-else-if="nextDistribution" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
+        <h3 class="text-base font-semibold text-crema text-center mb-4 mobiledesktop:text-xl">Prochaine cuisson dans :</h3>
+        <div class="grid grid-cols-2 gap-2 mobiledesktop:grid-cols-4 mobiledesktop:gap-4 text-center">
+          <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
+            <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ days }}</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Jours</div>
           </div>
-          <div class="bg-crema rounded-lg p-3">
-            <div class="text-2xl font-bold text-primary">{{ hours }}</div>
-            <div class="text-sm text-primary/80">Heures</div>
+          <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
+            <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ hours }}</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Heures</div>
           </div>
-          <div class="bg-crema rounded-lg p-3">
-            <div class="text-2xl font-bold text-primary">{{ minutes }}</div>
-            <div class="text-sm text-primary/80">Minutes</div>
+          <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
+            <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ minutes }}</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Minutes</div>
           </div>
-          <div class="bg-crema rounded-lg p-3">
-            <div class="text-2xl font-bold text-primary">{{ seconds }}</div>
-            <div class="text-sm text-primary/80">Secondes</div>
+          <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
+            <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ seconds }}</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Secondes</div>
           </div>
         </div>
-        <h4 class="text-sm font-semibold text-crema text-center mt-4">⏳ Portions limitées : {{ nextDistribution.disponibilite }} bols disponibles !</h4>
+        <h4 class="text-xs font-semibold text-crema text-center mt-4 mobiledesktop:text-sm">⏳ Portions limitées : {{ nextDistribution.disponibilite }} bols disponibles !</h4>
       </div>
 
       <p class="text-lg text-primary/80 text-center max-w-2xl mt-2"></p>
-      <NuxtLink to="/commander" class="mt-6 px-8 py-3 bg-primary text-crema rounded-xl text-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Commander</NuxtLink>
+      <NuxtLink to="/commander" class="mt-6 px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">Commander</NuxtLink>
     </section>
 
     <!-- Présentation Section -->
-    <section class="container max-w-screen-lg mx-auto bg-white border border-primary/10 rounded-xl p-6 md:p-10 shadow-xl flex flex-col md:flex-row gap-6 md:gap-12 items-center mb-10">
-      <div class="flex-1">
-        <h3 class="text-2xl font-semibold text-primary mb-2">Bienvenue chez El Caldito</h3>
-        <p class="text-primary/90 text-lg leading-relaxed">
+    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg bg-white border border-primary/10 rounded-xl p-4 mobiledesktop:p-10 shadow-xl flex flex-col mobiledesktop:flex-row gap-4 mobiledesktop:gap-12 items-center mb-8 mobiledesktop:mb-10">
+      <div class="flex-1 text-center mobiledesktop:text-left">
+        <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">Bienvenue chez El Caldito</h3>
+        <p class="text-primary/90 text-base leading-relaxed mobiledesktop:text-lg">
           Nous sommes <span class="font-semibold text-primary">Viviana</span>, Mexicaine jusqu'au bout des épices, et <span class="font-semibold text-primary">Samuel</span>, Marseillais amoureux de tout ce qui se mange avec du piment (et fou amoureux de Viviana).<br><br>
           Ensemble, nous mijotons un <span class="font-semibold text-primary">pozole maison</span> – ce "caldito" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d'un goût familial ou la curiosité d'une <span class="italic">fiesta de saveurs</span>.
         </p>
       </div>
-      <div class="flex-1 flex justify-center">
-        <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-32 h-32 rounded-full border-4 border-secondary shadow-md bg-crema" />
+      <div class="flex-1 flex justify-center mt-4 mobiledesktop:mt-0">
+        <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-24 h-24 rounded-full border-4 border-secondary shadow-md bg-crema mobiledesktop:w-32 mobiledesktop:h-32" />
       </div>
     </section>
 
     <!-- Valeurs/Avantages Section -->
-    <section class="container max-w-screen-lg mx-auto grid md:grid-cols-4 gap-6 mb-10">
-      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
-        <span class="text-3xl mb-2">👨‍🍳</span>
-        <h4 class="text-xl font-semibold text-primary mb-1">Recette unique</h4>
-        <p class="text-primary/90 text-center">Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis.</p>
+    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg grid grid-cols-1 gap-4 mobiledesktop:mx-auto mobiledesktop:grid-cols-4 mobiledesktop:gap-6 mb-8 mobiledesktop:mb-10 px-1 mobiledesktop:px-0">
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
+        <span class="text-2xl mb-2 mobiledesktop:text-3xl">👨‍🍳</span>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Recette unique</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis.</p>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
-        <span class="text-3xl mb-2">🌍</span>
-        <h4 class="text-xl font-semibold text-primary mb-1">Ingrédients sourcés</h4>
-        <p class="text-primary/90 text-center">On marie les saveurs du Mexique avec les trésors de la France.</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
+        <span class="text-2xl mb-2 mobiledesktop:text-3xl">🌍</span>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Ingrédients sourcés</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">On marie les saveurs du Mexique avec les trésors de la France.</p>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
-        <span class="text-3xl mb-2">⏳</span>
-        <h4 class="text-xl font-semibold text-primary mb-1">Cuisson lente</h4>
-        <p class="text-primary/90 text-center">Qui parfume toute la maison (et bientôt la vôtre).</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
+        <span class="text-2xl mb-2 mobiledesktop:text-3xl">⏳</span>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Cuisson lente</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Qui parfume toute la maison (et bientôt la vôtre).</p>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-6 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
-        <span class="text-3xl mb-2">🚚</span>
-        <h4 class="text-xl font-semibold text-primary mb-1">Samuel vous livre</h4>
-        <p class="text-primary/90 text-center">Sourire compris.</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
+        <span class="text-2xl mb-2 mobiledesktop:text-3xl">🚚</span>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Samuel vous livre</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Sourire compris.</p>
       </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="container max-w-screen-lg mx-auto bg-white border border-primary/10 rounded-xl p-6 md:p-10 shadow-xl flex flex-col items-center mb-10 animate-on-scroll">
-      <h3 class="text-2xl font-semibold text-primary mb-2">Contact & Commande</h3>
-      <p class="text-primary/90 text-center mb-4">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
-      <a href="mailto:contact@elcaldito.fr" class="px-8 py-3 bg-primary text-crema rounded-xl text-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Nous écrire</a>
+    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg bg-white border border-primary/10 rounded-xl p-4 mobiledesktop:p-10 shadow-xl flex flex-col items-center mb-8 mobiledesktop:mb-10 animate-on-scroll">
+      <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">Contact & Commande</h3>
+      <p class="text-primary/90 text-center mb-4 text-sm mobiledesktop:text-base">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
+      <a href="mailto:contact@elcaldito.fr" class="px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">Nous écrire</a>
     </section>
   </div>
 </template>
@@ -101,6 +101,7 @@
 import { useHead } from '#app'
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
+import LoadingSpinner from '~/components/LoadingSpinner.vue'
 const config = useRuntimeConfig()
 const { fetchFromStrapi } = useStrapi()
 const { animateOnScroll, addStaggeredAnimation } = useScrollAnimation()

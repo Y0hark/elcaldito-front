@@ -1,21 +1,19 @@
 <template>
   <div class="min-h-screen bg-crema">
     <!-- Loading State -->
-    <div v-if="pending" class="text-center py-12">
+    <div v-if="pending" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl mx-auto">
       <LoadingSpinner text="Chargement de l'article..." />
     </div>
 
     <!-- Error State -->
-    <div v-else-if="error" class="text-center py-12">
-      <div class="bg-red-50 border border-red-200 rounded-xl p-6 max-w-md mx-auto">
-        <p class="text-red-600 mb-4">Une erreur est survenue lors du chargement de l'article.</p>
-        <button 
-          @click="refresh"
-          class="px-6 py-2 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300"
-        >
-          Réessayer
-        </button>
-      </div>
+    <div v-else-if="error" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl mx-auto">
+      <p class="text-crema text-center mb-4">Une erreur est survenue lors du chargement de l'article.</p>
+      <button 
+        @click="refresh"
+        class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block"
+      >
+        Réessayer
+      </button>
     </div>
 
     <!-- Article Content -->
@@ -132,6 +130,8 @@
 </template>
 
 <script setup>
+import LoadingSpinner from '~/components/LoadingSpinner.vue'
+
 const route = useRoute()
 const config = useRuntimeConfig()
 const { fetchFromStrapi } = useStrapi()

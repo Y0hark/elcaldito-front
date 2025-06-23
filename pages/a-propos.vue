@@ -1,77 +1,35 @@
 <template>
-  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col">
-    <div class="max-w-4xl mx-auto p-6">
-      <h1 class="text-4xl font-bold text-primary text-center mb-12">Deux âmes, une marmite</h1>
-
-      <!-- Notre histoire -->
-      <section class="mb-16">
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-          <!-- Viviana -->
-          <div class="bg-white border border-primary/10 rounded-xl p-8 shadow-xl">
-            <h2 class="text-2xl font-semibold text-primary mb-4">Viviana</h2>
-            <p class="text-primary/90 leading-relaxed space-y-3">
-              <span class="block">Née au Mexique, biberonnée au pozole rouge, diplômée en commerce international et chef en herbe depuis qu'elle tient une louche.</span>
-              <span class="block italic text-primary/80">Depuis 2024, elle est titulaire du prestigieux titre de "Meilleure Chef de l'Univers" décerné par la Revue Culinaire de Samuel.</span>
-            </p>
-          </div>
-          <!-- Samuel -->
-          <div class="bg-white border border-primary/10 rounded-xl p-8 shadow-xl">
-            <h2 class="text-2xl font-semibold text-primary mb-4">Samuel</h2>
-            <p class="text-primary/90 leading-relaxed space-y-3">
-              <span class="block">Né à Marseille, il a grandit à la campagne et est revenu sous la protection de la bonne mère pour faire ses études.</span>
-              <span class="block italic text-primary/80">Il tombe par la suite éperduement amoureux de Viviana… et du Mexique.</span>
-            </p>
-          </div>
-        </div>
-
-        <!-- Rencontre & Aujourd'hui -->
-        <div class="grid md:grid-cols-2 gap-8">
-          <div class="bg-white border border-primary/10 rounded-xl p-8 shadow-xl">
-            <h2 class="text-2xl font-semibold text-primary mb-4">Rencontre</h2>
-            <p class="text-primary/90 leading-relaxed">
-              <span class="block font-medium">France 2023.</span>
-              <span class="block italic text-primary/80 mt-2">Coup de foudre pimenté <span class="text-accent">(Habanero)</span>.</span>
-            </p>
-          </div>
-          <div class="bg-white border border-primary/10 rounded-xl p-8 shadow-xl">
-            <h2 class="text-2xl font-semibold text-primary mb-4">Aujourd'hui</h2>
-            <p class="text-primary/90 leading-relaxed space-y-3">
-              <span class="block">Fiancés, parents de jumelles <span class="text-accent">(futures dégustatrices officielles)</span>.</span>
-              <span class="block">Lui code, elle cuisine.</span>
-              <span class="block italic text-primary/80">Ensemble, ils servent l'âme du Mexique dans des bols.</span>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Notre mission -->
-      <section class="mb-16">
-        <div class="bg-white border border-primary/10 rounded-xl p-8 shadow-xl text-center">
-          <h2 class="text-2xl font-semibold text-primary mb-4">Notre mission</h2>
-          <p class="text-xl text-primary/90 italic leading-relaxed">
-            <span class="block">Partager un caldito qui rassemble :</span>
-            <span class="block text-primary mt-2">une gorgée, et les frontières fondent.</span>
-          </p>
-        </div>
-      </section>
-
-      <!-- Nos valeurs -->
-      <section class="mb-16">
-        <h2 class="text-2xl font-semibold text-primary mb-8 text-center">Nos valeurs</h2>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="px-6 py-3 bg-white border border-primary/10 text-primary rounded-full text-lg font-medium shadow-sm">Authenticité</span>
-          <span class="px-6 py-3 bg-white border border-primary/10 text-primary rounded-full text-lg font-medium shadow-sm">Générosité</span>
-          <span class="px-6 py-3 bg-white border border-primary/10 text-primary rounded-full text-lg font-medium shadow-sm">Convivialité</span>
-          <span class="px-6 py-3 bg-white border border-primary/10 text-primary rounded-full text-lg font-medium shadow-sm">Slow Food</span>
-          <span class="px-6 py-3 bg-white border border-primary/10 text-primary rounded-full text-lg font-medium shadow-sm">Famille avant tout</span>
-        </div>
-      </section>
-
-      <!-- CTA -->
-      <div class="text-center">
-        <NuxtLink to="/commander" class="inline-block bg-primary text-crema font-bold px-8 py-4 rounded-xl hover:bg-accent hover:text-crema transition-colors duration-300 shadow-lg hover:shadow-xl btn-transition">
-          Commander notre prochain Caldito !
-        </NuxtLink>
+  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
+    <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
+      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">À propos</h1>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Notre histoire</h2>
+        <p class="text-base text-primary/90 leading-relaxed mobiledesktop:text-lg">
+          El Caldito, c'est l'histoire d'une rencontre entre Viviana, Mexicaine passionnée, et Samuel, Marseillais amoureux de la cuisine et de la vie. Ensemble, ils ont décidé de partager un peu de leur culture et de leur amour à travers un plat emblématique : le pozole.
+        </p>
+      </div>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Nos valeurs</h2>
+        <ul class="space-y-2 mobiledesktop:space-y-3">
+          <li class="flex items-start gap-2 mobiledesktop:gap-3">
+            <span class="text-xl mobiledesktop:text-2xl">🌶️</span>
+            <span class="text-base mobiledesktop:text-lg">Authenticité mexicaine</span>
+          </li>
+          <li class="flex items-start gap-2 mobiledesktop:gap-3">
+            <span class="text-xl mobiledesktop:text-2xl">❤️</span>
+            <span class="text-base mobiledesktop:text-lg">Cuisine maison et conviviale</span>
+          </li>
+          <li class="flex items-start gap-2 mobiledesktop:gap-3">
+            <span class="text-xl mobiledesktop:text-2xl">🌱</span>
+            <span class="text-base mobiledesktop:text-lg">Produits frais et locaux</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Notre mission</h2>
+        <p class="text-base text-primary/90 leading-relaxed mobiledesktop:text-lg">
+          Faire découvrir le vrai goût du Mexique à Marseille, dans une ambiance chaleureuse et familiale. Chaque bol de pozole est une invitation au voyage et au partage.
+        </p>
       </div>
     </div>
   </div>

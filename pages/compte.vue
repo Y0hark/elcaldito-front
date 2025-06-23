@@ -1,9 +1,9 @@
 <template>
-  <div class="min-h-screen bg-crema">
-    <div class="max-w-2xl mx-auto py-10 px-4">
-      <h1 class="text-3xl font-bold mb-6 text-primary">Mon compte</h1>
-      <div class="bg-white rounded-xl shadow p-6 mb-8 border border-primary/10">
-        <h2 class="text-xl font-semibold text-primary mb-4">Mes informations</h2>
+  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
+    <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
+      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">Mon compte</h1>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Mes informations</h2>
         <div v-if="user" class="space-y-3">
           <div class="flex items-center gap-x-8">
             <span class="w-32 font-medium text-primary/70">Email</span>
@@ -18,31 +18,24 @@
           <p class="text-primary/60">Chargement de vos informations...</p>
         </div>
       </div>
-      <div class="bg-white rounded-xl shadow p-6 border border-primary/10">
-        <h2 class="text-xl font-semibold text-primary mb-4">Mes commandes</h2>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Mes commandes</h2>
         <div v-if="pending" class="text-center text-primary/60">
           <LoadingSpinner text="Chargement des commandes..." />
         </div>
         <div v-else-if="error" class="text-red-500 text-center">
           Erreur lors du chargement des commandes.
         </div>
-        <ul v-else-if="commandes.length > 0" class="space-y-4">
-          <li v-for="commande in commandes" :key="commande.id" class="border border-primary/10 rounded-lg p-4 bg-primary/5">
-            <div class="flex justify-between items-start">
-              <div>
-                <p class="font-semibold text-lg">{{ commande.event?.title }}</p>
-                <p class="text-sm text-primary/70">{{ formatDate(commande.createdAt) }}</p>
-              </div>
-              <span :class="getStatusClass(commande.state)" class="text-xs font-semibold px-2 py-1 rounded-full uppercase tracking-wider">{{ commande.state }}</span>
-            </div>
-            <div class="mt-4 border-t border-primary/10 pt-4 text-sm space-y-1">
-              <p><span class="font-medium">Quantité:</span> {{ commande.quantite }} bols</p>
-              <p><span class="font-medium">Total:</span> {{ ((commande.quantite * (commande.event?.prix || 0))).toFixed(2) }}€</p>
-            </div>
+        <ul v-else-if="commandes.length > 0" class="space-y-2 mobiledesktop:space-y-3">
+          <li v-for="commande in commandes" :key="commande.id" class="flex flex-col mobiledesktop:flex-row mobiledesktop:items-center gap-2 mobiledesktop:gap-4 bg-primary/5 rounded-lg p-3">
+            <span class="font-semibold text-primary">{{ commande.event?.title }}</span>
+            <span class="text-primary/80 text-sm">{{ formatDate(commande.createdAt) }}</span>
+            <span :class="getStatusClass(commande.state)" class="text-xs font-semibold px-2 py-1 rounded-full uppercase tracking-wider">{{ commande.state }}</span>
           </li>
         </ul>
         <p v-else class="text-primary/60 italic text-center">Vous n'avez pas encore passé de commande.</p>
       </div>
+      <button class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg">Se déconnecter</button>
     </div>
   </div>
 </template>

@@ -1,55 +1,69 @@
 <template>
   <nav class="bg-crema text-primary sticky top-0 z-50 shadow-md border-b border-primary/10">
-    <div class="flex items-center justify-between px-6 py-4">
-      <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity">
-        <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-8 h-8 mr-2" />
-        <span class="text-xl font-semibold">El Caldito</span>
+    <div class="flex items-center justify-between px-4 py-3 mobiledesktop:px-6 mobiledesktop:py-4">
+      <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity focus:outline-none" tabindex="0">
+        <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-9 h-9 mr-2 mobiledesktop:w-10 mobiledesktop:h-10" />
+        <span class="text-lg font-semibold mobiledesktop:text-xl">El Caldito</span>
       </NuxtLink>
-      <div class="hidden md:flex items-center space-x-4">
-        <NuxtLink to="/" class="nav-link px-4 py-2">Accueil</NuxtLink>
-        <NuxtLink to="/commander" class="nav-link px-4 py-2">Commander</NuxtLink>
-        <NuxtLink to="/blog" class="nav-link px-4 py-2">Blog</NuxtLink>
-        <NuxtLink to="/actus" class="nav-link px-4 py-2">Actus</NuxtLink>
-        <NuxtLink to="/a-propos" class="nav-link px-4 py-2">À propos</NuxtLink>
-        <NuxtLink to="/contact" class="nav-link px-4 py-2">Contact</NuxtLink>
-        
-        <div v-if="isLoggedIn" class="relative" @mouseenter="isUserMenuOpen = true" @mouseleave="isUserMenuOpen = false">
-          <button class="nav-link px-4 py-2 flex items-center" aria-label="Menu utilisateur">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+      <!-- Menu desktop -->
+      <div class="hidden mobiledesktop:flex items-center space-x-2 mobiledesktop:space-x-4">
+        <NuxtLink to="/" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Accueil</NuxtLink>
+        <NuxtLink to="/commander" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Commander</NuxtLink>
+        <NuxtLink to="/blog" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Blog</NuxtLink>
+        <NuxtLink to="/actus" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Actus</NuxtLink>
+        <NuxtLink to="/a-propos" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">À propos</NuxtLink>
+        <NuxtLink to="/contact" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Contact</NuxtLink>
+        <div class="relative group">
+          <button v-if="isLoggedIn" class="px-2 py-2 rounded-lg flex items-center hover:text-accent transition-colors duration-200" @click="isUserMenuOpen = !isUserMenuOpen" aria-label="Menu utilisateur">
+            <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
           </button>
+          <NuxtLink v-else to="/login" class="px-2 py-2 rounded-lg flex items-center group hover:text-accent transition-colors duration-200">
+            <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Se connecter" class="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
+          </NuxtLink>
           <transition name="fade">
-            <div v-if="isUserMenuOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 border border-primary/10 z-20">
+            <div v-if="isUserMenuOpen && isLoggedIn" class="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg py-1 border border-primary/10 z-20">
               <NuxtLink to="/compte" @click="isUserMenuOpen = false" class="block px-4 py-2 text-sm text-primary hover:bg-crema">Mon compte</NuxtLink>
               <button @click="logout" class="block w-full text-left px-4 py-2 text-sm text-primary hover:bg-crema">Se déconnecter</button>
             </div>
           </transition>
         </div>
-        <NuxtLink v-else to="/login" class="nav-link px-4 py-2">Se connecter</NuxtLink>
       </div>
-      <button class="md:hidden" @click="toggleMenu" aria-label="Ouvrir le menu">
+      <!-- Burger menu mobile -->
+      <button class="mobiledesktop:hidden flex items-center justify-center w-10 h-10 rounded-lg focus:outline-none" @click="toggleMenu" aria-label="Ouvrir le menu">
         <span v-if="!isMenuOpen" class="text-2xl">☰</span>
         <span v-else class="text-2xl">✕</span>
       </button>
     </div>
-    <div v-show="isMenuOpen" class="md:hidden fixed inset-0 bg-crema/95 backdrop-blur-sm flex flex-col items-center justify-center">
-      <div class="flex flex-col items-center space-y-4">
-        <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity" @click="closeMenu">
-          <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-12 h-12 mb-4" />
-        </NuxtLink>
-        <NuxtLink to="/" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Accueil</NuxtLink>
-        <NuxtLink to="/commander" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Commander</NuxtLink>
-        <NuxtLink to="/blog" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Blog</NuxtLink>
-        <NuxtLink to="/actus" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Actus</NuxtLink>
-        <NuxtLink to="/a-propos" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">À propos</NuxtLink>
-        <NuxtLink to="/contact" class="text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Contact</NuxtLink>
-        
-        <div v-if="isLoggedIn" class="mt-4 pt-4 border-t border-primary/20 text-center">
-          <NuxtLink to="/compte" class="block text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Mon compte</NuxtLink>
-          <button @click="() => { logout(); closeMenu(); }" class="text-xl py-4 hover:text-accent transition-all duration-300">Se déconnecter</button>
+    <!-- Menu mobile plein écran -->
+    <transition name="slide-fade">
+      <div v-show="isMenuOpen" class="mobiledesktop:hidden fixed inset-0 bg-crema/95 backdrop-blur-sm flex flex-col items-center justify-center z-40" @click.self="closeMenu">
+        <div class="flex flex-col items-center space-y-2 w-full px-8">
+          <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity mb-2" @click="closeMenu">
+            <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-14 h-14 mb-2" />
+          </NuxtLink>
+          <NuxtLink to="/" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Accueil</NuxtLink>
+          <NuxtLink to="/commander" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Commander</NuxtLink>
+          <NuxtLink to="/blog" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Blog</NuxtLink>
+          <NuxtLink to="/actus" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Actus</NuxtLink>
+          <NuxtLink to="/a-propos" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">À propos</NuxtLink>
+          <NuxtLink to="/contact" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Contact</NuxtLink>
+          <div v-if="isLoggedIn" class="mt-2 pt-2 border-t border-primary/20 w-full text-center">
+            <div class="flex flex-col items-center mb-3">
+              <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-12 h-12 mb-1" />
+              <span class="text-xs text-primary/70">Mon compte</span>
+            </div>
+            <NuxtLink to="/compte" class="block text-lg py-3 w-full rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Mon compte</NuxtLink>
+            <button @click="() => { logout(); closeMenu(); }" class="text-lg py-3 w-full rounded-lg hover:text-accent transition-all duration-200">Se déconnecter</button>
+          </div>
+          <div v-else class="mt-2 pt-2 border-t border-primary/20 w-full flex justify-center">
+            <NuxtLink to="/login" @click="closeMenu" class="flex flex-col items-center group">
+              <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Se connecter" class="w-12 h-12 mb-1 transition-transform duration-200 group-hover:scale-110" />
+              <span class="text-xs text-primary/70 group-hover:text-accent">Se connecter</span>
+            </NuxtLink>
+          </div>
         </div>
-        <NuxtLink v-else to="/login" class="mt-4 pt-4 border-t border-primary/20 text-xl py-4 hover:text-accent transition-all duration-300" @click="closeMenu">Se connecter</NuxtLink>
       </div>
-    </div>
+    </transition>
   </nav>
 </template>
 
@@ -63,6 +77,9 @@ const { isLoggedIn, logout } = useAuth()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
+  if (isMenuOpen.value) {
+    isUserMenuOpen.value = false;
+  }
 };
 
 const closeMenu = () => {
@@ -71,17 +88,47 @@ const closeMenu = () => {
 </script>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+}
+/* Animation menu mobile burger */
+.slide-fade-enter-active {
+  transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-fade-leave-active {
+  transition: opacity 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.slide-fade-enter-from {
+  opacity: 0;
+  transform: translateY(-40px) scale(0.98);
+}
+.slide-fade-enter-to {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.slide-fade-leave-from {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-40px) scale(0.98);
+}
+/* Animation active link desktop */
 .nav-link {
   position: relative;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
-
-.nav-link:hover {
-  color: theme('colors.accent');
+.mobiledesktop\:flex .nav-link.router-link-exact-active::after,
+.mobiledesktop\:flex .nav-link.router-link-active::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
-
-.nav-link::after {
+.mobiledesktop\:flex .nav-link::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -89,34 +136,17 @@ const closeMenu = () => {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: theme('colors.accent');
+  background-color: #275b00;
+  transition: transform 0.25s;
   transform-origin: bottom right;
-  transition: transform 0.25s ease-out;
 }
-
-.nav-link:hover::after {
+.mobiledesktop\:flex .nav-link:hover::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
-.router-link-exact-active {
-  color: theme('colors.accent');
-}
-
-.router-link-exact-active::after {
-  transform: scaleX(1);
-  transform-origin: bottom left;
-}
-
-/* Remove focus outline */
-a:focus, button:focus {
-  outline: none;
-}
-
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
+/* Supprimer le contour sur tous les liens/logo navbar (mobile & desktop) */
+a:focus, button:focus, .nav-link:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 </style>

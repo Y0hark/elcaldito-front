@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <main class="min-h-screen">
+    <main class="min-h-screen w-full px-4 mobiledesktop:px-0">
       <NuxtPage />
     </main>
     <Footer />
@@ -153,5 +153,18 @@ import Footer from '~/components/Footer.vue'
 /* Amélioration des transitions de couleur */
 * {
   transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+html, body {
+  background: #fdf6ec !important;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
 }
 </style>

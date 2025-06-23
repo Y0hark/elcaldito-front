@@ -1,59 +1,11 @@
 <template>
-  <div class="min-h-screen bg-crema font-sans text-primary">
-    <div class="max-w-4xl mx-auto p-6">
-      <div v-if="pending" class="text-center py-12">
-        <LoadingSpinner text="Chargement de l'article..." />
-      </div>
-
-      <div v-else-if="error" class="text-center py-12">
-        <div class="bg-red-50 border border-red-200 rounded-xl p-6 max-w-md mx-auto">
-          <p class="text-red-600 mb-4">Une erreur est survenue lors du chargement de l'article.</p>
-          <NuxtLink to="/blog" 
-                  class="mt-4 inline-block px-6 py-3 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300">
-            Retour aux articles
-          </NuxtLink>
-        </div>
-      </div>
-
-      <div v-else-if="article" class="bg-white rounded-xl p-8 shadow-xl">
-        <img :src="`${config.public.strapiBaseUrl}${article.cover?.url}`" 
-             :alt="article.cover?.alternativeText || article.title"
-             class="w-full h-96 object-cover rounded-xl mb-8" />
-        
-        <h1 class="text-4xl font-bold text-primary mb-4">{{ article.title }}</h1>
-        
-        <div class="flex items-center gap-4 text-primary/60 mb-8">
-          <span>{{ new Date(article.publishedAt).toLocaleDateString('fr-FR') }}</span>
-          <span>{{ article.likes }} ❤️</span>
-        </div>
-
-        <div class="prose prose-lg max-w-none">
-          <div v-for="(block, index) in article.content" :key="index">
-            <p v-if="block.type === 'paragraph'" class="mb-4">
-              <span v-for="(child, childIndex) in block.children" :key="childIndex">
-                {{ child.text }}
-              </span>
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-8 pt-8 border-t border-primary/10">
-          <h2 class="text-2xl font-semibold mb-4">Commentaires</h2>
-          <div v-if="article.commentaires && article.commentaires.length > 0">
-            <div v-for="comment in article.commentaires" :key="comment.id" class="mb-4 p-4 bg-primary/5 rounded-lg">
-              <p class="text-primary/80">{{ comment.content }}</p>
-            </div>
-          </div>
-          <p v-else class="text-primary/60 italic">Soyez le premier à commenter cet article !</p>
-        </div>
-      </div>
-
-      <div v-else class="text-center py-12">
-        <p class="text-xl text-primary/60">Article non trouvé</p>
-        <NuxtLink to="/blog" 
-                class="mt-4 inline-block px-8 py-3 bg-primary text-crema rounded-xl font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300">
-          Retour aux articles
-        </NuxtLink>
+  <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
+    <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
+      <NuxtLink to="/blog" class="text-primary text-sm hover:text-accent mb-3 inline-block">← Retour au blog</NuxtLink>
+      <h1 class="text-2xl font-bold text-primary mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">{{ article.title }}</h1>
+      <div class="text-xs text-primary/60 mb-4">{{ formatDate(new Date(article.publishedAt)) }}</div>
+      <div class="prose prose-primary max-w-none text-base mobiledesktop:text-lg">
+        <div v-html="article.content" />
       </div>
     </div>
   </div>
