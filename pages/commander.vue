@@ -241,7 +241,7 @@
             ></textarea>
           </div>
           <!-- Submit -->
-          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg">Valider la commande</button>
+          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg focus:outline-none">Valider la commande</button>
         </form>
       </div>
     </div>

@@ -33,7 +33,7 @@
       </div>
       <div v-else-if="error" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mx-auto text-center">
         <span class="text-crema block mb-4">Erreur lors du chargement des articles.</span>
-        <button @click="refresh" class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block">Réessayer</button>
+        <button @click="refresh" class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block focus:outline-none">Réessayer</button>
       </div>
       <div v-else>
         <div v-if="articles.length === 0" class="text-center text-primary/60 py-8">Aucun article pour le moment.</div>

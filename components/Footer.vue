@@ -13,12 +13,12 @@
       <div class="flex flex-col items-center mobiledesktop:items-start">
         <h3 class="text-base font-semibold mb-3">Liens utiles</h3>
         <ul class="flex flex-col items-center gap-2 mobiledesktop:items-start">
-          <li><NuxtLink to="/" class="hover:text-accent transition-all duration-200 px-2 py-1">Accueil</NuxtLink></li>
-          <li><NuxtLink to="/commander" class="hover:text-accent transition-all duration-200 px-2 py-1">Commander</NuxtLink></li>
-          <li><NuxtLink to="/blog" class="hover:text-accent transition-all duration-200 px-2 py-1">Blog</NuxtLink></li>
-          <li><NuxtLink to="/actus" class="hover:text-accent transition-all duration-200 px-2 py-1">Actus</NuxtLink></li>
-          <li><NuxtLink to="/a-propos" class="hover:text-accent transition-all duration-200 px-2 py-1">À propos</NuxtLink></li>
-          <li><NuxtLink to="/contact" class="hover:text-accent transition-all duration-200 px-2 py-1">Contact</NuxtLink></li>
+          <li><NuxtLink to="/" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Accueil</NuxtLink></li>
+          <li><NuxtLink to="/commander" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Commander</NuxtLink></li>
+          <li><NuxtLink to="/blog" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Blog</NuxtLink></li>
+          <li><NuxtLink to="/actus" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Actus</NuxtLink></li>
+          <li><NuxtLink to="/a-propos" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">À propos</NuxtLink></li>
+          <li><NuxtLink to="/contact" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Contact</NuxtLink></li>
         </ul>
       </div>
       <!-- Séparateur mobile -->
@@ -27,9 +27,9 @@
       <div class="flex flex-col items-center mobiledesktop:items-start">
         <h3 class="text-base font-semibold mb-3">Suivez-nous</h3>
         <div class="flex justify-center gap-6 mobiledesktop:justify-start">
-          <a href="#" class="hover:text-accent transition-all duration-200 text-lg">Instagram</a>
-          <a href="#" class="hover:text-accent transition-all duration-200 text-lg">WhatsApp</a>
-          <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-200 text-lg">Email</a>
+          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">Instagram</a>
+          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">WhatsApp</a>
+          <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">Email</a>
         </div>
       </div>
     </div>

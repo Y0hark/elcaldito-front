@@ -10,7 +10,7 @@
       <p class="text-crema text-center mb-4">Une erreur est survenue lors du chargement de l'article.</p>
       <button 
         @click="refresh"
-        class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block"
+        class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block focus:outline-none"
       >
         Réessayer
       </button>
@@ -19,24 +19,11 @@
     <!-- Article Content -->
     <article v-else-if="articleData" class="max-w-3xl mx-auto px-4 py-12">
       <!-- Back Button -->
-      <NuxtLink 
+      <NuxtLink
         to="/actus"
-        class="inline-flex items-center text-primary hover:text-accent mb-8 group"
+        class="text-primary text-sm hover:text-accent mb-3 inline-block focus:outline-none"
       >
-        <svg 
-          class="w-5 h-5 mr-2 group-hover:text-accent transition-colors" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
-        >
-          <path 
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            stroke-width="2" 
-            d="M15 19l-7-7 7-7"
-          />
-        </svg>
-        Retour aux actualités
+        ← Retour aux actus
       </NuxtLink>
 
       <!-- Article Card -->

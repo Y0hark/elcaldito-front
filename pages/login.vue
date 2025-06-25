@@ -10,7 +10,7 @@
         <label class="block text-primary font-medium mb-1">Mot de passe</label>
         <input v-model="password" type="password" required class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none" />
       </div>
-      <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300" :disabled="loading">
+      <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 focus:outline-none" :disabled="loading">
         <span v-if="loading">Connexion...</span>
         <span v-else>Se connecter</span>
       </button>

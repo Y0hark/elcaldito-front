@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
-      <NuxtLink to="/blog" class="text-primary text-sm hover:text-accent mb-3 inline-block">← Retour au blog</NuxtLink>
+      <NuxtLink to="/blog" class="text-primary text-sm hover:text-accent mb-3 inline-block focus:outline-none">← Retour au blog</NuxtLink>
       <h1 class="text-2xl font-bold text-primary mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">{{ article.title }}</h1>
       <div class="text-xs text-primary/60 mb-4">{{ formatDate(new Date(article.publishedAt)) }}</div>
       <div class="prose prose-primary max-w-none text-base mobiledesktop:text-lg">

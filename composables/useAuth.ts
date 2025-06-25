@@ -11,7 +11,7 @@ export function useAuth() {
   const fetchUser = async () => {
     if (token.value) {
       try {
-        const { data, error } = await useFetch('/api/users/me', {
+        const { data, error } = await useFetch('/api/users/me?populate=*', {
           baseURL: config.public.strapiBaseUrl,
           headers: {
             Authorization: `Bearer ${token.value}`,
@@ -22,6 +22,14 @@ export function useAuth() {
           user.value = null
         } else {
           user.value = data.value
+          // Récupérer le téléphone du localStorage si il n'est pas dans les données API
+          if (!user.value.phone) {
+            const savedPhone = localStorage.getItem('userPhone')
+            if (savedPhone) {
+              user.value.phone = savedPhone
+              console.log('Téléphone récupéré du localStorage:', savedPhone)
+            }
+          }
         }
       } catch (e) {
         token.value = null
@@ -51,8 +59,9 @@ export function useAuth() {
     }
   }
 
-  const register = async (email: string, password: string) => {
+  const register = async (email: string, password: string, phone?: string) => {
     try {
+      // Créer l'utilisateur avec le téléphone directement
       const { data, error } = await useFetch('/api/auth/local/register', {
         method: 'POST',
         baseURL: useRuntimeConfig().public.strapiBaseUrl,
@@ -60,6 +69,7 @@ export function useAuth() {
           email,
           username: email,
           password,
+          phone,
         },
         watch: false,
       })
@@ -68,6 +78,9 @@ export function useAuth() {
       if (err || !response?.jwt) {
         return { success: false, message: err?.data?.error?.message || "Erreur lors de l'inscription" }
       }
+
+      console.log('Inscription réussie avec téléphone:', response.user.phone)
+
       token.value = response.jwt
       user.value = response.user
       return { success: true }

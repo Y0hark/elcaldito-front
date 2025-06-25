@@ -18,7 +18,7 @@
           <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Message</label>
           <textarea rows="5" required class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base mobiledesktop:text-lg"></textarea>
         </div>
-        <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg">Envoyer</button>
+        <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg focus:outline-none">Envoyer</button>
       </form>
     </div>
     <div class="max-w-4xl mx-auto px-4 py-12">
@@ -47,7 +47,7 @@
               <label for="message" class="block text-sm font-medium text-primary">Message</label>
               <textarea id="message" v-model="form.message" rows="5" placeholder="Votre message" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none mt-1"></textarea>
             </div>
-            <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition">Envoyer</button>
+            <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition focus:outline-none">Envoyer</button>
           </form>
           <p v-if="successMessage" class="text-green-600 mt-4">{{ successMessage }}</p>
         </div>
