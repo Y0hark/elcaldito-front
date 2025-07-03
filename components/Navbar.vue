@@ -123,8 +123,8 @@ const closeMenu = () => {
   text-decoration: none;
   transition: color 0.3s;
 }
-.mobiledesktop\:flex .nav-link.router-link-exact-active::after,
-.mobiledesktop\:flex .nav-link.router-link-active::after {
+.mobiledesktop\:flex .nav-link.nuxt-link-exact-active::after,
+.mobiledesktop\:flex .nav-link.nuxt-link-active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }

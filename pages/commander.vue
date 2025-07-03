@@ -143,13 +143,14 @@
     <!-- Order Panel -->
     <div 
       v-if="isOrderPanelOpen"
-      class="fixed inset-0 bg-black/50 z-50 flex items-end mobiledesktop:items-center justify-center"
+      class="fixed inset-0 bg-black/50 z-50 flex items-end mobiledesktop:items-center justify-center p-4"
       @click.self="closeOrderPanel"
     >
       <div 
-        class="bg-crema w-full max-w-lg rounded-t-2xl mobiledesktop:rounded-2xl p-4 mobiledesktop:p-6 transform transition-transform duration-300"
+        class="bg-crema w-full max-w-lg mobiledesktop:max-w-4xl rounded-t-2xl mobiledesktop:rounded-2xl transform transition-transform duration-300 mobiledesktop:max-h-[90vh] mobiledesktop:overflow-y-auto"
         :class="{ 'translate-y-0': isOrderPanelOpen, 'translate-y-full mobiledesktop:translate-y-0 mobiledesktop:scale-95': !isOrderPanelOpen }"
       >
+        <div class="p-4 mobiledesktop:p-6">
         <div class="flex justify-between items-center mb-4 mobiledesktop:mb-6">
           <h3 class="text-lg font-semibold text-primary mobiledesktop:text-2xl">Votre commande</h3>
           <button 
@@ -161,7 +162,12 @@
             </svg>
           </button>
         </div>
-        <form @submit.prevent="submitOrder" class="space-y-4 mobiledesktop:space-y-6">
+        
+        <!-- Layout en deux colonnes sur desktop -->
+        <div class="mobiledesktop:grid mobiledesktop:grid-cols-2 mobiledesktop:gap-6">
+          <!-- Colonne gauche : Formulaire de commande -->
+          <div class="mobiledesktop:space-y-4">
+            <form @submit.prevent="submitOrder" class="space-y-4 mobiledesktop:space-y-4">
           <!-- Event Info -->
           <div class="bg-primary/5 rounded-xl p-3 mobiledesktop:p-4">
             <h4 class="font-semibold text-primary mb-1 mobiledesktop:mb-2">{{ nextDistribution?.title }}</h4>
@@ -240,9 +246,113 @@
               placeholder="Un mot pour Viviana & Samuel ou une précision sur la livraison ?"
             ></textarea>
           </div>
+          <!-- Payment Method -->
+          <div>
+            <label class="block text-primary font-medium mb-2 mobiledesktop:mb-3">Méthode de paiement</label>
+            
+            <!-- Avertissement si paiement liquide non disponible -->
+            <PaymentWarning
+              :show="orderForm.paymentMethod === 'liquide' && !paymentValidation.canPayInCash && !paymentValidation.loading"
+              title="Paiement en liquide non disponible"
+              message="Vous avez atteint la limite de 2 bols en liquide pour cette marmite. Veuillez utiliser le paiement par carte."
+              action="Passer au paiement par carte"
+              @action="orderForm.paymentMethod = 'stripe'"
+            />
+            
+            <div class="space-y-3">
+              <label class="flex items-start gap-3 p-3 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors cursor-pointer">
+                <input
+                  type="radio"
+                  v-model="orderForm.paymentMethod"
+                  value="liquide"
+                  :disabled="!paymentValidation.canPayInCash"
+                  class="form-radio h-5 w-5 text-primary mt-0.5"
+                />
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-medium text-primary">💵 Paiement en liquide</span>
+                    <span v-if="paymentValidation.loading" class="text-xs text-primary/60">Vérification...</span>
+                  </div>
+                  <p class="text-sm text-primary/70 mt-1">Payez le jour de la livraison</p>
+                  <p v-if="!paymentValidation.canPayInCash && !paymentValidation.loading" class="text-xs text-red-600 mt-1">
+                    Limite atteinte : maximum 2 bols en liquide par marmite
+                  </p>
+                </div>
+              </label>
+              
+              <label class="flex items-start gap-3 p-3 rounded-lg border border-primary/20 hover:border-primary/40 transition-colors cursor-pointer">
+                <input
+                  type="radio"
+                  v-model="orderForm.paymentMethod"
+                  value="stripe"
+                  class="form-radio h-5 w-5 text-primary mt-0.5"
+                />
+                <div class="flex-1">
+                  <span class="font-medium text-primary">💳 Paiement par carte</span>
+                  <p class="text-sm text-primary/70 mt-1">Paiement sécurisé via Stripe</p>
+                </div>
+              </label>
+            </div>
+            
+            <!-- Info sur les règles de paiement -->
+            <div v-if="isLoggedIn && user" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+              <p class="text-xs text-blue-800">
+                <strong>Règles de paiement :</strong><br>
+                • Maximum 6 bols par personne par marmite<br>
+                • Paiement en liquide limité à 2 bols par personne par marmite<br>
+                • Au-delà, paiement par carte obligatoire
+              </p>
+            </div>
+          </div>
           <!-- Submit -->
-          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg focus:outline-none">Valider la commande</button>
-        </form>
+          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition focus:outline-none">Valider la commande</button>
+            </form>
+          </div>
+          
+          <!-- Colonne droite : Résumé et paiement -->
+          <div class="mobiledesktop:space-y-4">
+            <!-- Résumé de la commande -->
+            <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mobiledesktop:sticky mobiledesktop:top-4">
+              <h4 class="font-medium text-primary mb-3">Résumé de votre commande</h4>
+              <div class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <span class="text-primary/70">{{ orderForm.quantite }} bol{{ orderForm.quantite > 1 ? 's' : '' }} de pozole</span>
+                  <span class="font-medium">{{ (nextDistribution?.prix || 0) * orderForm.quantite }}€</span>
+                </div>
+                <div v-if="orderForm.livraison" class="flex justify-between">
+                  <span class="text-primary/70">Livraison à domicile</span>
+                  <span class="font-medium">+2.00€</span>
+                </div>
+                <div class="border-t border-gray-200 pt-2 flex justify-between font-semibold">
+                  <span>Total</span>
+                  <span>{{ totalPrice }}€</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Formulaire de paiement Stripe -->
+            <div v-if="showStripeForm" class="border-t border-primary/20 pt-4">
+              <StripePaymentForm
+                ref="stripeFormRef"
+                :amount="totalPrice"
+                :quantite="orderForm.quantite"
+                :prix="nextDistribution?.prix || 0"
+                :livraison="orderForm.livraison"
+                :commandeData="{
+                  quantite: orderForm.quantite,
+                  livraison: orderForm.livraison,
+                  commentaire: orderForm.commentaire,
+                  paymentMethod: orderForm.paymentMethod,
+                  amount: totalPrice,
+                  event: nextDistribution?.id
+                }"
+                @success="handlePaymentSuccess"
+                @error="handlePaymentError"
+              />
+            </div>
+          </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
@@ -252,15 +362,19 @@
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import { useHead } from '#app'
 import Notification from '~/components/Notification.vue'
+import PaymentWarning from '~/components/PaymentWarning.vue'
+import StripePaymentForm from '~/components/StripePaymentForm.vue'
 import { useStrapi } from '../composables/useStrapi'
 import { useAuth } from '../composables/useAuth'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
 import { useCookie } from '#app'
+import { useCommandeValidation } from '../composables/useCommandeValidation'
 
 const config = useRuntimeConfig()
-const { fetchFromStrapi, postToStrapi } = useStrapi()
+const { fetchFromStrapi, postToStrapi, putToStrapi } = useStrapi()
 const { user, isLoggedIn } = useAuth()
 const { animateOnScroll } = useScrollAnimation()
+const { validateCommande, canPayInCash } = useCommandeValidation()
 const userOrdersForCurrentDistribution = ref([])
 const alreadyOrderedQuantity = computed(() => {
   if (!isLoggedIn.value || !user.value || !nextDistribution.value) return 0
@@ -320,8 +434,19 @@ const isSubmitting = ref(false)
 const orderForm = ref({
   quantite: 1,
   livraison: false,
-  commentaire: ''
+  commentaire: '',
+  paymentMethod: 'liquide'
 })
+
+// État pour la validation du paiement
+const paymentValidation = ref({
+  canPayInCash: true,
+  loading: false
+})
+
+// État pour le paiement Stripe
+const showStripeForm = ref(false)
+const stripeFormRef = ref(null)
 
 const notification = ref({
   visible: false,
@@ -351,6 +476,37 @@ const openOrderPanel = () => {
 const closeOrderPanel = () => {
   isOrderPanelOpen.value = false
   document.body.style.overflow = 'auto'
+  // Reset Stripe states
+  showStripeForm.value = false
+}
+
+// Vérifier si l'utilisateur peut payer en liquide
+const checkCashPaymentAvailability = async () => {
+  if (!isLoggedIn.value || !user.value || !nextDistribution.value) {
+    paymentValidation.value.canPayInCash = true
+    return
+  }
+
+  paymentValidation.value.loading = true
+  try {
+    const canPay = await canPayInCash(
+      nextDistribution.value.id,
+      orderForm.value.quantite,
+      user.value.id
+    )
+    paymentValidation.value.canPayInCash = canPay
+    
+    // Si l'utilisateur ne peut pas payer en liquide, forcer Stripe
+    if (!canPay && orderForm.value.paymentMethod === 'liquide') {
+      orderForm.value.paymentMethod = 'stripe'
+    }
+  } catch (error) {
+    console.error('Erreur lors de la vérification du paiement en liquide:', error)
+    paymentValidation.value.canPayInCash = false
+    orderForm.value.paymentMethod = 'stripe'
+  } finally {
+    paymentValidation.value.loading = false
+  }
 }
 
 // Submit order
@@ -366,34 +522,80 @@ const submitOrder = async () => {
     }
   }
 
+  // Validation de la commande avec la nouvelle logique
+  if (isLoggedIn.value && user.value && nextDistribution.value) {
+    const validation = await validateCommande(
+      nextDistribution.value.id,
+      orderForm.value.quantite,
+      orderForm.value.paymentMethod,
+      user.value.id
+    )
+
+    if (!validation.isValid) {
+      showNotification(validation.error || 'Erreur de validation', 'error')
+      return
+    }
+
+    // Si la validation indique qu'il faut utiliser Stripe, forcer le changement
+    if (validation.requiresStripe) {
+      orderForm.value.paymentMethod = 'stripe'
+      showNotification('Le paiement en liquide n\'est pas autorisé pour cette commande. Veuillez utiliser le paiement par carte.', 'warning')
+      return
+    }
+  }
+
   isSubmitting.value = true
 
   try {
+    // Calculer le montant total
+    const baseAmount = nextDistribution.value?.prix * orderForm.value.quantite
+    const totalAmount = orderForm.value.livraison ? baseAmount + 2 : baseAmount
+
     // Préparer les données à envoyer
     let data = {
       quantite: orderForm.value.quantite,
       livraison: orderForm.value.livraison,
       commentaire: orderForm.value.commentaire,
+      paymentMethod: orderForm.value.paymentMethod,
+      amount: totalAmount,
       event: nextDistribution.value?.id,
       state: 'En attente'
     }
-    console.log('Payload envoyé à Strapi:', data)
-    const { data: response, error } = await postToStrapi('/commandes', data)
 
-    if (error.value) {
-      throw new Error(error.value?.data?.error?.message || 'Erreur lors de l\'enregistrement')
-    }
+    if (orderForm.value.paymentMethod === 'stripe') {
+      // Pour le paiement Stripe, afficher directement le formulaire de paiement
+      console.log('🚀 Début paiement Stripe - Affichage du formulaire')
+      showStripeForm.value = true
+      
+      // Focus sur le formulaire Stripe après un petit délai
+      nextTick(() => {
+        setTimeout(() => {
+          if (stripeFormRef.value && stripeFormRef.value.focusForm) {
+            stripeFormRef.value.focusForm()
+          }
+        }, 100)
+      })
+    } else {
+      // Paiement en liquide - logique existante
+      console.log('Payload envoyé à Strapi:', data)
+      const { data: response, error } = await postToStrapi('/commandes', data)
 
-    if (response.value) {
-      showNotification('Votre commande a été enregistrée avec succès ! Nous vous contacterons bientôt.', 'success')
-      closeOrderPanel()
-      // Reset form
-      orderForm.value = {
-        quantite: 1,
-        livraison: false,
-        commentaire: ''
+      if (error) {
+        throw new Error(error?.data?.error?.message || 'Erreur lors de l\'enregistrement')
       }
-      await refresh()
+
+      if (response) {
+        showNotification('Votre commande a été enregistrée avec succès ! Nous vous contacterons bientôt.', 'success')
+        closeOrderPanel()
+        // Reset form
+        orderForm.value = {
+          quantite: 1,
+          livraison: false,
+          commentaire: '',
+          paymentMethod: 'liquide'
+        }
+        await refresh()
+      }
     }
   } catch (error) {
     console.error('Error submitting order:', error)
@@ -401,6 +603,37 @@ const submitOrder = async () => {
   } finally {
     isSubmitting.value = false
   }
+}
+
+// Handlers pour les événements Stripe
+const handlePaymentSuccess = async (result) => {
+  try {
+    console.log('✅ Paiement Stripe réussi:', result.paymentIntent)
+    console.log('✅ Commande créée avec succès:', result.commande)
+    
+    showNotification('Paiement réussi ! Votre commande a été confirmée.', 'success')
+    closeOrderPanel()
+    // Reset form
+    orderForm.value = {
+      quantite: 1,
+      livraison: false,
+      commentaire: '',
+      paymentMethod: 'liquide'
+    }
+    showStripeForm.value = false
+    await refresh()
+  } catch (error) {
+    console.error('Erreur lors du traitement du paiement:', error)
+    showNotification('Paiement réussi mais erreur lors du traitement.', 'warning')
+  }
+}
+
+const handlePaymentError = async (error) => {
+  console.error('❌ Erreur de paiement Stripe:', error)
+  
+  showNotification(`Erreur de paiement : ${error}`, 'error')
+  // Optionnel : permettre à l'utilisateur de réessayer
+  showStripeForm.value = false
 }
 
 // Get image URL with proper format
@@ -426,12 +659,20 @@ const formatDate = (date) => {
 const incrementQuantity = () => {
   if (orderForm.value.quantite < 6) {
     orderForm.value.quantite++
+    // Vérifier la disponibilité du paiement en liquide quand la quantité change
+    nextTick(() => {
+      checkCashPaymentAvailability()
+    })
   }
 }
 
 const decrementQuantity = () => {
   if (orderForm.value.quantite > 1) {
     orderForm.value.quantite--
+    // Vérifier la disponibilité du paiement en liquide quand la quantité change
+    nextTick(() => {
+      checkCashPaymentAvailability()
+    })
   }
 }
 
@@ -445,6 +686,22 @@ onMounted(() => {
 
 watch([isLoggedIn, user, nextDistribution], () => {
   fetchUserOrdersForCurrentDistribution()
+  // Vérifier la disponibilité du paiement en liquide quand l'utilisateur ou la distribution change
+  nextTick(() => {
+    checkCashPaymentAvailability()
+  })
+})
+
+// Watcher pour la méthode de paiement
+watch(() => orderForm.value.paymentMethod, (newMethod) => {
+  if (newMethod === 'liquide') {
+    checkCashPaymentAvailability()
+  }
+})
+
+// Watcher pour la quantité
+watch(() => orderForm.value.quantite, () => {
+  checkCashPaymentAvailability()
 })
 
 useHead({
@@ -497,5 +754,108 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+/* Supprimer le contour de focus par défaut sur les boutons radio */
+input[type="radio"] {
+  outline: none;
+}
+
+input[type="radio"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Style personnalisé pour les boutons radio */
+input[type="radio"]:focus-visible {
+  outline: 2px solid theme('colors.primary');
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+/* Supprimer le contour de focus par défaut sur les checkboxes */
+input[type="checkbox"] {
+  outline: none;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Style personnalisé pour les checkboxes */
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid theme('colors.primary');
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Supprimer le contour de focus par défaut sur les boutons */
+button {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Style personnalisé pour les boutons */
+button:focus-visible {
+  outline: 2px solid theme('colors.primary');
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Style pour le scroll du panneau de commande */
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar-track {
+  background: theme('colors.crema');
+  border-radius: 3px;
+}
+
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar-thumb {
+  background: theme('colors.primary');
+  border-radius: 3px;
+}
+
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.accent');
+}
+
+/* Style pour le scroll du panneau de commande - alternative */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: theme('colors.crema');
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background: theme('colors.primary');
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.accent');
+}
+
+/* Masquer la barre de scroll mais garder la fonctionnalité */
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar {
+  display: none;
+}
+
+.mobiledesktop\:overflow-y-auto {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.mobiledesktop\:overflow-y-auto::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
 }
 </style> 

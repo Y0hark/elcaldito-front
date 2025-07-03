@@ -2,6 +2,8 @@
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
       <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">Mon compte</h1>
+      
+      <!-- Section informations utilisateur -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
         <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Mes informations</h2>
         <div v-if="user" class="space-y-3">
@@ -13,15 +15,83 @@
             <span class="w-32 font-medium text-primary/70">Nom d'utilisateur</span>
             <span>{{ user.username }}</span>
           </div>
-          <div v-if="user.phone" class="flex items-center gap-x-8">
+          
+          <div class="flex items-center gap-x-8">
             <span class="w-32 font-medium text-primary/70">Téléphone</span>
-            <span>{{ user.phone }}</span>
+            <span v-if="userInfo?.phone" class="text-primary">{{ userInfo.phone }}</span>
+            <span v-else class="text-primary/50 italic">Non renseigné</span>
+          </div>
+          
+          <div class="flex items-center gap-x-8">
+            <span class="w-32 font-medium text-primary/70">Adresse</span>
+            <span v-if="userInfo?.address" class="text-primary">{{ userInfo.address }}</span>
+            <span v-else class="text-primary/50 italic">Non renseignée</span>
+          </div>
+          
+          <!-- Bouton pour modifier les informations -->
+          <div class="pt-3 border-t border-primary/10">
+            <button 
+              @click="showEditForm = true"
+              class="px-4 py-2 bg-primary text-crema rounded-lg font-semibold shadow hover:bg-accent transition-colors duration-300"
+            >
+              {{ userInfo ? 'Modifier mes informations' : 'Ajouter mes informations' }}
+            </button>
           </div>
         </div>
         <div v-else>
           <p class="text-primary/60">Chargement de vos informations...</p>
         </div>
       </div>
+
+      <!-- Formulaire de modification des informations -->
+      <div v-if="showEditForm" class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
+        <h3 class="text-lg font-semibold text-primary mb-4">Modifier mes informations</h3>
+        <form @submit.prevent="updateUserInfo" class="space-y-4">
+          <div>
+            <label class="block text-primary font-medium mb-1">Téléphone *</label>
+            <input 
+              v-model="editForm.phone" 
+              type="tel" 
+              required 
+              class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none"
+              placeholder="06 12 34 56 78"
+            />
+          </div>
+          
+          <div>
+            <label class="block text-primary font-medium mb-1">Adresse (optionnel)</label>
+            <textarea 
+              v-model="editForm.address" 
+              rows="3"
+              class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none resize-none"
+              placeholder="123 Rue de la Paix, 75001 Paris"
+            ></textarea>
+          </div>
+          
+          <div class="flex gap-3">
+            <button 
+              type="submit" 
+              :disabled="updating"
+              class="flex-1 py-2 bg-primary text-crema rounded-lg font-semibold shadow hover:bg-accent transition-colors duration-300 disabled:opacity-50"
+            >
+              <span v-if="updating">Mise à jour...</span>
+              <span v-else>Sauvegarder</span>
+            </button>
+            <button 
+              type="button"
+              @click="cancelEdit"
+              class="flex-1 py-2 border border-primary text-primary rounded-lg font-semibold hover:bg-primary hover:text-crema transition-colors duration-300"
+            >
+              Annuler
+            </button>
+          </div>
+          
+          <p v-if="updateError" class="text-red-600 text-sm">{{ updateError }}</p>
+          <p v-if="updateSuccess" class="text-green-600 text-sm">{{ updateSuccess }}</p>
+        </form>
+      </div>
+
+      <!-- Section commandes -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
         <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Mes commandes</h2>
         <div v-if="pending" class="text-center text-primary/60">
@@ -167,6 +237,7 @@
         </div>
         <p v-else class="text-primary/60 italic text-center">Vous n'avez pas encore passé de commande.</p>
       </div>
+      
       <button class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition mobiledesktop:w-auto mobiledesktop:px-6 mobiledesktop:text-lg focus:outline-none">Se déconnecter</button>
     </div>
   </div>
@@ -174,12 +245,103 @@
 
 <script setup>
 import { useAuth } from '../composables/useAuth'
+import { useUserInfo } from '../composables/useUserInfo'
 import { useAsyncData, useRuntimeConfig } from '#app'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, watch } from 'vue'
 
-const { user, isLoggedIn } = useAuth()
+const { user, isLoggedIn, fetchUser } = useAuth()
+const { createOrUpdateUserInfoWithRetry } = useUserInfo()
 const config = useRuntimeConfig()
 const token = useCookie('token')
+
+// État pour la modification des informations
+const showEditForm = ref(false)
+const updating = ref(false)
+const updateError = ref('')
+const updateSuccess = ref('')
+
+// Utiliser directement les données de useAuth
+const userInfo = computed(() => user.value?.userInfo || null)
+
+const editForm = ref({
+  phone: '',
+  address: ''
+})
+
+// Initialiser le formulaire avec les données actuelles
+const initEditForm = () => {
+  if (userInfo.value) {
+    editForm.value = {
+      phone: userInfo.value.phone || '',
+      address: userInfo.value.address || ''
+    }
+  } else {
+    editForm.value = {
+      phone: '',
+      address: ''
+    }
+  }
+}
+
+// Surveiller les changements de userInfo pour mettre à jour le formulaire
+watch(userInfo, () => {
+  initEditForm()
+}, { immediate: true })
+
+// Mettre à jour les UserInfo
+const updateUserInfo = async () => {
+  if (!isLoggedIn.value) return
+  
+  updating.value = true
+  updateError.value = ''
+  updateSuccess.value = ''
+  
+  try {
+    const result = await createOrUpdateUserInfoWithRetry({
+      phone: editForm.value.phone,
+      address: editForm.value.address
+    })
+    
+    if (result.success) {
+      const isNewUserInfo = !userInfo.value
+      updateSuccess.value = isNewUserInfo 
+        ? 'Informations ajoutées avec succès !' 
+        : 'Informations mises à jour avec succès !'
+      
+      // Rafraîchir les données utilisateur pour mettre à jour l'interface
+      console.log('🔄 Rafraîchissement des données utilisateur...')
+      await fetchUser()
+      
+      // Attendre un peu pour que l'état réactif soit mis à jour
+      await new Promise(resolve => setTimeout(resolve, 100))
+      
+      // Vérifier que les données ont été mises à jour
+      console.log('📊 Données utilisateur après mise à jour:', user.value)
+      console.log('📊 UserInfo après mise à jour:', userInfo.value)
+      
+      showEditForm.value = false
+      
+      // Nettoyer le message de succès après 3 secondes
+      setTimeout(() => {
+        updateSuccess.value = ''
+      }, 3000)
+    } else {
+      updateError.value = result.message || 'Erreur lors de la sauvegarde'
+    }
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour des informations:', error)
+    updateError.value = 'Erreur lors de la sauvegarde des informations'
+  } finally {
+    updating.value = false
+  }
+}
+
+const cancelEdit = () => {
+  showEditForm.value = false
+  updateError.value = ''
+  updateSuccess.value = ''
+  initEditForm()
+}
 
 const { data: userData, pending, error } = useAsyncData(
   'user-with-orders',

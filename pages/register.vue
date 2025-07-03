@@ -1,67 +1,191 @@
 <template>
   <div class="min-h-screen flex items-center justify-center bg-crema">
-    <form @submit.prevent="onRegister" class="bg-white p-8 rounded-xl shadow-md w-full max-w-md space-y-6">
-      <h2 class="text-2xl font-bold text-primary text-center">Créer un compte</h2>
-      <div>
-        <label class="block text-primary font-medium mb-1">Email</label>
-        <input v-model="email" type="email" required class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none" />
+    <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+      <!-- Titre et progression -->
+      <h2 class="text-2xl font-bold text-primary text-center mb-6">Créer un compte</h2>
+      
+      <RegistrationProgress :current-step="currentStep" />
+      
+      <!-- Étape 1: Informations de base -->
+      <div v-if="currentStep === 1">
+        <RegistrationStep1 
+          @next-step="handleStep1Complete"
+          @error="handleError"
+        />
       </div>
-      <div>
-        <label class="block text-primary font-medium mb-1">Téléphone</label>
-        <input v-model="phone" type="tel" class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none" placeholder="06 12 34 56 78" />
+      
+      <!-- Étape 2: Informations complémentaires -->
+      <div v-else-if="currentStep === 2">
+        <RegistrationStep2 
+          @complete="handleStep2Complete"
+          @back="goBackToStep1"
+          @skip="handleSkipStep2"
+          @error="handleError"
+        />
       </div>
-      <div>
-        <label class="block text-primary font-medium mb-1">Mot de passe</label>
-        <input v-model="password" type="password" required class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none" />
+      
+      <!-- Étape 3: Finalisation -->
+      <div v-else-if="currentStep === 3" class="text-center space-y-6">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        <h3 class="text-lg font-semibold text-primary">Finalisation de votre inscription...</h3>
+        <p class="text-gray-600">Veuillez patienter pendant que nous finalisons votre compte.</p>
       </div>
-      <div>
-        <label class="block text-primary font-medium mb-1">Confirmer le mot de passe</label>
-        <input v-model="confirmPassword" type="password" required class="w-full border border-primary/20 rounded-lg p-3 focus:border-primary outline-none" />
-        <p v-if="passwordMismatch" class="text-red-600 text-sm mt-1">Les mots de passe ne correspondent pas</p>
+      
+      <!-- Messages d'erreur globaux -->
+      <div v-if="globalError" class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="ml-3">
+            <p class="text-sm text-red-800">{{ globalError }}</p>
+          </div>
+        </div>
       </div>
-      <button type="submit" class="w-full py-3 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 focus:outline-none" :disabled="loading || passwordMismatch">
-        <span v-if="loading">Inscription...</span>
-        <span v-else>Créer un compte</span>
-      </button>
-      <p v-if="error" class="text-red-600 text-center">{{ error }}</p>
-      <p class="text-center text-primary/60">Déjà un compte ? <NuxtLink to="/login" class="underline">Se connecter</NuxtLink></p>
-    </form>
+      
+      <!-- Lien de connexion -->
+      <div class="mt-6 text-center">
+        <p class="text-primary/60">Déjà un compte ? 
+          <NuxtLink to="/login" class="underline hover:text-primary">Se connecter</NuxtLink>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
+import { useUserInfo } from '../composables/useUserInfo'
 
-const email = ref('')
-const phone = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-const loading = ref(false)
-const error = ref('')
+// État local
+const currentStep = ref(1)
+const globalError = ref('')
+const step1Data = ref(null)
+const step2Data = ref(null)
+
+// Composables
 const router = useRouter()
-const { register } = useAuth()
+const { register, isLoggedIn } = useAuth()
+const { createOrUpdateUserInfoWithRetry } = useUserInfo()
 
-const passwordMismatch = computed(() => {
-  return password.value && confirmPassword.value && password.value !== confirmPassword.value
-})
-
-const onRegister = async () => {
-  // Vérifier que les mots de passe correspondent
-  if (password.value !== confirmPassword.value) {
-    error.value = 'Les mots de passe ne correspondent pas'
+// Vérifier si l'utilisateur est déjà connecté
+onMounted(() => {
+  if (isLoggedIn.value) {
+    router.push('/commander')
     return
   }
-
-  loading.value = true
-  error.value = ''
-  const { success, message } = await register(email.value, password.value, phone.value)
-  loading.value = false
-  if (success) {
-    router.push('/commander')
-  } else {
-    error.value = message || "Erreur lors de l'inscription"
+  
+  // Récupérer les données temporaires si elles existent
+  const tempData = localStorage.getItem('registration_temp_data')
+  if (tempData) {
+    try {
+      const parsed = JSON.parse(tempData)
+      step1Data.value = parsed
+      currentStep.value = 2
+    } catch (e) {
+      console.error('Erreur lors de la récupération des données temporaires:', e)
+      localStorage.removeItem('registration_temp_data')
+    }
   }
+})
+
+// Gestionnaires d'événements
+const handleStep1Complete = async (data) => {
+  try {
+    step1Data.value = data
+    currentStep.value = 2
+    globalError.value = ''
+  } catch (error) {
+    globalError.value = 'Erreur lors de la validation des données'
+  }
+}
+
+const handleStep2Complete = async (data) => {
+  try {
+    step2Data.value = data
+    currentStep.value = 3
+    globalError.value = ''
+    
+    await completeRegistration()
+  } catch (error) {
+    globalError.value = 'Erreur lors de la finalisation'
+    currentStep.value = 2
+  }
+}
+
+const handleSkipStep2 = async () => {
+  try {
+    step2Data.value = { phone: '', address: null }
+    currentStep.value = 3
+    globalError.value = ''
+    
+    await completeRegistration()
+  } catch (error) {
+    globalError.value = 'Erreur lors de la finalisation'
+    currentStep.value = 2
+  }
+}
+
+const goBackToStep1 = () => {
+  currentStep.value = 1
+  globalError.value = ''
+}
+
+const handleError = (error) => {
+  globalError.value = error
+}
+
+// Processus de finalisation
+const completeRegistration = async () => {
+  try {
+    // Étape 1: Créer le compte utilisateur
+    const registerResult = await register(
+      step1Data.value.email,
+      step1Data.value.password,
+      step1Data.value.username
+    )
+    
+    if (!registerResult.success) {
+      throw new Error(registerResult.message || 'Erreur lors de la création du compte')
+    }
+    
+    // Étape 2: Créer ou mettre à jour les UserInfo si des données sont fournies
+    if (step2Data.value && step2Data.value.phone) {
+      const userInfoResult = await createOrUpdateUserInfoWithRetry({
+        phone: step2Data.value.phone,
+        address: step2Data.value.address,
+        user: registerResult.user.id
+      })
+      
+      if (!userInfoResult.success) {
+        console.warn('Échec de la création des UserInfo:', userInfoResult.message)
+        // On continue quand même car l'utilisateur peut les ajouter plus tard
+      }
+    }
+    
+    // Nettoyer les données temporaires
+    localStorage.removeItem('registration_temp_data')
+    localStorage.removeItem('userPhone')
+    
+    // Rediriger vers la page de commande
+    router.push('/commander')
+    
+  } catch (error) {
+    console.error('Erreur lors de la finalisation:', error)
+    globalError.value = error.message || 'Erreur lors de la finalisation de l\'inscription'
+    currentStep.value = 2
+  }
+}
+
+// Gestion de la fermeture de la page
+if (process.client) {
+  window.addEventListener('beforeunload', () => {
+    // Les données sont déjà sauvegardées dans localStorage
+    // Pas besoin de faire quoi que ce soit de spécial
+  })
 }
 </script> 

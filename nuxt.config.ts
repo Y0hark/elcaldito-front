@@ -5,9 +5,13 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss'],
   
   runtimeConfig: {
+    strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
+    strapiToken: process.env.STRAPI_API_TOKEN,
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
     public: {
       strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
       strapiToken: process.env.STRAPI_API_TOKEN,
+      stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     }
   },
 
@@ -20,6 +24,13 @@ export default defineNuxtConfig({
   nitro: {
     routeRules: {
       '/blog/**': { cors: true }
+    }
+  },
+
+  // Add Vue configuration to prevent RouterLink warnings
+  vue: {
+    compilerOptions: {
+      isCustomElement: (tag) => tag === 'RouterLink'
     }
   }
 })
