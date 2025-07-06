@@ -1,5 +1,6 @@
 import { defineNuxtRouteMiddleware, useRoute, navigateTo } from '#app'
 import { useAuth } from '../composables/useAuth'
+import { useLocalePath } from '#i18n'
 
 export default defineNuxtRouteMiddleware(async (to) => {
   const { isLoggedIn, fetchUser, token } = useAuth()
@@ -38,19 +39,22 @@ export default defineNuxtRouteMiddleware(async (to) => {
         // Si toujours pas connecté après la tentative, rediriger
         if (!isLoggedIn.value || !fetchSuccess) {
           console.log('🔒 Auth middleware - ❌ Redirection vers /login (toujours pas connecté ou fetch échoué)')
-          return navigateTo('/login')
+          const localePath = useLocalePath()
+          return navigateTo(localePath('/login'))
         } else {
           console.log('🔒 Auth middleware - ✅ Utilisateur connecté, accès autorisé')
         }
       } else {
         // Pas de token, rediriger directement
         console.log('🔒 Auth middleware - ❌ Aucun token, redirection vers /login')
-        return navigateTo('/login')
+        const localePath = useLocalePath()
+        return navigateTo(localePath('/login'))
       }
     } catch (error) {
       console.error('🔒 Auth middleware - ❌ Erreur lors de la récupération:', error)
       console.log('🔒 Auth middleware - Redirection vers /login (erreur)')
-      return navigateTo('/login')
+      const localePath = useLocalePath()
+      return navigateTo(localePath('/login'))
     }
   } else if (isProtectedRoute && isLoggedIn.value) {
     console.log('🔒 Auth middleware - ✅ Déjà connecté, accès autorisé')

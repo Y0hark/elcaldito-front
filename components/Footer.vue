@@ -4,41 +4,44 @@
       <!-- Logo + baseline -->
       <div class="flex flex-col items-center mobiledesktop:items-start">
         <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-14 h-14 mx-auto mb-2 rounded-full border-2 border-secondary bg-crema" />
-        <h2 class="text-xl font-semibold mb-1">El Caldito</h2>
-        <p class="text-sm">Le goût du Mexique, mijoté avec amour à Marseille.</p>
+        <h2 class="text-xl font-semibold mb-1">{{ t('footer.title') }}</h2>
+        <p class="text-sm">{{ t('footer.baseline') }}</p>
       </div>
       <!-- Séparateur mobile -->
       <div class="w-full border-t border-crema/20 mobiledesktop:hidden"></div>
       <!-- Liens utiles -->
       <div class="flex flex-col items-center mobiledesktop:items-start">
-        <h3 class="text-base font-semibold mb-3">Liens utiles</h3>
+        <h3 class="text-base font-semibold mb-3">{{ t('footer.usefulLinks') }}</h3>
         <ul class="flex flex-col items-center gap-2 mobiledesktop:items-start">
-          <li><NuxtLink to="/" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Accueil</NuxtLink></li>
-          <li><NuxtLink to="/commander" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Commander</NuxtLink></li>
-          <li><NuxtLink to="/blog" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Blog</NuxtLink></li>
-          <li><NuxtLink to="/actus" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Actus</NuxtLink></li>
-          <li><NuxtLink to="/a-propos" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">À propos</NuxtLink></li>
-          <li><NuxtLink to="/contact" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">Contact</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.home') }}</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/commander')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.order') }}</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/blog')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.blog') }}</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/actus')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.news') }}</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/a-propos')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.about') }}</NuxtLink></li>
+          <li><NuxtLink :to="$localePath('/contact')" class="hover:text-accent transition-all duration-200 px-2 py-1 focus:outline-none">{{ t('nav.contact') }}</NuxtLink></li>
         </ul>
       </div>
       <!-- Séparateur mobile -->
       <div class="w-full border-t border-crema/20 mobiledesktop:hidden"></div>
       <!-- Réseaux sociaux -->
       <div class="flex flex-col items-center mobiledesktop:items-start">
-        <h3 class="text-base font-semibold mb-3">Suivez-nous</h3>
+        <h3 class="text-base font-semibold mb-3">{{ t('footer.followUs') }}</h3>
         <div class="flex justify-center gap-6 mobiledesktop:justify-start">
-          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">Instagram</a>
-          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">WhatsApp</a>
-          <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">Email</a>
+          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.instagram') }}</a>
+          <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.whatsapp') }}</a>
+          <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.email') }}</a>
         </div>
       </div>
     </div>
     <div class="max-w-5xl mx-auto pt-8 mt-8 border-t border-crema/20 text-xs text-center">
-      © 2025 El Caldito – Fait maison par Viviana & Samuel avec ❤️ depuis Marseille 🌶️
+      {{ t('footer.copyright') }}
     </div>
   </footer>
 </template>
 
 <script setup>
+import { useI18n, useLocalePath } from '#i18n'
+const { t } = useI18n()
+const localePath = useLocalePath()
 // Aucun script nécessaire pour ce composant
 </script> 

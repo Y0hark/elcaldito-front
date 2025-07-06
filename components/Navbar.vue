@@ -7,23 +7,24 @@
       </NuxtLink>
       <!-- Menu desktop -->
       <div class="hidden mobiledesktop:flex items-center space-x-2 mobiledesktop:space-x-4">
-        <NuxtLink to="/" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Accueil</NuxtLink>
-        <NuxtLink to="/commander" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Commander</NuxtLink>
-        <NuxtLink to="/blog" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Blog</NuxtLink>
-        <NuxtLink to="/actus" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Actus</NuxtLink>
-        <NuxtLink to="/a-propos" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">À propos</NuxtLink>
-        <NuxtLink to="/contact" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">Contact</NuxtLink>
+        <NuxtLink :to="$localePath('/')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.home') }}</NuxtLink>
+        <NuxtLink :to="$localePath('/commander')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.order') }}</NuxtLink>
+        <NuxtLink :to="$localePath('/blog')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.blog') }}</NuxtLink>
+        <NuxtLink :to="$localePath('/actus')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.news') }}</NuxtLink>
+        <NuxtLink :to="$localePath('/a-propos')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.about') }}</NuxtLink>
+        <NuxtLink :to="$localePath('/contact')" class="nav-link px-3 py-2 rounded-lg font-medium hover:text-accent transition-colors duration-200 mobiledesktop:px-4 mobiledesktop:py-2 focus:outline-none">{{ $t('nav.contact') }}</NuxtLink>
+        <LanguageSwitcher />
         <div class="relative group">
           <button v-if="isLoggedIn" class="px-2 py-2 rounded-lg flex items-center hover:text-accent transition-colors duration-200" @click="isUserMenuOpen = !isUserMenuOpen" aria-label="Menu utilisateur">
             <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
           </button>
-          <NuxtLink v-else to="/login" class="px-2 py-2 rounded-lg flex items-center group hover:text-accent transition-colors duration-200">
+          <NuxtLink v-else :to="$localePath('/login')" class="px-2 py-2 rounded-lg flex items-center group hover:text-accent transition-colors duration-200">
             <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Se connecter" class="w-8 h-8 transition-transform duration-200 group-hover:scale-110" />
           </NuxtLink>
           <transition name="fade">
             <div v-if="isUserMenuOpen && isLoggedIn" class="absolute right-0 mt-2 w-44 bg-white rounded-md shadow-lg py-1 border border-primary/10 z-20">
-              <NuxtLink to="/compte" @click="isUserMenuOpen = false" class="block px-4 py-2 text-sm text-primary hover:bg-crema">Mon compte</NuxtLink>
-              <button @click="logout" class="block w-full text-left px-4 py-2 text-sm text-primary hover:bg-crema">Se déconnecter</button>
+              <NuxtLink :to="$localePath('/compte')" @click="isUserMenuOpen = false" class="block px-4 py-2 text-sm text-primary hover:bg-crema">{{ $t('nav.account') }}</NuxtLink>
+              <button @click="logout" class="block w-full text-left px-4 py-2 text-sm text-primary hover:bg-crema">{{ $t('nav.logout') }}</button>
             </div>
           </transition>
         </div>
@@ -41,24 +42,29 @@
           <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity mb-2" @click="closeMenu">
             <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-14 h-14 mb-2" />
           </NuxtLink>
-          <NuxtLink to="/" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Accueil</NuxtLink>
-          <NuxtLink to="/commander" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Commander</NuxtLink>
-          <NuxtLink to="/blog" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Blog</NuxtLink>
-          <NuxtLink to="/actus" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Actus</NuxtLink>
-          <NuxtLink to="/a-propos" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">À propos</NuxtLink>
-          <NuxtLink to="/contact" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Contact</NuxtLink>
-          <div v-if="isLoggedIn" class="mt-2 pt-2 border-t border-primary/20 w-full text-center">
+          <NuxtLink :to="$localePath('/')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.home') }}</NuxtLink>
+          <NuxtLink :to="$localePath('/commander')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.order') }}</NuxtLink>
+          <NuxtLink :to="$localePath('/blog')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.blog') }}</NuxtLink>
+          <NuxtLink :to="$localePath('/actus')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.news') }}</NuxtLink>
+          <NuxtLink :to="$localePath('/a-propos')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.about') }}</NuxtLink>
+          <NuxtLink :to="$localePath('/contact')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.contact') }}</NuxtLink>
+          <div class="flex justify-center mt-2 pt-2 border-t border-primary/20 w-full">
+            <LanguageSwitcher />
+          </div>
+          <div v-if="isLoggedIn" class="mt-2 pt-2 border-t border-primary/20 w-full">
             <div class="flex flex-col items-center mb-3">
               <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-12 h-12 mb-1" />
-              <span class="text-xs text-primary/70">Mon compte</span>
+              <span class="text-xs text-primary/70">{{ $t('nav.account') }}</span>
             </div>
-            <NuxtLink to="/compte" class="block text-lg py-3 w-full rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">Mon compte</NuxtLink>
-            <button @click="() => { logout(); closeMenu(); }" class="text-lg py-3 w-full rounded-lg hover:text-accent transition-all duration-200">Se déconnecter</button>
+            <div class="flex flex-col items-center space-y-2">
+              <NuxtLink :to="$localePath('/compte')" class="text-lg py-3 px-6 rounded-lg hover:text-accent transition-all duration-200 text-center" @click="closeMenu">{{ $t('nav.account') }}</NuxtLink>
+              <button @click="() => { logout(); closeMenu(); }" class="text-lg py-3 px-6 rounded-lg hover:text-accent transition-all duration-200 text-center">{{ $t('nav.logout') }}</button>
+            </div>
           </div>
           <div v-else class="mt-2 pt-2 border-t border-primary/20 w-full flex justify-center">
-            <NuxtLink to="/login" @click="closeMenu" class="flex flex-col items-center group">
+            <NuxtLink :to="$localePath('/login')" @click="closeMenu" class="flex flex-col items-center group">
               <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Se connecter" class="w-12 h-12 mb-1 transition-transform duration-200 group-hover:scale-110" />
-              <span class="text-xs text-primary/70 group-hover:text-accent">Se connecter</span>
+              <span class="text-xs text-primary/70 group-hover:text-accent">{{ $t('nav.login') }}</span>
             </NuxtLink>
           </div>
         </div>
@@ -70,10 +76,12 @@
 <script setup>
 import { ref } from 'vue';
 import { useAuth } from '../composables/useAuth'
+import { useLocalePath } from '#i18n'
 
 const isMenuOpen = ref(false);
 const isUserMenuOpen = ref(false);
 const { isLoggedIn, logout } = useAuth()
+const localePath = useLocalePath()
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -123,10 +131,15 @@ const closeMenu = () => {
   text-decoration: none;
   transition: color 0.3s;
 }
-.mobiledesktop\:flex .nav-link.nuxt-link-exact-active::after,
-.mobiledesktop\:flex .nav-link.nuxt-link-active::after {
+.mobiledesktop\:flex .nav-link.router-link-exact-active::after,
+.mobiledesktop\:flex .nav-link.router-link-active::after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+.mobiledesktop\:flex .nav-link.router-link-exact-active,
+.mobiledesktop\:flex .nav-link.router-link-active {
+  color: #275b00;
+  font-weight: 600;
 }
 .mobiledesktop\:flex .nav-link::after {
   content: '';

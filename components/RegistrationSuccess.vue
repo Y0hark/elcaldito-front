@@ -38,14 +38,16 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import { useLocalePath } from '#i18n'
 
 const router = useRouter()
+const localePath = useLocalePath()
 
 const goToCommander = () => {
-  router.push('/commander')
+  router.push(localePath('/commander'))
 }
 
 const goToProfile = () => {
-  router.push('/compte')
+  router.push(localePath('/compte'))
 }
 </script> 

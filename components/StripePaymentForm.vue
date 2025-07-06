@@ -9,9 +9,9 @@
           </svg>
         </div>
         <div class="flex-1">
-          <h4 class="text-sm font-medium text-blue-800">Paiement sécurisé</h4>
+          <h4 class="text-sm font-medium text-blue-800">{{ $t('order.stripe.securePayment') }}</h4>
           <p class="text-sm text-blue-700 mt-1">
-            Vos informations de paiement sont protégées par Stripe. Nous ne stockons jamais vos données de carte.
+            {{ $t('order.stripe.securePaymentDesc') }}
           </p>
         </div>
       </div>
@@ -19,36 +19,36 @@
 
     <!-- Formulaire de carte -->
     <div>
-      <label class="block text-primary font-medium mb-2">Informations de carte</label>
+      <label class="block text-primary font-medium mb-2">{{ $t('order.stripe.cardInfo') }}</label>
       <div 
         ref="cardElementRef"
         class="w-full px-3 py-2 border border-primary/20 rounded-lg focus-within:border-primary transition-colors"
       ></div>
       <p class="text-xs text-primary/60 mt-1">
-        Paiement sécurisé par Stripe
+        {{ $t('order.stripe.secureByStripe') }}
       </p>
     </div>
 
     <!-- Informations de facturation -->
     <div class="grid grid-cols-1 mobiledesktop:grid-cols-2 gap-4">
       <div>
-        <label class="block text-primary font-medium mb-1">Nom complet</label>
+        <label class="block text-primary font-medium mb-1">{{ $t('order.stripe.fullName') }}</label>
         <input 
           v-model="billingName"
           type="text"
           required
           class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base"
-          placeholder="Nom et prénom"
+          :placeholder="$t('order.stripe.fullNamePlaceholder')"
         />
       </div>
       <div>
-        <label class="block text-primary font-medium mb-1">Email</label>
+        <label class="block text-primary font-medium mb-1">{{ $t('order.stripe.email') }}</label>
         <input 
           v-model="billingEmail"
           type="email"
           required
           class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base"
-          placeholder="email@example.com"
+          :placeholder="$t('order.stripe.emailPlaceholder')"
         />
       </div>
     </div>
@@ -66,10 +66,10 @@
           <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
-        Traitement en cours...
+        {{ $t('order.stripe.processing') }}
       </span>
       <span v-else>
-        Payer {{ totalAmount.toFixed(2) }}€
+        {{ $t('order.stripe.pay') }} {{ totalAmount.toFixed(2) }}€
       </span>
     </button>
 
@@ -83,6 +83,9 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useStripePayment } from '../composables/useStripePayment'
+import { useI18n } from '#i18n'
+
+const { t } = useI18n()
 
 const props = defineProps({
   amount: {
@@ -157,7 +160,7 @@ onMounted(async () => {
       cardElement.value.mount(cardElementRef.value)
     }
   } catch (err) {
-    error.value = 'Erreur lors de l\'initialisation du système de paiement'
+    error.value = t('order.stripe.initError')
     console.error('Erreur Stripe:', err)
   }
 })
@@ -202,7 +205,7 @@ defineExpose({
 // Gestion du paiement
 const handlePayment = async () => {
   if (!isFormValid.value) {
-    error.value = 'Veuillez remplir tous les champs requis'
+    error.value = t('order.stripe.fillFieldsError')
     return
   }
 
@@ -223,7 +226,7 @@ const handlePayment = async () => {
       emit('error', result.error)
     }
   } catch (err) {
-    error.value = 'Erreur lors du traitement du paiement'
+    error.value = t('order.stripe.paymentError')
     emit('error', error.value)
     console.error('Erreur paiement:', err)
   }

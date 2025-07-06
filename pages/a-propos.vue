@@ -1,52 +1,52 @@
 <template>
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
-      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">À propos</h1>
+      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">{{ $t('order.about.title') }}</h1>
       
       <!-- H1 -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
         <h2 class="text-xl font-semibold text-primary text-center mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3 italic">
-          Deux âmes, une marmite
+          {{ $t('order.about.subtitle') }}
         </h2>
       </div>
 
       <!-- Notre histoire -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
-        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Notre histoire</h2>
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">{{ $t('order.about.story.title') }}</h2>
         <div class="space-y-4">
           <div class="flex items-start gap-3">
             <span class="text-2xl mobiledesktop:text-3xl">👩‍🍳</span>
             <div>
-              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">Viviana</h3>
+              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">{{ $t('order.about.story.viviana.name') }}</h3>
               <p class="text-primary/90 text-sm mobiledesktop:text-base leading-relaxed">
-                Née au <strong>Mexique</strong>, biberonnée au <strong>pozole rouge</strong>, diplômée en <strong>commerce international</strong> et chef en herbe depuis qu'elle tient une louche. Depuis 2024, elle est titulaire du prestigieux titre de <strong>"Meilleure Chef de l'Univers"</strong> décerné par la Revue Culinaire de Samuel.
+                {{ $t('order.about.story.viviana.description') }}
               </p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="text-2xl mobiledesktop:text-3xl">🚚</span>
             <div>
-              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">Samuel</h3>
+              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">{{ $t('order.about.story.samuel.name') }}</h3>
               <p class="text-primary/90 text-sm mobiledesktop:text-base leading-relaxed">
-                Né à <strong>Marseille</strong>, il a grandi à la <strong>campagne</strong> et est revenu sous la protection de la <strong>bonne mère</strong> pour faire ses études. Il tombe par la suite éperdument amoureux de Viviana… et du <strong>Mexique</strong>.
+                {{ $t('order.about.story.samuel.description') }}
               </p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="text-2xl mobiledesktop:text-3xl">💕</span>
             <div>
-              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">Rencontre</h3>
+              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">{{ $t('order.about.story.meeting.name') }}</h3>
               <p class="text-primary/90 text-sm mobiledesktop:text-base leading-relaxed">
-                <strong>France 2023</strong>. Coup de foudre pimenté (<strong>Habanero</strong>).
+                {{ $t('order.about.story.meeting.description') }}
               </p>
             </div>
           </div>
           <div class="flex items-start gap-3">
             <span class="text-2xl mobiledesktop:text-3xl">👨‍👩‍👧‍👧</span>
             <div>
-              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">Aujourd'hui</h3>
+              <h3 class="font-semibold text-primary text-base mobiledesktop:text-lg mb-1">{{ $t('order.about.story.today.name') }}</h3>
               <p class="text-primary/90 text-sm mobiledesktop:text-base leading-relaxed">
-                <strong>Fiancés</strong>, parents de <strong>jumelles</strong> (futures dégustatrices officielles). <strong>Lui code, elle cuisine</strong>. Ensemble, ils servent l'<strong>âme du Mexique</strong> dans des bols.
+                {{ $t('order.about.story.today.description') }}
               </p>
             </div>
           </div>
@@ -55,21 +55,21 @@
 
       <!-- Notre mission -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
-        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Notre mission</h2>
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">{{ $t('order.about.mission.title') }}</h2>
         <p class="text-base text-primary/90 leading-relaxed mobiledesktop:text-lg italic text-center">
-          Partager un caldito qui rassemble : une gorgée, et les frontières fondent.
+          {{ $t('order.about.mission.description') }}
         </p>
       </div>
 
       <!-- Nos valeurs -->
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
-        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">Nos valeurs</h2>
+        <h2 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl mobiledesktop:mb-3">{{ $t('order.about.values.title') }}</h2>
         <div class="flex flex-wrap justify-center gap-3 mobiledesktop:gap-4">
-          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">Authenticité</span>
-          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">Générosité</span>
-          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">Convivialité</span>
-          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">Slow Food</span>
-          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">Famille avant tout</span>
+          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">{{ $t('order.about.values.authenticity') }}</span>
+          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">{{ $t('order.about.values.generosity') }}</span>
+          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">{{ $t('order.about.values.conviviality') }}</span>
+          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">{{ $t('order.about.values.slowFood') }}</span>
+          <span class="px-4 py-2 bg-primary/10 text-primary rounded-full font-medium text-sm mobiledesktop:text-base">{{ $t('order.about.values.familyFirst') }}</span>
         </div>
       </div>
 
@@ -77,10 +77,10 @@
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
         <div class="text-center">
           <p class="text-base text-primary/90 leading-relaxed mobiledesktop:text-lg mb-4">
-            Prêt à goûter l'âme du Mexique ?
+            {{ $t('order.about.cta.question') }}
           </p>
           <NuxtLink to="/commander" class="inline-block px-6 py-3 bg-primary text-crema rounded-xl font-semibold hover:bg-accent transition-colors duration-300 focus:outline-none">
-            Commander maintenant
+            {{ $t('order.about.cta.button') }}
           </NuxtLink>
         </div>
       </div>

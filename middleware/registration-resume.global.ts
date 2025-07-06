@@ -1,3 +1,5 @@
+import { useLocalePath } from '#i18n'
+
 export default defineNuxtRouteMiddleware((to, from) => {
   // Seulement côté client
   if (process.server) return
@@ -8,7 +10,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
   // Vérifier si l'utilisateur est déjà connecté
   const token = useCookie('token')
   if (token.value) {
-    return navigateTo('/commander')
+    const localePath = useLocalePath()
+    return navigateTo(localePath('/commander'))
   }
   
   // Vérifier s'il y a des données temporaires d'enregistrement

@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center bg-crema">
     <div class="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
       <!-- Titre et progression -->
-      <h2 class="text-2xl font-bold text-primary text-center mb-6">Créer un compte</h2>
+      <h2 class="text-2xl font-bold text-primary text-center mb-6">{{ t('register.title') }}</h2>
       
       <RegistrationProgress :current-step="currentStep" />
       
@@ -27,8 +27,8 @@
       <!-- Étape 3: Finalisation -->
       <div v-else-if="currentStep === 3" class="text-center space-y-6">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-        <h3 class="text-lg font-semibold text-primary">Finalisation de votre inscription...</h3>
-        <p class="text-gray-600">Veuillez patienter pendant que nous finalisons votre compte.</p>
+        <h3 class="text-lg font-semibold text-primary">{{ t('register.finalizing') }}</h3>
+        <p class="text-gray-600">{{ t('register.pleaseWait') }}</p>
       </div>
       
       <!-- Messages d'erreur globaux -->
@@ -47,8 +47,8 @@
       
       <!-- Lien de connexion -->
       <div class="mt-6 text-center">
-        <p class="text-primary/60">Déjà un compte ? 
-          <NuxtLink to="/login" class="underline hover:text-primary">Se connecter</NuxtLink>
+        <p class="text-primary/60">{{ t('register.hasAccount') }} 
+          <NuxtLink :to="localePath('/login')" class="underline hover:text-primary">{{ t('register.login') }}</NuxtLink>
         </p>
       </div>
     </div>
@@ -60,6 +60,7 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 import { useUserInfo } from '../composables/useUserInfo'
+import { useI18n, useLocalePath } from '#i18n'
 
 // État local
 const currentStep = ref(1)
@@ -71,11 +72,13 @@ const step2Data = ref(null)
 const router = useRouter()
 const { register, isLoggedIn } = useAuth()
 const { createOrUpdateUserInfoWithRetry } = useUserInfo()
+const { t } = useI18n()
+const localePath = useLocalePath()
 
 // Vérifier si l'utilisateur est déjà connecté
 onMounted(() => {
   if (isLoggedIn.value) {
-    router.push('/commander')
+    router.push(localePath('/commander'))
     return
   }
   
@@ -150,7 +153,7 @@ const completeRegistration = async () => {
     )
     
     if (!registerResult.success) {
-      throw new Error(registerResult.message || 'Erreur lors de la création du compte')
+      throw new Error(registerResult.message || t('register.accountError'))
     }
     
     // Étape 2: Créer ou mettre à jour les UserInfo si des données sont fournies
@@ -172,11 +175,11 @@ const completeRegistration = async () => {
     localStorage.removeItem('userPhone')
     
     // Rediriger vers la page de commande
-    router.push('/commander')
+    router.push(localePath('/commander'))
     
   } catch (error) {
     console.error('Erreur lors de la finalisation:', error)
-    globalError.value = error.message || 'Erreur lors de la finalisation de l\'inscription'
+    globalError.value = error.message || t('register.finalizationError')
     currentStep.value = 2
   }
 }

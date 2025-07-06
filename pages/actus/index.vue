@@ -2,9 +2,9 @@
   <div class="min-h-screen bg-crema">
     <!-- Header -->
     <header class="py-12 px-4 text-center">
-      <h1 class="text-4xl font-bold text-primary">Le coin des nouvelles fraîches (et bien chaudes)</h1>
+      <h1 class="text-4xl font-bold text-primary">{{ $t('order.news.title') }}</h1>
       <p class="text-primary/70 text-center text-lg mt-2">
-        Suivez l'actualité d'El Caldito en temps réel
+        {{ $t('order.news.subtitle') }}
       </p>
     </header>
 
@@ -12,25 +12,25 @@
     <main class="max-w-3xl mx-auto px-4 pb-16">
       <!-- Loading State -->
       <div v-if="pending" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl mx-auto">
-        <LoadingSpinner text="Chargement des actualités..." />
+        <LoadingSpinner :text="$t('order.news.loading')" />
       </div>
 
       <!-- Error State -->
       <div v-else-if="error" class="bg-primary/95 rounded-xl p-6 shadow-xl mt-4 w-full max-w-2xl mx-auto">
-        <p class="text-crema text-center mb-4">Une erreur est survenue lors du chargement des actualités.</p>
+        <p class="text-crema text-center mb-4">{{ $t('order.news.error') }}</p>
         <button 
           @click="refresh"
           class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block"
         >
-          Réessayer
+          {{ $t('order.news.retry') }}
         </button>
       </div>
 
       <!-- No Posts -->
       <div v-else-if="!posts || posts.length === 0" class="text-center py-12">
         <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-6 max-w-md mx-auto">
-          <p class="text-yellow-800 mb-4">Aucune actualité pour le moment.</p>
-          <p class="text-yellow-700 text-sm">Revenez bientôt pour découvrir nos dernières nouvelles !</p>
+          <p class="text-yellow-800 mb-4">{{ $t('order.news.noNews') }}</p>
+          <p class="text-yellow-700 text-sm">{{ $t('order.news.noNewsHint') }}</p>
         </div>
       </div>
 
@@ -104,7 +104,7 @@
                 :to="`/actus/${post.slug}`"
                 class="mt-3 text-accent hover:underline inline-flex items-center text-sm"
               >
-                En savoir plus
+                {{ $t('order.news.readMore') }}
                 <svg 
                   class="w-4 h-4 ml-1" 
                   fill="none" 

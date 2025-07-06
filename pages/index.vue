@@ -2,61 +2,63 @@
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <!-- Hero Section -->
     <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-none flex flex-col items-center justify-center flex-1 gap-6 py-10 mobiledesktop:py-16 px-2 mobiledesktop:px-0">
-      <h1 class="text-2xl font-bold text-primary drop-shadow-lg text-center mobiledesktop:text-4xl">Le Pozole qui réchauffe Marseille.</h1>
-      <h2 class="text-base font-semibold text-secondary text-center mobiledesktop:text-xl">Une marmite. Deux cœurs. Un seul goût d'authenticité.</h2>
+      <h1 class="text-2xl font-bold text-primary drop-shadow-lg text-center mobiledesktop:text-4xl">{{ $t('home.hero.title') }}</h1>
+      <h2 class="text-base font-semibold text-secondary text-center mobiledesktop:text-xl">{{ $t('home.hero.subtitle') }}</h2>
       
       <!-- Loading State -->
       <div v-if="pending" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
-        <LoadingSpinner text="Préparation de la prochaine marmite..." />
+        <LoadingSpinner :text="$t('home.hero.loading')" />
       </div>
 
       <!-- Error State -->
       <div v-else-if="error" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
-        <p class="text-crema text-center mb-4">Désolé, une erreur est survenue lors du chargement des disponibilités.</p>
+        <p class="text-crema text-center mb-4">{{ $t('home.hero.error') }}</p>
         <button 
           @click="refresh"
           class="px-6 py-2 bg-crema text-primary rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300 mx-auto block"
         >
-          Réessayer
+          {{ $t('home.hero.retry') }}
         </button>
       </div>
 
       <!-- Countdown Widget -->
       <div v-else-if="nextDistribution" class="bg-primary/95 rounded-xl p-4 shadow-xl mt-4 w-full max-w-md mobiledesktop:max-w-2xl">
-        <h3 class="text-base font-semibold text-crema text-center mb-4 mobiledesktop:text-xl">Prochaine cuisson dans :</h3>
+        <h3 class="text-base font-semibold text-crema text-center mb-4 mobiledesktop:text-xl">{{ $t('home.hero.countdown.title') }}</h3>
         <div class="grid grid-cols-2 gap-2 mobiledesktop:grid-cols-4 mobiledesktop:gap-4 text-center">
           <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
             <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ days }}</div>
-            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Jours</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">{{ $t('home.hero.countdown.days') }}</div>
           </div>
           <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
             <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ hours }}</div>
-            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Heures</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">{{ $t('home.hero.countdown.hours') }}</div>
           </div>
           <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
             <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ minutes }}</div>
-            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Minutes</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">{{ $t('home.hero.countdown.minutes') }}</div>
           </div>
           <div class="bg-crema rounded-lg p-2 mobiledesktop:p-3">
             <div class="text-lg font-bold text-primary mobiledesktop:text-2xl">{{ seconds }}</div>
-            <div class="text-xs text-primary/80 mobiledesktop:text-sm">Secondes</div>
+            <div class="text-xs text-primary/80 mobiledesktop:text-sm">{{ $t('home.hero.countdown.seconds') }}</div>
           </div>
         </div>
-        <h4 class="text-xs font-semibold text-crema text-center mt-4 mobiledesktop:text-sm">⏳ Portions limitées : {{ nextDistribution.disponibilite }} bols disponibles !</h4>
+        <h4 class="text-xs font-semibold text-crema text-center mt-4 mobiledesktop:text-sm">{{ $t('home.hero.countdown.limited', { count: nextDistribution.disponibilite }) }}</h4>
       </div>
 
       <p class="text-lg text-primary/80 text-center max-w-2xl mt-2"></p>
-      <NuxtLink to="/commander" class="mt-6 px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">Commander</NuxtLink>
+      <NuxtLink to="/commander" class="mt-6 px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">{{ $t('home.hero.orderButton') }}</NuxtLink>
     </section>
 
     <!-- Présentation Section -->
     <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg bg-white border border-primary/10 rounded-xl p-4 mobiledesktop:p-10 shadow-xl flex flex-col mobiledesktop:flex-row gap-4 mobiledesktop:gap-12 items-center mb-8 mobiledesktop:mb-10">
       <div class="flex-1 text-center mobiledesktop:text-left">
-        <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">Bienvenue chez El Caldito</h3>
-        <p class="text-primary/90 text-base leading-relaxed mobiledesktop:text-lg">
-          Nous sommes <span class="font-semibold text-primary">Viviana</span>, Mexicaine jusqu'au bout des épices, et <span class="font-semibold text-primary">Samuel</span>, Marseillais amoureux de tout ce qui se mange avec du piment (et fou amoureux de Viviana).<br><br>
-          Ensemble, nous mijotons un <span class="font-semibold text-primary">pozole maison</span> – ce "caldito" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d'un goût familial ou la curiosité d'une <span class="italic">fiesta de saveurs</span>.
-        </p>
+        <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">{{ $t('home.presentation.title') }}</h3>
+        <p class="text-primary/90 text-base leading-relaxed mobiledesktop:text-lg" v-html="$t('home.presentation.description', {
+          viviana: `<span class='font-semibold text-primary'>${$t('home.presentation.viviana')}</span>`,
+          samuel: `<span class='font-semibold text-primary'>${$t('home.presentation.samuel')}</span>`,
+          pozole: `<span class='font-semibold text-primary'>${$t('home.presentation.pozole')}</span>`,
+          fiesta: `<span class='italic'>${$t('home.presentation.fiesta')}</span>`
+        }).replace(/\n\n/g, '<br><br>')"></p>
       </div>
       <div class="flex-1 flex justify-center mt-4 mobiledesktop:mt-0">
         <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-24 h-24 rounded-full border-4 border-secondary shadow-md bg-crema mobiledesktop:w-32 mobiledesktop:h-32" />
@@ -67,31 +69,31 @@
     <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg grid grid-cols-1 gap-4 mobiledesktop:mx-auto mobiledesktop:grid-cols-4 mobiledesktop:gap-6 mb-8 mobiledesktop:mb-10 px-1 mobiledesktop:px-0">
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
         <span class="text-2xl mb-2 mobiledesktop:text-3xl">👨‍🍳</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Recette unique</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis.</p>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.recipe.title') }}</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.recipe.description') }}</p>
       </div>
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
         <span class="text-2xl mb-2 mobiledesktop:text-3xl">🌍</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Ingrédients sourcés</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">On marie les saveurs du Mexique avec les trésors de la France.</p>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.ingredients.title') }}</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.ingredients.description') }}</p>
       </div>
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
         <span class="text-2xl mb-2 mobiledesktop:text-3xl">⏳</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Cuisson lente</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Qui parfume toute la maison (et bientôt la vôtre).</p>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.cooking.title') }}</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.cooking.description') }}</p>
       </div>
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
         <span class="text-2xl mb-2 mobiledesktop:text-3xl">🚚</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">Samuel vous livre</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">Sourire compris.</p>
+        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.delivery.title') }}</h4>
+        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.delivery.description') }}</p>
       </div>
     </section>
 
     <!-- Contact Section -->
     <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg bg-white border border-primary/10 rounded-xl p-4 mobiledesktop:p-10 shadow-xl flex flex-col items-center mb-8 mobiledesktop:mb-10 animate-on-scroll">
-      <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">Contact & Commande</h3>
-      <p class="text-primary/90 text-center mb-4 text-sm mobiledesktop:text-base">Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !</p>
-      <a href="mailto:contact@elcaldito.fr" class="px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">Nous écrire</a>
+      <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">{{ $t('home.contact.title') }}</h3>
+      <p class="text-primary/90 text-center mb-4 text-sm mobiledesktop:text-base">{{ $t('home.contact.description') }}</p>
+      <a href="mailto:contact@elcaldito.fr" class="px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">{{ $t('home.contact.emailButton') }}</a>
     </section>
   </div>
 </template>

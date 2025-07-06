@@ -2,7 +2,38 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n'
+  ],
+  
+  i18n: {
+    locales: [
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français',
+        flag: '🇫🇷',
+        file: 'fr-FR.json'
+      },
+      {
+        code: 'es',
+        iso: 'es-MX',
+        name: 'Español (MX)',
+        flag: '🇲🇽',
+        file: 'es-MX.json'
+      }
+    ],
+    defaultLocale: 'fr',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    langDir: 'locales',
+    lazy: true
+  },
   
   runtimeConfig: {
     strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',

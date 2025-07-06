@@ -75,7 +75,11 @@ export const useStripePayment = () => {
   /**
    * Crée l'élément de carte
    */
-  const createCardElement = () => {
+  const createCardElement = (placeholders?: {
+    cardNumber?: string
+    expiryDate?: string
+    cvc?: string
+  }) => {
     if (!elements.value) {
       throw new Error('Elements non initialisés')
     }
@@ -93,6 +97,9 @@ export const useStripePayment = () => {
           color: '#ef4444',
         },
       },
+      ...(placeholders && {
+        placeholder: placeholders
+      })
     })
 
     return cardElement.value

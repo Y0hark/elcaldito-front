@@ -7,31 +7,29 @@
       @close="closeNotification"
     />
     <div class="w-full max-w-2xl mx-auto p-3 mobiledesktop:p-6">
-      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">Réservez votre bol de bonheur</h1>
-      <p class="text-base text-primary/80 text-center mb-4 mobiledesktop:text-lg mobiledesktop:mb-6">
-        Notre pozole sort de la marmite une ou deux fois par mois. Chaque service est limité : quand c'est complet, on ferme les commandes pour garder la qualité familiale.
-      </p>
+      <h1 class="text-2xl font-bold text-primary text-center mb-3 mobiledesktop:text-4xl mobiledesktop:mb-4">{{ $t('order.title') }}</h1>
+      <p class="text-base text-primary/80 text-center mb-4 mobiledesktop:text-lg mobiledesktop:mb-6">{{ $t('order.subtitle') }}</p>
       <!-- Loading State -->
       <div v-if="pending" class="text-center py-8 mobiledesktop:py-12">
-        <LoadingSpinner text="Chargement des disponibilités..." />
+        <LoadingSpinner :text="$t('order.loading')" />
       </div>
       <!-- Error State -->
       <div v-else-if="error" class="text-center py-8 mobiledesktop:py-12">
         <div class="bg-red-50 border border-red-200 rounded-xl p-4 max-w-xs mx-auto mobiledesktop:p-6 mobiledesktop:max-w-md">
-          <p class="text-red-600 mb-3 mobiledesktop:mb-4">Une erreur est survenue lors du chargement des disponibilités.</p>
+          <p class="text-red-600 mb-3 mobiledesktop:mb-4">{{ $t('order.error') }}</p>
           <button 
             @click="refresh"
             class="w-full px-4 py-2 bg-red-600 text-white rounded-xl font-semibold shadow hover:bg-red-700 transition-colors duration-300"
           >
-            Réessayer
+            {{ $t('order.retry') }}
           </button>
         </div>
       </div>
       <!-- No Distribution Available -->
       <div v-else-if="!nextDistribution" class="text-center py-8 mobiledesktop:py-12">
         <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 max-w-xs mx-auto mobiledesktop:p-6 mobiledesktop:max-w-md">
-          <p class="text-yellow-800 mb-3 mobiledesktop:mb-4">Aucune distribution prévue pour le moment.</p>
-          <p class="text-yellow-700 text-xs mobiledesktop:text-sm">Revenez bientôt pour découvrir nos prochaines cuissons !</p>
+          <p class="text-yellow-800 mb-3 mobiledesktop:mb-4">{{ $t('order.noDistribution') }}</p>
+          <p class="text-yellow-700 text-xs mobiledesktop:text-sm">{{ $t('order.noDistributionHint') }}</p>
         </div>
       </div>
       <!-- Next Distribution -->
@@ -65,79 +63,79 @@
               :disabled="nextDistribution.disponibilite <= 0"
               class="mt-3 w-full px-4 py-2 bg-white text-primary rounded-xl font-semibold shadow hover:bg-crema transition-colors duration-300 btn-transition disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed mobiledesktop:mt-4 mobiledesktop:w-auto mobiledesktop:px-6"
             >
-              <span v-if="nextDistribution.disponibilite > 0">Réserver maintenant</span>
-              <span v-else>Complet</span>
+              <span v-if="nextDistribution.disponibilite > 0">{{ $t('order.reserveNow') }}</span>
+              <span v-else>{{ $t('order.soldOut') }}</span>
             </button>
           </div>
         </div>
       </div>
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
-        <h2 class="text-lg font-semibold text-primary mb-3 mobiledesktop:text-2xl mobiledesktop:mb-4">Comment se passe la commande ?</h2>
+        <h2 class="text-lg font-semibold text-primary mb-3 mobiledesktop:text-2xl mobiledesktop:mb-4">{{ $t('order.howTitle') }}</h2>
         <ul class="space-y-3 mobiledesktop:space-y-4">
           <li class="flex items-start gap-2 mobiledesktop:gap-3">
             <span class="text-xl mobiledesktop:text-2xl">📅</span>
             <div>
-              <span class="font-semibold text-primary">Choisissez la date disponible</span>
-              <p class="text-primary/90 text-sm mobiledesktop:text-base">et réservez votre bol.</p>
+              <span class="font-semibold text-primary">{{ $t('order.step1Title') }}</span>
+              <p class="text-primary/90 text-sm mobiledesktop:text-base">{{ $t('order.step1Desc') }}</p>
             </div>
           </li>
           <li class="flex items-start gap-2 mobiledesktop:gap-3">
             <span class="text-xl mobiledesktop:text-2xl">🥘</span>
             <div>
-              <span class="font-semibold text-primary">Indiquez le nombre de portions</span>
-              <p class="text-primary/90 text-sm mobiledesktop:text-base">(max : 6 par personne).</p>
+              <span class="font-semibold text-primary">{{ $t('order.step2Title') }}</span>
+              <p class="text-primary/90 text-sm mobiledesktop:text-base">{{ $t('order.step2Desc') }}</p>
             </div>
           </li>
           <li class="flex items-start gap-2 mobiledesktop:gap-3">
             <span class="text-xl mobiledesktop:text-2xl">💳</span>
             <div>
-              <span class="font-semibold text-primary">Payez en ligne ou en liquide</span>
-              <p class="text-primary/90 text-sm mobiledesktop:text-base">(carte via Stripe, bientôt PayPal).</p>
+              <span class="font-semibold text-primary">{{ $t('order.step3Title') }}</span>
+              <p class="text-primary/90 text-sm mobiledesktop:text-base">{{ $t('order.step3Desc') }}</p>
             </div>
           </li>
           <li class="flex items-start gap-2 mobiledesktop:gap-3">
             <span class="text-xl mobiledesktop:text-2xl">✉️</span>
             <div>
-              <span class="font-semibold text-primary">Recevez votre confirmation</span>
-              <p class="text-primary/90 text-sm mobiledesktop:text-base">par email + SMS.</p>
+              <span class="font-semibold text-primary">{{ $t('order.step4Title') }}</span>
+              <p class="text-primary/90 text-sm mobiledesktop:text-base">{{ $t('order.step4Desc') }}</p>
             </div>
           </li>
           <li class="flex items-start gap-2 mobiledesktop:gap-3">
             <span class="text-xl mobiledesktop:text-2xl">🚚</span>
             <div>
-              <span class="font-semibold text-primary">Dégustez</span>
-              <p class="text-primary/90 text-sm mobiledesktop:text-base">le jour J : Samuel arrive jusqu'à votre porte ou point-relais.</p>
+              <span class="font-semibold text-primary">{{ $t('order.step5Title') }}</span>
+              <p class="text-primary/90 text-sm mobiledesktop:text-base">{{ $t('order.step5Desc') }}</p>
             </div>
           </li>
         </ul>
       </div>
       <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md mb-4 mobiledesktop:p-6 mobiledesktop:mb-6">
-        <h2 class="text-base font-semibold text-primary mb-2 mobiledesktop:text-xl mobiledesktop:mb-3">Informations pratiques</h2>
+        <h2 class="text-base font-semibold text-primary mb-2 mobiledesktop:text-xl mobiledesktop:mb-3">{{ $t('order.infoTitle') }}</h2>
         <div class="flex flex-col mobiledesktop:flex-row gap-4 mobiledesktop:gap-6">
           <div class="flex-1">
-            <h3 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-lg mobiledesktop:mb-2">Allergènes</h3>
+            <h3 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-lg mobiledesktop:mb-2">{{ $t('order.allergensTitle') }}</h3>
             <ul class="space-y-1 mobiledesktop:space-y-2">
               <li class="flex items-center gap-1 mobiledesktop:gap-2 text-primary/90">
                 <span class="text-lg mobiledesktop:text-xl">🌾</span>
-                <span>Sans gluten</span>
+                <span>{{ $t('order.stripe.glutenFree') }}</span>
               </li>
               <li class="flex items-center gap-1 mobiledesktop:gap-2 text-primary/90">
                 <span class="text-lg mobiledesktop:text-xl">🌶️</span>
-                <span>Peut contenir traces de piment fort</span>
+                <span>{{ $t('order.stripe.spicyWarning') }}</span>
               </li>
             </ul>
           </div>
           <div class="flex-1 mt-3 mobiledesktop:mt-0">
-            <h3 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-lg mobiledesktop:mb-2">Zone de livraison</h3>
+            <h3 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-lg mobiledesktop:mb-2">{{ $t('order.deliveryZoneTitle') }}</h3>
             <p class="text-primary/90 flex items-center gap-1 mobiledesktop:gap-2 text-sm mobiledesktop:text-base">
               <span class="text-lg mobiledesktop:text-xl">📍</span>
-              <span>Marseille intra-muros & proches environs</span>
+              <span>{{ $t('order.stripe.deliveryZone') }}</span>
             </p>
           </div>
         </div>
       </div>
       <p class="text-base text-primary/80 text-center italic mobiledesktop:text-lg">
-        Chaque bol de pozole est une déclaration d'amour à nos racines et à notre ville.
+        {{ $t('order.loveDeclaration') }}
       </p>
     </div>
     <!-- Order Panel -->
@@ -152,7 +150,7 @@
       >
         <div class="p-4 mobiledesktop:p-6">
         <div class="flex justify-between items-center mb-4 mobiledesktop:mb-6">
-          <h3 class="text-lg font-semibold text-primary mobiledesktop:text-2xl">Votre commande</h3>
+          <h3 class="text-lg font-semibold text-primary mobiledesktop:text-2xl">{{ $t('order.summaryTitle') }}</h3>
           <button 
             @click="closeOrderPanel"
             class="text-primary/60 hover:text-primary"
@@ -175,7 +173,7 @@
           </div>
           <!-- Quantity -->
           <div>
-            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Nombre de bols</label>
+            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">{{ $t('order.quantity') }}</label>
             <div class="flex items-center gap-2 mobiledesktop:gap-4">
               <button 
                 type="button"
@@ -208,7 +206,7 @@
           </div>
           <!-- Name & Email only if not logged in -->
           <div v-if="!isLoggedIn">
-            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Nom</label>
+            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">{{ $t('order.name') }}</label>
             <input 
               v-model="orderForm.nom"
               type="text"
@@ -217,7 +215,7 @@
             />
           </div>
           <div v-if="!isLoggedIn">
-            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Email</label>
+            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">{{ $t('order.email') }}</label>
             <input 
               v-model="orderForm.email"
               type="email"
@@ -233,29 +231,29 @@
                 v-model="orderForm.livraison"
                 class="form-checkbox h-5 w-5 text-primary"
               />
-              <span class="text-primary font-medium">Livraison à domicile</span>
+              <span class="text-primary font-medium">{{ $t('order.homeDelivery') }}</span>
             </label>
           </div>
           <!-- Commentaire -->
           <div>
-            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">Commentaire (optionnel)</label>
+            <label class="block text-primary font-medium mb-1 mobiledesktop:mb-2">{{ $t('order.comment') }}</label>
             <textarea
               v-model="orderForm.commentaire"
               rows="2"
               class="w-full px-3 py-2 rounded-lg border border-primary/20 focus:border-primary outline-none text-base mobiledesktop:text-lg resize-none"
-              placeholder="Un mot pour Viviana & Samuel ou une précision sur la livraison ?"
+              :placeholder="$t('order.commentPlaceholder')"
             ></textarea>
           </div>
           <!-- Payment Method -->
           <div>
-            <label class="block text-primary font-medium mb-2 mobiledesktop:mb-3">Méthode de paiement</label>
+            <label class="block text-primary font-medium mb-2 mobiledesktop:mb-3">{{ $t('order.paymentMethod') }}</label>
             
             <!-- Avertissement si paiement liquide non disponible -->
             <PaymentWarning
               :show="orderForm.paymentMethod === 'liquide' && !paymentValidation.canPayInCash && !paymentValidation.loading"
-              title="Paiement en liquide non disponible"
-              message="Vous avez atteint la limite de 2 bols en liquide pour cette marmite. Veuillez utiliser le paiement par carte."
-              action="Passer au paiement par carte"
+              :title="$t('order.cashNotAvailableTitle')"
+              :message="$t('order.cashNotAvailableMessage')"
+              :action="$t('order.switchToCard')"
               @action="orderForm.paymentMethod = 'stripe'"
             />
             
@@ -270,12 +268,12 @@
                 />
                 <div class="flex-1">
                   <div class="flex items-center gap-2">
-                    <span class="font-medium text-primary">💵 Paiement en liquide</span>
-                    <span v-if="paymentValidation.loading" class="text-xs text-primary/60">Vérification...</span>
+                    <span class="font-medium text-primary">💵 {{ $t('order.cashPayment') }}</span>
+                    <span v-if="paymentValidation.loading" class="text-xs text-primary/60">{{ $t('order.checking') }}</span>
                   </div>
-                  <p class="text-sm text-primary/70 mt-1">Payez le jour de la livraison</p>
+                  <p class="text-sm text-primary/70 mt-1">{{ $t('order.payOnDelivery') }}</p>
                   <p v-if="!paymentValidation.canPayInCash && !paymentValidation.loading" class="text-xs text-red-600 mt-1">
-                    Limite atteinte : maximum 2 bols en liquide par marmite
+                    {{ $t('order.cashLimitReached') }}
                   </p>
                 </div>
               </label>
@@ -288,8 +286,8 @@
                   class="form-radio h-5 w-5 text-primary mt-0.5"
                 />
                 <div class="flex-1">
-                  <span class="font-medium text-primary">💳 Paiement par carte</span>
-                  <p class="text-sm text-primary/70 mt-1">Paiement sécurisé via Stripe</p>
+                  <span class="font-medium text-primary">💳 {{ $t('order.cardPayment') }}</span>
+                  <p class="text-sm text-primary/70 mt-1">{{ $t('order.secureStripe') }}</p>
                 </div>
               </label>
             </div>
@@ -297,15 +295,15 @@
             <!-- Info sur les règles de paiement -->
             <div v-if="isLoggedIn && user" class="mt-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
               <p class="text-xs text-blue-800">
-                <strong>Règles de paiement :</strong><br>
-                • Maximum 6 bols par personne par marmite<br>
-                • Paiement en liquide limité à 2 bols par personne par marmite<br>
-                • Au-delà, paiement par carte obligatoire
+                <strong>{{ $t('order.paymentRulesTitle') }}</strong><br>
+                • {{ $t('order.max6PerPerson') }}<br>
+                • {{ $t('order.max2Cash') }}<br>
+                • {{ $t('order.cardRequired') }}
               </p>
             </div>
           </div>
           <!-- Submit -->
-          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition focus:outline-none">Valider la commande</button>
+          <button type="submit" class="w-full px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent transition-colors duration-300 btn-transition focus:outline-none">{{ $t('order.submit') }}</button>
             </form>
           </div>
           
@@ -313,14 +311,14 @@
           <div class="mobiledesktop:space-y-4">
             <!-- Résumé de la commande -->
             <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mobiledesktop:sticky mobiledesktop:top-4">
-              <h4 class="font-medium text-primary mb-3">Résumé de votre commande</h4>
+              <h4 class="font-medium text-primary mb-3">{{ $t('order.summaryTitle') }}</h4>
               <div class="space-y-2 text-sm">
                 <div class="flex justify-between">
-                  <span class="text-primary/70">{{ orderForm.quantite }} bol{{ orderForm.quantite > 1 ? 's' : '' }} de pozole</span>
+                  <span class="text-primary/70">{{ orderForm.quantite }} {{ orderForm.quantite > 1 ? $t('order.bowls') : $t('order.bowl') }} de pozole</span>
                   <span class="font-medium">{{ (nextDistribution?.prix || 0) * orderForm.quantite }}€</span>
                 </div>
                 <div v-if="orderForm.livraison" class="flex justify-between">
-                  <span class="text-primary/70">Livraison à domicile</span>
+                  <span class="text-primary/70">{{ $t('order.deliveryFee') }}</span>
                   <span class="font-medium">+2.00€</span>
                 </div>
                 <div class="border-t border-gray-200 pt-2 flex justify-between font-semibold">
