@@ -165,7 +165,6 @@ export const useStripePayment = () => {
       
       // 2. Créer le Payment Intent d'abord
       const paymentIntentData = await createPaymentIntent(amount)
-      console.log('✅ Payment Intent créé:', paymentIntentData)
       
       // 3. Traiter le paiement avec Stripe
       const { error, paymentIntent } = await stripe.value.confirmCardPayment(paymentIntentData.clientSecret, {
@@ -194,11 +193,8 @@ export const useStripePayment = () => {
         }
       }
       
-      console.log('✅ Paiement confirmé:', paymentIntent)
-      
       // 5. Créer la commande avec le Stripe Payment Intent ID
       const commandeResult = await createCommandeWithPayment(commandeData, paymentIntentData.paymentIntentId)
-      console.log('✅ Commande créée:', commandeResult)
       
       return {
         success: true,

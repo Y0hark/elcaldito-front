@@ -25,11 +25,13 @@ export default defineNuxtConfig({
       }
     ],
     defaultLocale: 'fr',
-    strategy: 'prefix_except_default',
+    strategy: 'prefix',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       redirectOn: 'root',
+      alwaysRedirect: true,
+      fallbackLocale: 'fr'
     },
     langDir: 'locales',
     lazy: true

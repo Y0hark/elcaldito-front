@@ -66,26 +66,34 @@
     </section>
 
     <!-- Valeurs/Avantages Section -->
-    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg grid grid-cols-1 gap-4 mobiledesktop:mx-auto mobiledesktop:grid-cols-4 mobiledesktop:gap-6 mb-8 mobiledesktop:mb-10 px-1 mobiledesktop:px-0">
-      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0s;">
-        <span class="text-2xl mb-2 mobiledesktop:text-3xl">👨‍🍳</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.recipe.title') }}</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.recipe.description') }}</p>
+    <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg grid grid-cols-1 gap-4 mobiledesktop:grid-cols-4 mobiledesktop:gap-6 mb-8 mobiledesktop:mb-10 px-1 mobiledesktop:px-0">
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center justify-between hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover h-full" style="animation-delay: 0s;">
+        <div class="flex flex-col items-center">
+          <span class="text-2xl mb-2 mobiledesktop:text-3xl">👨‍🍳</span>
+          <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl text-center">{{ $t('home.values.recipe.title') }}</h4>
+          <p class="text-primary/90 text-center text-sm mobiledesktop:text-base leading-relaxed">{{ $t('home.values.recipe.description') }}</p>
+        </div>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.2s;">
-        <span class="text-2xl mb-2 mobiledesktop:text-3xl">🌍</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.ingredients.title') }}</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.ingredients.description') }}</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center justify-between hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover h-full" style="animation-delay: 0.2s;">
+        <div class="flex flex-col items-center">
+          <span class="text-2xl mb-2 mobiledesktop:text-3xl">🌍</span>
+          <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl text-center">{{ $t('home.values.ingredients.title') }}</h4>
+          <p class="text-primary/90 text-center text-sm mobiledesktop:text-base leading-relaxed">{{ $t('home.values.ingredients.description') }}</p>
+        </div>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.4s;">
-        <span class="text-2xl mb-2 mobiledesktop:text-3xl">⏳</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.cooking.title') }}</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.cooking.description') }}</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center justify-between hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover h-full" style="animation-delay: 0.4s;">
+        <div class="flex flex-col items-center">
+          <span class="text-2xl mb-2 mobiledesktop:text-3xl">⏳</span>
+          <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl text-center">{{ $t('home.values.cooking.title') }}</h4>
+          <p class="text-primary/90 text-center text-sm mobiledesktop:text-base leading-relaxed">{{ $t('home.values.cooking.description') }}</p>
+        </div>
       </div>
-      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover" style="animation-delay: 0.6s;">
-        <span class="text-2xl mb-2 mobiledesktop:text-3xl">🚚</span>
-        <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl">{{ $t('home.values.delivery.title') }}</h4>
-        <p class="text-primary/90 text-center text-sm mobiledesktop:text-base">{{ $t('home.values.delivery.description') }}</p>
+      <div class="bg-white border border-primary/10 rounded-xl p-4 shadow-md flex flex-col items-center justify-between hover:shadow-xl transition-all duration-300 transform hover:scale-105 animate-on-scroll stagger-animate card-hover h-full" style="animation-delay: 0.6s;">
+        <div class="flex flex-col items-center">
+          <span class="text-2xl mb-2 mobiledesktop:text-3xl">🚚</span>
+          <h4 class="text-base font-semibold text-primary mb-1 mobiledesktop:text-xl text-center">{{ $t('home.values.delivery.title') }}</h4>
+          <p class="text-primary/90 text-center text-sm mobiledesktop:text-base leading-relaxed">{{ $t('home.values.delivery.description') }}</p>
+        </div>
       </div>
     </section>
 

@@ -3,7 +3,7 @@
     "hero": {
       "title": "Le Pozole qui réchauffe Marseille.",
       "subtitle": "Une marmite. Deux cœurs. Un seul goût d'authenticité.",
-      "loading": "Préparation de la prochaine marmite...",
+      "loading": "La marmite frémit doucement...",
       "error": "Désolé, une erreur est survenue lors du chargement des disponibilités.",
       "retry": "Réessayer",
       "countdown": {
@@ -18,7 +18,7 @@
     },
     "presentation": {
       "title": "Bienvenue chez El Caldito",
-      "description": "Nous sommes {viviana}, Mexicaine jusqu'au bout des épices, et {samuel}, Marseillais amoureux de tout ce qui se mange avec du piment (et fou amoureux de Viviana).\n\nEnsemble, nous mijotons un {pozole} maison – ce \"caldito\" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d'un goût familial ou la curiosité d'une {fiesta}.",
+      "description": "Nous sommes {viviana}, Mexicaine jusqu'au bout des épices, et {samuel}, Marseillais amoureux de tout ce qui pique (et fou de Viviana, surtout).\n\nEnsemble, on mijote un {pozole} maison – ce \"caldito\" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d’un goût familial… ou l’envie d’une vraie {fiesta}.",
       "viviana": "Viviana",
       "samuel": "Samuel",
       "pozole": "pozole",
@@ -26,7 +26,7 @@
     },
     "values": {
       "recipe": {
-        "title": "Recette unique",
+        "title": "Recette maison",
         "description": "Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis."
       },
       "ingredients": {
@@ -38,7 +38,7 @@
         "description": "Qui parfume toute la maison (et bientôt la vôtre)."
       },
       "delivery": {
-        "title": "Samuel vous livre",
+        "title": "Samuel vous livre en personne",
         "description": "Sourire compris."
       }
     },
@@ -73,7 +73,7 @@
         "whatsapp": "WhatsApp (si disponible)",
         "instagram": "Instagram"
       },
-      "footer": "On répond entre deux siestes de nos bébés et deux bouillonnements de marmite !"
+      "footer": "On répond entre deux siestes... ❤️"
     },
     "account": {
       "title": "Mon compte",
@@ -83,8 +83,8 @@
         "username": "Nom d'utilisateur",
         "phone": "Téléphone",
         "address": "Adresse",
-        "notProvided": "Non renseigné",
-        "notProvidedFem": "Non renseignée",
+        "notProvided": "À compléter plus tard",
+        "notProvidedFem": "À compléter plus tard",
         "loading": "Chargement de vos informations...",
         "editButton": "Modifier mes informations",
         "addButton": "Ajouter mes informations"
@@ -181,10 +181,10 @@
     "step2Desc": "(max : 6 par personne).",
     "step3Title": "Payez en ligne ou en liquide",
     "step3Desc": "(carte via Stripe, bientôt PayPal).",
-    "step4Title": "Recevez votre confirmation",
-    "step4Desc": "par email + SMS.",
+    "step4Title": "Vous recevez une confirmation",
+    "step4Desc": "par email et SMS – pour ne rien louper du festin.",
     "step5Title": "Dégustez",
-    "step5Desc": "le jour J : Samuel arrive jusqu'à votre porte ou point-relais.",
+    "step5Desc": "le jour J : Samuel toque chez vous avec son plus beau sourire.",
     "infoTitle": "Informations pratiques",
     "allergensTitle": "Allergènes",
     "deliveryZoneTitle": "Zone de livraison",
@@ -250,7 +250,7 @@
       "retry": "Réessayer",
       "noArticles": "Aucun article pour le moment.",
       "readArticle": "Lire l'article",
-      "feedback": "Vos retours comptent énormément pour nous. Si une recette vous a touché, écrivez-nous ❤️"
+      "feedback": "Un mot doux, une critique, une anecdote ? On lit tout avec amour (et un pozole fumant à la main). ❤️"
     },
     "news": {
       "title": "Le coin des nouvelles fraîches (et bien chaudes)",
@@ -281,7 +281,7 @@
         },
         "today": {
           "name": "Aujourd'hui",
-          "description": "Fiancés, parents de jumelles (futures dégustatrices officielles). Lui code, elle cuisine. Ensemble, ils servent l'âme du Mexique dans des bols."
+          "description": "Fiancés, parents de jumelles (futures dégustatrices officielles). Lui bidouille du code, elle dompte les marmites. Ensemble, ils programment des calditos."
         }
       },
       "mission": {

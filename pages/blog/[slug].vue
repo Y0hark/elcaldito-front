@@ -29,9 +29,6 @@ const error = ref(null)
 // Fetch article data
 const fetchArticle = async () => {
   try {
-    console.log('Article page - Starting fetch')
-    console.log('Article page - Route params:', route.params)
-
     const { data: articleData, error: fetchError } = await fetchFromStrapi(`/articles?filters[slug][$eq]=${route.params.slug}&populate=*`)
     
     if (fetchError.value) {
@@ -41,13 +38,6 @@ const fetchArticle = async () => {
 
     if (articleData.value?.data?.[0]) {
       article.value = articleData.value.data[0]
-      console.log('Article page - Found article:', {
-        title: article.value.title,
-        slug: article.value.slug,
-        content: article.value.content
-      })
-    } else {
-      console.log('Article page - No article found')
     }
   } catch (e) {
     console.error('Article page - Error:', e)
@@ -59,7 +49,6 @@ const fetchArticle = async () => {
 
 // Fetch article on component mount
 onMounted(() => {
-  console.log('Article page mounted')
   fetchArticle()
 })
 

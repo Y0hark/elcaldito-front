@@ -129,9 +129,6 @@ const { data: article, pending, error, refresh } = await fetchFromStrapi(`/actus
 // Get the first article from the data array
 const articleData = computed(() => article.value?.data?.[0])
 
-// Debug log
-console.log('Article data:', articleData.value)
-
 // Format date in French
 const formatDate = (date) => {
   if (!date) return ''

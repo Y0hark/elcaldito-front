@@ -347,14 +347,10 @@ const updateUserInfo = async () => {
         : t('home.account.editForm.updateSuccess')
       
       // Rafraîchir les userInfo pour mettre à jour l'interface
-      console.log('🔄 Rafraîchissement des userInfo...')
       await fetchUserInfo()
       
       // Attendre un peu pour que l'état réactif soit mis à jour
       await new Promise(resolve => setTimeout(resolve, 100))
-      
-      // Vérifier que les données ont été mises à jour
-      console.log('📊 UserInfo après mise à jour:', userInfo.value)
       
       showEditForm.value = false
       

@@ -1,8 +1,8 @@
 {
   "home": {
     "hero": {
-      "title": "El Pozole que calienta Marsella.",
-      "subtitle": "Una olla. Dos corazones. Un solo sabor de autenticidad.",
+      "title": "El pozole que calienta Marsella.",
+      "subtitle": "Una cocción. Dos corazones. Un solo sabor auténtico.",
       "loading": "Preparando la próxima olla...",
       "error": "Lo sentimos, ocurrió un error al cargar las disponibilidades.",
       "retry": "Reintentar",
@@ -18,7 +18,7 @@
     },
     "presentation": {
       "title": "Bienvenidos a El Caldito",
-      "description": "Somos {viviana}, Mexicana hasta la médula de las especias, y {samuel}, Marsellés enamorado de todo lo que se come con chile (y locamente enamorado de Viviana).\n\nJuntos, cocinamos un {pozole} casero – este \"caldito\" emblemático de México – para compartirlo, en pequeñas series, con todos aquellos que tienen la nostalgia de un sabor familiar o la curiosidad de una {fiesta}.",
+      "description": "Somos {viviana}, Mexicana hasta la médula, y {samuel}, Marsellés enamorado de todo lo que se come con chile (y locamente enamorado de Viviana).\n\nJuntos, cocinamos un {pozole} casero – este \"caldito\" emblemático de México – para compartirlo, en pequeñas series,con quienes extrañan ese sabor de casa o la curiosidad de una {fiesta} de sabores.",
       "viviana": "Viviana",
       "samuel": "Samuel",
       "pozole": "pozole",
@@ -27,19 +27,19 @@
     "values": {
       "recipe": {
         "title": "Receta única",
-        "description": "Samuel la prueba y re-prueba desde hace meses y te certifica un viaje al paraíso."
+        "description": "Samuel la prueba desde meses y te garantiza un viaje al paraíso."
       },
       "ingredients": {
-        "title": "Ingredientes seleccionados",
-        "description": "Combinamos los sabores de México con los tesoros de Francia."
+        "title": "Ingredientes selectos",
+        "description": "Sabores de México con tesoros de Francia."
       },
       "cooking": {
         "title": "Cocción lenta",
-        "description": "Que perfuma toda la casa (y pronto la tuya)."
+        "description": "Que perfuma toda la casa."
       },
       "delivery": {
         "title": "Samuel te entrega",
-        "description": "Sonrisa incluida."
+        "description": "Con sonrisa incluida."
       }
     },
     "contact": {
@@ -73,7 +73,7 @@
         "whatsapp": "WhatsApp (si está disponible)",
         "instagram": "Instagram"
       },
-      "footer": "¡Respondemos entre dos siestas de nuestros bebés y dos hervores de olla!"
+      "footer": "¡Respondemos entre dos siestas de las niñas y dos hervores del caldo!"
     },
     "account": {
       "title": "Mi cuenta",
@@ -166,7 +166,7 @@
   },
   "order": {
     "title": "Reserva tu tazón de felicidad",
-    "subtitle": "Nuestro pozole sale de la olla una o dos veces al mes. Cada servicio es limitado: cuando se llena, cerramos los pedidos para mantener la calidad familiar.",
+    "subtitle": "Nuestro pozole sale de la olla una o dos veces al mes. Cada servicio es limitado: cuando se llena, cerramos los pedidos para que siga sabiendo a hogar.",
     "loading": "Cargando disponibilidades...",
     "error": "Ocurrió un error al cargar las disponibilidades.",
     "retry": "Reintentar",
@@ -184,7 +184,7 @@
     "step4Title": "Recibe tu confirmación",
     "step4Desc": "por email + SMS.",
     "step5Title": "Disfruta",
-    "step5Desc": "el día D: Samuel llega hasta tu puerta o punto de entrega.",
+    "step5Desc": "el día D: Samuel llega directo hasta tu puerta.",
     "infoTitle": "Información práctica",
     "allergensTitle": "Alérgenos",
     "deliveryZoneTitle": "Zona de entrega",
@@ -237,9 +237,9 @@
     },
     "blog": {
       "title": "El caldero y el teclado",
-      "subtitle": "Entre dos tomas de nuestras gemelas y un remover de caldo, escribimos aquí:",
+      "subtitle": "Entre dos tomas de las niñas y un remover de caldo, escribimos aquí:",
       "topics": {
-        "ingredients": "Historias de ingredientes mexicanos imposibles de encontrar en Le Panier",
+        "ingredients": "Historias de ingredientes mexicanos difíciles de hallar en Le Panier",
         "travel": "Cuadernos de viaje culinario entre Querétaro y la Bonne Mère",
         "garniture": "Consejos para preparar tu guarnición de pozole perfecta (rábano, orégano, limón verde)",
         "couple": "Notas de humor sobre la vida de pareja mixta en la cocina"
@@ -269,7 +269,7 @@
         "title": "Nuestra historia",
         "viviana": {
           "name": "Viviana",
-          "description": "Nacida en México, criada con pozole rojo, licenciada en comercio internacional y chef en ciernes desde que sostiene una cuchara. Desde 2024, es titular del prestigioso título de \"Mejor Chef del Universo\" otorgado por la Revista Culinaria de Samuel."
+          "description": "Nacida en México, criada con pozole rojo, licenciada en comercio internacional y chef en ciernes desde que sostiene una cuchara. Desde 2024, ostenta con orgullo el título de \"Mejor Chef del Universo\" otorgado por la Revista Culinaria de Samuel."
         },
         "samuel": {
           "name": "Samuel",
@@ -281,12 +281,12 @@
         },
         "today": {
           "name": "Hoy",
-          "description": "Prometidos, padres de gemelas (futuras catadoras oficiales). Él programa, ella cocina. Juntos sirven el alma de México en tazones."
+          "description": "Prometidos, padres de gemelas (futuras catadoras oficiales). Él le da al código, ella al cucharoncito. Juntos sirven el alma de México en tazones."
         }
       },
       "mission": {
         "title": "Nuestra misión",
-        "description": "Compartir un caldito que une: un sorbo, y las fronteras se derriten."
+        "description": "Compartir un caldito que une: un sorbo... y las fronteras se disuelven."
       },
       "values": {
         "title": "Nuestros valores",

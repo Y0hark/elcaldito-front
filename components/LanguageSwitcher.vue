@@ -47,14 +47,30 @@ const availableLocales = computed(() => {
   return locales.value
 })
 
-const switchLanguage = (code) => {
-  document.cookie = 'i18n_redirected=; Max-Age=0; path=/'
+const switchLanguage = async (code) => {
   locale.value = code
   isOpen.value = false
-  router.push({ path: code === 'fr' ? '/' : `/${code}` }).then(() => {
-    window.location.reload()
-  })
-  console.log('Switched to:', code, 'locale.value:', locale.value)
+  
+  // Sauvegarder la langue dans le cookie
+  const cookie = useCookie('i18n_redirected')
+  cookie.value = code
+  
+  // Naviguer vers la nouvelle URL avec la langue
+  const currentRoute = router.currentRoute.value
+  let newPath = currentRoute.path
+  
+  if (code === 'fr') {
+    // Retirer le préfixe /es si présent
+    newPath = currentRoute.path.replace(/^\/es/, '')
+    if (newPath === '') newPath = '/'
+  } else {
+    // Ajouter le préfixe /es si pas déjà présent
+    if (!currentRoute.path.startsWith('/es')) {
+      newPath = `/es${currentRoute.path}`
+    }
+  }
+  
+  await router.push(newPath)
 }
 
 // Fermer le menu quand on clique ailleurs
@@ -65,8 +81,12 @@ const closeOnClickOutside = (event) => {
 }
 
 onMounted(() => {
-  console.log('locales:', locales.value)
-  console.log('locale:', locale.value)
+  // Récupérer la langue sauvegardée depuis le cookie
+  const savedLocale = useCookie('i18n_redirected')
+  if (savedLocale.value && (savedLocale.value === 'fr' || savedLocale.value === 'es') && savedLocale.value !== locale.value) {
+    locale.value = savedLocale.value
+  }
+  
   document.addEventListener('click', closeOnClickOutside)
 })
 

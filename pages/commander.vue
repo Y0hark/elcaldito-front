@@ -465,7 +465,6 @@ const closeNotification = () => {
 
 // Open order panel
 const openOrderPanel = () => {
-  console.log(isLoggedIn.value)
   isOrderPanelOpen.value = true
   document.body.style.overflow = 'hidden'
 }
@@ -562,7 +561,6 @@ const submitOrder = async () => {
 
     if (orderForm.value.paymentMethod === 'stripe') {
       // Pour le paiement Stripe, afficher directement le formulaire de paiement
-      console.log('🚀 Début paiement Stripe - Affichage du formulaire')
       showStripeForm.value = true
       
       // Focus sur le formulaire Stripe après un petit délai
@@ -575,7 +573,6 @@ const submitOrder = async () => {
       })
     } else {
       // Paiement en liquide - logique existante
-      console.log('Payload envoyé à Strapi:', data)
       const { data: response, error } = await postToStrapi('/commandes', data)
 
       if (error) {
@@ -606,9 +603,6 @@ const submitOrder = async () => {
 // Handlers pour les événements Stripe
 const handlePaymentSuccess = async (result) => {
   try {
-    console.log('✅ Paiement Stripe réussi:', result.paymentIntent)
-    console.log('✅ Commande créée avec succès:', result.commande)
-    
     showNotification('Paiement réussi ! Votre commande a été confirmée.', 'success')
     closeOrderPanel()
     // Reset form
