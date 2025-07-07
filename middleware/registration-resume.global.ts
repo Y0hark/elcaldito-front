@@ -20,7 +20,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     try {
       const parsed = JSON.parse(tempData)
       // Les données sont valides, on peut les utiliser
-      console.log('Données d\'enregistrement temporaires trouvées:', parsed)
     } catch (e) {
       // Données corrompues, les supprimer
       console.error('Données temporaires corrompues, suppression:', e)

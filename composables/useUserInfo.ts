@@ -26,9 +26,6 @@ export function useUserInfo() {
 
   const createUserInfo = async (userInfo: Omit<UserInfo, 'id' | 'user'>): Promise<{ success: boolean; data?: UserInfo; message?: string }> => {
     try {
-      console.log('Tentative de création UserInfo (sans ID utilisateur):', userInfo)
-      console.log('Token disponible:', !!tokenCookie.value)
-      
       // Structure exacte comme dans le curl
       const requestBody = {
         data: {
@@ -36,8 +33,6 @@ export function useUserInfo() {
           address: userInfo.address
         }
       }
-      
-      console.log('Body de la requête:', requestBody)
       
       const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiBaseUrl}/api/user-infos`, {
         method: 'POST',
@@ -48,7 +43,6 @@ export function useUserInfo() {
         body: requestBody
       })
 
-      console.log('UserInfo créé avec succès:', response)
       return { success: true, data: response.data }
     } catch (err: any) {
       console.error('Erreur création UserInfo:', err)
@@ -73,11 +67,9 @@ export function useUserInfo() {
         
         // Si Strapi indique qu'un UserInfo existe déjà, on essaie de le récupérer et le mettre à jour
         if (err.data?.error?.message?.includes('already exists')) {
-          console.log('UserInfo existe déjà, tentative de récupération et mise à jour...')
           try {
             const existingResult = await getUserInfo()
             if (existingResult.success && existingResult.data) {
-              console.log('UserInfo existant trouvé, mise à jour...')
               return await updateUserInfo(existingResult.data.id!, userInfo)
             }
           } catch (updateErr) {
@@ -98,8 +90,6 @@ export function useUserInfo() {
 
   const updateUserInfo = async (id: number, userInfo: Omit<UserInfo, 'id' | 'user'>): Promise<{ success: boolean; data?: UserInfo; message?: string }> => {
     try {
-      console.log('Tentative de mise à jour UserInfo avec ID:', { id, userInfo })
-      
       // Structure exacte comme dans le curl
       const requestBody = {
         data: {
@@ -107,8 +97,6 @@ export function useUserInfo() {
           address: userInfo.address
         }
       }
-      
-      console.log('Body de la requête (mise à jour):', requestBody)
       
       // Utiliser directement l'endpoint avec ID
       const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiBaseUrl}/api/user-infos/${id}`, {
@@ -120,7 +108,6 @@ export function useUserInfo() {
         body: requestBody
       })
 
-      console.log('UserInfo mis à jour avec succès:', response)
       return { success: true, data: response.data }
     } catch (err: any) {
       console.error('Erreur mise à jour UserInfo:', err)
@@ -159,17 +146,12 @@ export function useUserInfo() {
       // Strapi filtrera automatiquement par l'utilisateur authentifié
       const endpoint = `${config.public.strapiBaseUrl}/api/user-infos?populate=*`
 
-      console.log('Tentative de récupération UserInfo (utilisateur connecté):', endpoint)
-      console.log('Token disponible:', !!tokenCookie.value)
-
       const response = await $fetch<StrapiResponse<UserInfo[]>>(endpoint, {
         headers: {
           Authorization: `Bearer ${tokenCookie.value}`,
         },
       })
 
-      console.log('UserInfo récupéré avec succès:', response)
-      
       // Retourner le premier UserInfo trouvé
       const userInfoData = response.data
       const userInfo = Array.isArray(userInfoData) ? userInfoData[0] : userInfoData
@@ -213,17 +195,13 @@ export function useUserInfo() {
 
   const createOrUpdateUserInfo = async (userInfo: Omit<UserInfo, 'id' | 'user'>): Promise<{ success: boolean; data?: UserInfo; message?: string }> => {
     try {
-      console.log('Début createOrUpdateUserInfo:', userInfo)
-      
       // D'abord, essayer de récupérer un UserInfo existant
       const existingResult = await getUserInfo()
       
       if (existingResult.success && existingResult.data) {
-        console.log('UserInfo existant trouvé, mise à jour...')
         // Mettre à jour l'existant
         return await updateUserInfo(existingResult.data.id!, userInfo)
       } else {
-        console.log('Aucun UserInfo existant, création...')
         // Créer un nouveau
         return await createUserInfo(userInfo)
       }
@@ -242,21 +220,17 @@ export function useUserInfo() {
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
       try {
-        console.log(`Tentative ${attempt}/${maxRetries} de createOrUpdateUserInfo`)
         const result = await createOrUpdateUserInfo(userInfo)
         
         if (result.success) {
-          console.log(`Succès à la tentative ${attempt}`)
           return result
         }
         
         lastError = result.message || 'Erreur inconnue'
-        console.log(`Échec à la tentative ${attempt}: ${lastError}`)
         
         // Attendre avant de réessayer (backoff exponentiel)
         if (attempt < maxRetries) {
           const delay = Math.pow(2, attempt) * 1000 // 2s, 4s, 8s...
-          console.log(`Attente de ${delay}ms avant la prochaine tentative...`)
           await new Promise(resolve => setTimeout(resolve, delay))
         }
       } catch (err) {
@@ -270,7 +244,6 @@ export function useUserInfo() {
       }
     }
     
-    console.error(`Échec après ${maxRetries} tentatives: ${lastError}`)
     return { success: false, message: `Échec après ${maxRetries} tentatives: ${lastError}` }
   }
 
