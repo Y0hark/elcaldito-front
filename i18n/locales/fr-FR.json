@@ -1,0 +1,305 @@
+{
+  "home": {
+    "hero": {
+      "title": "Le Pozole qui réchauffe Marseille.",
+      "subtitle": "Une marmite. Deux cœurs. Un seul goût d'authenticité.",
+      "loading": "La marmite frémit doucement...",
+      "error": "Désolé, une erreur est survenue lors du chargement des disponibilités.",
+      "retry": "Réessayer",
+      "countdown": {
+        "title": "Prochaine cuisson dans :",
+        "days": "Jours",
+        "hours": "Heures",
+        "minutes": "Minutes",
+        "seconds": "Secondes",
+        "limited": "⏳ Portions limitées : {count} bols disponibles !"
+      },
+      "orderButton": "Commander"
+    },
+    "presentation": {
+      "title": "Bienvenue chez El Caldito",
+      "description": "Nous sommes {viviana}, Mexicaine jusqu'au bout des épices, et {samuel}, Marseillais amoureux de tout ce qui pique (et fou de Viviana, surtout).\n\nEnsemble, on mijote un {pozole} maison – ce \"caldito\" emblématique du Mexique – pour le partager, en petites séries, avec tous ceux qui ont la nostalgie d’un goût familial… ou l’envie d’une vraie {fiesta}.",
+      "viviana": "Viviana",
+      "samuel": "Samuel",
+      "pozole": "pozole",
+      "fiesta": "fiesta de saveurs"
+    },
+    "values": {
+      "recipe": {
+        "title": "Recette maison",
+        "description": "Samuel la goûte et re-goûte depuis des mois et vous certifie un voyage au paradis."
+      },
+      "ingredients": {
+        "title": "Ingrédients sourcés",
+        "description": "On marie les saveurs du Mexique avec les trésors de la France."
+      },
+      "cooking": {
+        "title": "Cuisson lente",
+        "description": "Qui parfume toute la maison (et bientôt la vôtre)."
+      },
+      "delivery": {
+        "title": "Samuel vous livre en personne",
+        "description": "Sourire compris."
+      }
+    },
+    "contact": {
+      "title": "Contact & Commande",
+      "description": "Prêt à goûter l'expérience El Caldito ? Commandez en ligne ou contactez-nous pour toute question !",
+      "emailButton": "Nous écrire",
+      "pageTitle": "Contactez-nous",
+      "subtitle": "Une question, une demande spéciale ou juste envie de nous dire hola ? Remplissez le formulaire ci-dessous ou écrivez-nous directement à",
+      "form": {
+        "name": "Nom",
+        "firstName": "Prénom",
+        "email": "Email",
+        "subject": "Sujet",
+        "message": "Message",
+        "firstNamePlaceholder": "Votre prénom",
+        "emailPlaceholder": "Votre email",
+        "subjectPlaceholder": "Sujet de votre message",
+        "messagePlaceholder": "Votre message",
+        "send": "Envoyer",
+        "firstNameRequired": "Le prénom est requis.",
+        "emailRequired": "L'email est requis.",
+        "emailInvalid": "Veuillez entrer un email valide.",
+        "success": "Merci, votre message a été envoyé 💌",
+        "error": "Désolé, une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+        "sending": "Envoi..."
+      },
+      "info": {
+        "title": "Informations de contact",
+        "description": "On cuisine depuis notre maison, mais on est toujours à portée de message !",
+        "location": "Marseille (quartier à préciser)",
+        "whatsapp": "WhatsApp (si disponible)",
+        "instagram": "Instagram"
+      },
+      "footer": "On répond entre deux siestes... ❤️"
+    },
+    "account": {
+      "title": "Mon compte",
+      "userInfo": {
+        "title": "Mes informations",
+        "email": "Email",
+        "username": "Nom d'utilisateur",
+        "phone": "Téléphone",
+        "address": "Adresse",
+        "notProvided": "À compléter plus tard",
+        "notProvidedFem": "À compléter plus tard",
+        "loading": "Chargement de vos informations...",
+        "editButton": "Modifier mes informations",
+        "addButton": "Ajouter mes informations"
+      },
+      "editForm": {
+        "title": "Modifier mes informations",
+        "phone": "Téléphone *",
+        "phonePlaceholder": "06 12 34 56 78",
+        "address": "Adresse (optionnel)",
+        "addressPlaceholder": "123 Rue de la Paix, 75001 Paris",
+        "save": "Sauvegarder",
+        "updating": "Mise à jour...",
+        "cancel": "Annuler",
+        "addSuccess": "Informations ajoutées avec succès !",
+        "updateSuccess": "Informations mises à jour avec succès !",
+        "error": "Erreur lors de la sauvegarde"
+      },
+      "orders": {
+        "title": "Mes commandes",
+        "loading": "Chargement des commandes...",
+        "error": "Erreur lors du chargement des commandes.",
+        "noOrders": "Vous n'avez pas encore passé de commande.",
+        "activeOrders": "Commandes en cours",
+        "validatedOrders": "Commandes validées",
+        "orderWithoutTitle": "Commande sans titre",
+        "quantity": "Quantité :",
+        "portions": "portions",
+        "portion": "portion",
+        "delivery": "Livraison :",
+        "homeDelivery": "À domicile",
+        "pickupPoint": "Point relais",
+        "distributionDate": "Date de distribution :",
+        "time": "Heure :",
+        "comment": "Commentaire :",
+        "cancelled": "Annulée"
+      },
+      "logout": "Se déconnecter"
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "order": "Commander",
+    "blog": "Blog",
+    "news": "Actus",
+    "about": "À propos",
+    "contact": "Contact",
+    "account": "Mon compte",
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
+  },
+  "footer": {
+    "title": "El Caldito",
+    "baseline": "Le goût du Mexique, mijoté avec amour à Marseille.",
+    "usefulLinks": "Liens utiles",
+    "followUs": "Suivez-nous",
+    "instagram": "Instagram",
+    "whatsapp": "WhatsApp",
+    "email": "Email",
+    "copyright": "© 2025 El Caldito – Fait maison par Viviana & Samuel avec ❤️ depuis Marseille 🌶️"
+  },
+  "login": {
+    "title": "Connexion",
+    "email": "Email",
+    "password": "Mot de passe",
+    "loading": "Connexion...",
+    "submit": "Se connecter",
+    "noAccount": "Pas encore de compte ?",
+    "createAccount": "Créer un compte",
+    "error": "Erreur de connexion"
+  },
+  "register": {
+    "title": "Créer un compte",
+    "finalizing": "Finalisation de votre inscription...",
+    "pleaseWait": "Veuillez patienter pendant que nous finalisons votre compte.",
+    "hasAccount": "Déjà un compte ?",
+    "login": "Se connecter",
+    "accountError": "Erreur lors de la création du compte",
+    "finalizationError": "Erreur lors de la finalisation de l'inscription"
+  },
+  "order": {
+    "title": "Réservez votre bol de bonheur",
+    "subtitle": "Notre pozole sort de la marmite une ou deux fois par mois. Chaque service est limité : quand c'est complet, on ferme les commandes pour garder la qualité familiale.",
+    "loading": "Chargement des disponibilités...",
+    "error": "Une erreur est survenue lors du chargement des disponibilités.",
+    "retry": "Réessayer",
+    "noDistribution": "Aucune distribution prévue pour le moment.",
+    "noDistributionHint": "Revenez bientôt pour découvrir nos prochaines cuissons !",
+    "reserveNow": "Réserver maintenant",
+    "soldOut": "Complet",
+    "howTitle": "Comment se passe la commande ?",
+    "step1Title": "Choisissez la date disponible",
+    "step1Desc": "et réservez votre bol.",
+    "step2Title": "Indiquez le nombre de portions",
+    "step2Desc": "(max : 6 par personne).",
+    "step3Title": "Payez en ligne ou en liquide",
+    "step3Desc": "(carte via Stripe, bientôt PayPal).",
+    "step4Title": "Vous recevez une confirmation",
+    "step4Desc": "par email et SMS – pour ne rien louper du festin.",
+    "step5Title": "Dégustez",
+    "step5Desc": "le jour J : Samuel toque chez vous avec son plus beau sourire.",
+    "infoTitle": "Informations pratiques",
+    "allergensTitle": "Allergènes",
+    "deliveryZoneTitle": "Zone de livraison",
+    "loveDeclaration": "Chaque bol de pozole est une déclaration d'amour à nos racines et à notre ville.",
+    "quantity": "Nombre de bols",
+    "name": "Nom",
+    "email": "Email",
+    "homeDelivery": "Livraison à domicile",
+    "comment": "Commentaire (optionnel)",
+    "commentPlaceholder": "Un mot pour Viviana & Samuel ou une précision sur la livraison ?",
+    "paymentMethod": "Méthode de paiement",
+    "cashNotAvailableTitle": "Paiement en liquide non disponible",
+    "cashNotAvailableMessage": "Vous avez atteint la limite de 2 bols en liquide pour cette marmite. Veuillez utiliser le paiement par carte.",
+    "switchToCard": "Passer au paiement par carte",
+    "cashPayment": "Paiement en liquide",
+    "checking": "Vérification...",
+    "payOnDelivery": "Payez le jour de la livraison",
+    "cashLimitReached": "Limite atteinte : maximum 2 bols en liquide par marmite",
+    "cardPayment": "Paiement par carte",
+    "secureStripe": "Paiement sécurisé via Stripe",
+    "paymentRulesTitle": "Règles de paiement :",
+    "max6PerPerson": "Maximum 6 bols par personne par marmite",
+    "max2Cash": "Paiement en liquide limité à 2 bols par personne par marmite",
+    "cardRequired": "Au-delà, paiement par carte obligatoire",
+    "submit": "Valider la commande",
+    "summaryTitle": "Résumé de votre commande",
+    "bowls": "bols",
+    "bowl": "bol",
+    "deliveryFee": "Livraison à domicile",
+    "stripe": {
+      "securePayment": "Paiement sécurisé",
+      "securePaymentDesc": "Vos informations de paiement sont protégées par Stripe. Nous ne stockons jamais vos données de carte.",
+      "cardInfo": "Informations de carte",
+      "secureByStripe": "Paiement sécurisé par Stripe",
+      "fullName": "Nom complet",
+      "fullNamePlaceholder": "Nom et prénom",
+      "email": "Email",
+      "emailPlaceholder": "votre email",
+      "pay": "Payer",
+      "processing": "Traitement en cours...",
+      "initError": "Erreur lors de l'initialisation du système de paiement",
+      "fillFieldsError": "Veuillez remplir tous les champs requis",
+      "paymentError": "Erreur lors du traitement du paiement",
+      "cardNumber": "Numéro de carte",
+      "expiryDate": "MM/AA",
+      "cvc": "CVC",
+      "glutenFree": "Sans gluten",
+      "spicyWarning": "Peut contenir traces de piment fort",
+      "deliveryZone": "Marseille intra-muros & proches environs"
+    },
+    "blog": {
+      "title": "Le chaudron et le clavier",
+      "subtitle": "Entre deux tétées de nos jumelles et un brassage de bouillon, on écrit ici :",
+      "topics": {
+        "ingredients": "Histoires d'ingrédients mexicains introuvables au Panier",
+        "travel": "Carnets de voyage culinaire entre Queretaro et la Bonne Mère",
+        "garniture": "Conseils pour préparer votre garniture de pozole parfaite (radis, origan, citron vert)",
+        "couple": "Billets d'humeur sur la vie de couple mixte en cuisine"
+      },
+      "invitation": "Prenez une cuillère, servez-vous d'un article, et laissez un commentaire – on répond toujours !",
+      "loading": "Chargement des articles...",
+      "error": "Erreur lors du chargement des articles.",
+      "retry": "Réessayer",
+      "noArticles": "Aucun article pour le moment.",
+      "readArticle": "Lire l'article",
+      "feedback": "Un mot doux, une critique, une anecdote ? On lit tout avec amour (et un pozole fumant à la main). ❤️"
+    },
+    "news": {
+      "title": "Le coin des nouvelles fraîches (et bien chaudes)",
+      "subtitle": "Suivez l'actualité d'El Caldito en temps réel",
+      "loading": "Chargement des actualités...",
+      "error": "Une erreur est survenue lors du chargement des actualités.",
+      "retry": "Réessayer",
+      "noNews": "Aucune actualité pour le moment.",
+      "noNewsHint": "Revenez bientôt pour découvrir nos dernières nouvelles !",
+      "readMore": "En savoir plus"
+    },
+    "about": {
+      "title": "À propos",
+      "subtitle": "Deux âmes, une marmite",
+      "story": {
+        "title": "Notre histoire",
+        "viviana": {
+          "name": "Viviana",
+          "description": "Née au Mexique, biberonnée au pozole rouge, diplômée en commerce international et chef en herbe depuis qu'elle tient une louche. Depuis 2024, elle est titulaire du prestigieux titre de \"Meilleure Chef de l'Univers\" décerné par la Revue Culinaire de Samuel."
+        },
+        "samuel": {
+          "name": "Samuel",
+          "description": "Né à Marseille, il a grandi à la campagne et est revenu sous la protection de la bonne mère pour faire ses études. Il tombe par la suite éperdument amoureux de Viviana… et du Mexique."
+        },
+        "meeting": {
+          "name": "Rencontre",
+          "description": "France 2023. Coup de foudre pimenté (Habanero)."
+        },
+        "today": {
+          "name": "Aujourd'hui",
+          "description": "Fiancés, parents de jumelles (futures dégustatrices officielles). Lui bidouille du code, elle dompte les marmites. Ensemble, ils programment des calditos."
+        }
+      },
+      "mission": {
+        "title": "Notre mission",
+        "description": "Partager un caldito qui rassemble : une gorgée, et les frontières fondent."
+      },
+      "values": {
+        "title": "Nos valeurs",
+        "authenticity": "Authenticité",
+        "generosity": "Générosité",
+        "conviviality": "Convivialité",
+        "slowFood": "Slow Food",
+        "familyFirst": "Famille avant tout"
+      },
+      "cta": {
+        "question": "Prêt à goûter l'âme du Mexique ?",
+        "button": "Commander maintenant"
+      }
+    }
+  }
+} 
