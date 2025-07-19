@@ -233,7 +233,8 @@
       "cvc": "CVC",
       "glutenFree": "Sin gluten",
       "spicyWarning": "Puede contener trazas de chile picante",
-      "deliveryZone": "Marsella intramuros y alrededores"
+      "deliveryZone": "Marsella únicamente",
+      "deliveryNote": "Podemos agrupar pedidos en un punto de recogida según las disponibilidades."
     },
     "blog": {
       "title": "El caldero y el teclado",

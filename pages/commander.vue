@@ -131,6 +131,9 @@
               <span class="text-lg mobiledesktop:text-xl">📍</span>
               <span>{{ $t('order.stripe.deliveryZone') }}</span>
             </p>
+            <p class="text-primary/70 text-xs mobiledesktop:text-sm mt-1 italic">
+              {{ $t('order.stripe.deliveryNote') }}
+            </p>
           </div>
         </div>
       </div>

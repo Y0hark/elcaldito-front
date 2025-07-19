@@ -41,6 +41,7 @@
         <div class="flex flex-col items-center space-y-2 w-full px-8">
           <NuxtLink to="/" class="flex items-center hover:opacity-80 transition-opacity mb-2" @click="closeMenu">
             <img src="/logo-elcaldito.png" alt="El Caldito Logo" class="w-14 h-14 mb-2" />
+            <span class="text-xl font-semibold">El Caldito</span>
           </NuxtLink>
           <NuxtLink :to="$localePath('/')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.home') }}</NuxtLink>
           <NuxtLink :to="$localePath('/commander')" class="text-lg py-3 w-full text-center rounded-lg hover:text-accent transition-all duration-200" @click="closeMenu">{{ $t('nav.order') }}</NuxtLink>

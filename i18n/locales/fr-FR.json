@@ -233,7 +233,8 @@
       "cvc": "CVC",
       "glutenFree": "Sans gluten",
       "spicyWarning": "Peut contenir traces de piment fort",
-      "deliveryZone": "Marseille intra-muros & proches environs"
+      "deliveryZone": "Marseille uniquement",
+      "deliveryNote": "Nous pouvons être amenés à grouper des commandes sur un point relais selon les disponibilités."
     },
     "blog": {
       "title": "Le chaudron et le clavier",
