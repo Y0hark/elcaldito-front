@@ -51,14 +51,17 @@
           <div class="flex justify-center mt-2 pt-2 border-t border-primary/20 w-full">
             <LanguageSwitcher />
           </div>
-          <div v-if="isLoggedIn" class="mt-2 pt-2 border-t border-primary/20 w-full">
-            <div class="flex flex-col items-center mb-3">
-              <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-12 h-12 mb-1" />
-              <span class="text-xs text-primary/70">{{ $t('nav.account') }}</span>
-            </div>
-            <div class="flex flex-col items-center space-y-2">
-              <NuxtLink :to="$localePath('/compte')" class="text-lg py-3 px-6 rounded-lg hover:text-accent transition-all duration-200 text-center" @click="closeMenu">{{ $t('nav.account') }}</NuxtLink>
-              <button @click="() => { logout(); closeMenu(); }" class="text-lg py-3 px-6 rounded-lg hover:text-accent transition-all duration-200 text-center">{{ $t('nav.logout') }}</button>
+          <div v-if="isLoggedIn" class="mt-2 pt-2 border-t border-primary/20 w-full flex flex-col items-center">
+            <div class="relative" ref="mobileUserMenuRef">
+              <button class="flex items-center justify-center w-12 h-12 rounded-full focus:outline-none" @click="isMobileUserMenuOpen = !isMobileUserMenuOpen" aria-label="Menu utilisateur mobile">
+                <img src="/mexican-skull-skull-svgrepo-com.svg" alt="Compte" class="w-12 h-12 mb-1" />
+              </button>
+              <transition name="fade">
+                <div v-if="isMobileUserMenuOpen" class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-40 bg-white rounded-md shadow-lg py-1 border border-primary/10 z-50 flex flex-col items-center max-h-60 overflow-auto">
+                  <NuxtLink :to="$localePath('/compte')" @click="() => { closeMobileUserMenu(); closeMenu(); }" class="block px-4 py-2 text-sm text-primary hover:bg-crema w-full text-center">{{ $t('nav.account') }}</NuxtLink>
+                  <button @click="() => { logout(); closeMenu(); closeMobileUserMenu(); }" class="block w-full text-left px-4 py-2 text-sm text-primary hover:bg-crema text-center">{{ $t('nav.logout') }}</button>
+                </div>
+              </transition>
             </div>
           </div>
           <div v-else class="mt-2 pt-2 border-t border-primary/20 w-full flex justify-center">
@@ -74,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useAuth } from '../composables/useAuth'
 import { useLocalePath } from '#i18n'
 
@@ -82,6 +85,8 @@ const isMenuOpen = ref(false);
 const isUserMenuOpen = ref(false);
 const { isLoggedIn, logout } = useAuth()
 const localePath = useLocalePath()
+const isMobileUserMenuOpen = ref(false)
+const mobileUserMenuRef = ref(null)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -93,6 +98,23 @@ const toggleMenu = () => {
 const closeMenu = () => {
   isMenuOpen.value = false;
 };
+
+const closeMobileUserMenu = () => {
+  isMobileUserMenuOpen.value = false;
+}
+
+const handleClickOutsideMobileUserMenu = (e) => {
+  if (isMobileUserMenuOpen.value && mobileUserMenuRef.value && !mobileUserMenuRef.value.contains(e.target)) {
+    isMobileUserMenuOpen.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('click', handleClickOutsideMobileUserMenu)
+})
+onUnmounted(() => {
+  window.removeEventListener('click', handleClickOutsideMobileUserMenu)
+})
 </script>
 
 <style scoped>

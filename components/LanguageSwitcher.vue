@@ -34,7 +34,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useI18n } from '#i18n'
 import { useRouter } from 'vue-router'
 
-const { locale, locales } = useI18n()
+const { locale, locales, setLocale } = useI18n()
 const router = useRouter()
 
 const isOpen = ref(false)
@@ -48,29 +48,8 @@ const availableLocales = computed(() => {
 })
 
 const switchLanguage = async (code) => {
-  locale.value = code
   isOpen.value = false
-  
-  // Sauvegarder la langue dans le cookie
-  const cookie = useCookie('i18n_redirected')
-  cookie.value = code
-  
-  // Naviguer vers la nouvelle URL avec la langue
-  const currentRoute = router.currentRoute.value
-  let newPath = currentRoute.path
-  
-  if (code === 'fr') {
-    // Retirer le préfixe /es si présent
-    newPath = currentRoute.path.replace(/^\/es/, '')
-    if (newPath === '') newPath = '/'
-  } else {
-    // Ajouter le préfixe /es si pas déjà présent
-    if (!currentRoute.path.startsWith('/es')) {
-      newPath = `/es${currentRoute.path}`
-    }
-  }
-  
-  await router.push(newPath)
+  await setLocale(code)
 }
 
 // Fermer le menu quand on clique ailleurs
