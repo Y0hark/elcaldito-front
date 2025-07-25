@@ -34,7 +34,7 @@ export function useUserInfo() {
         }
       }
       
-      const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiBaseUrl}/api/user-infos`, {
+      const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiApiUrl}/api/user-infos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -99,7 +99,7 @@ export function useUserInfo() {
       }
       
       // Utiliser directement l'endpoint avec ID
-      const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiBaseUrl}/api/user-infos/${id}`, {
+      const response = await $fetch<StrapiResponse<UserInfo>>(`${config.public.strapiApiUrl}/api/user-infos/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ export function useUserInfo() {
     try {
       // Récupérer le UserInfo de l'utilisateur connecté (identifié par le JWT token)
       // Strapi filtrera automatiquement par l'utilisateur authentifié
-      const endpoint = `${config.public.strapiBaseUrl}/api/user-infos?populate=*`
+      const endpoint = `${config.public.strapiApiUrl}/api/user-infos?populate=*`
 
       const response = await $fetch<StrapiResponse<UserInfo[]>>(endpoint, {
         headers: {

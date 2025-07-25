@@ -4,8 +4,11 @@ export const useStrapi = () => {
   const config = useRuntimeConfig()
   const tokenCookie = useCookie('token')
   
-  const fetchFromStrapi = async (endpoint: string, options: { headers?: Record<string, string> } = {}) => {
-    const baseUrl = config.public.strapiBaseUrl
+  const fetchFromStrapi = async (
+    endpoint: string,
+    options: { headers?: Record<string, string>, noAuth?: boolean } = {}
+  ) => {
+    const baseUrl = config.public.strapiApiUrl
     const token = config.public.strapiToken
 
     if (!baseUrl) {
@@ -17,7 +20,7 @@ export const useStrapi = () => {
       ...options.headers,
     }
 
-    if (token) {
+    if (token && !options.noAuth) {
       headers.Authorization = `Bearer ${token}`
     }
     
@@ -34,7 +37,7 @@ export const useStrapi = () => {
   }
 
   const postToStrapi = async (endpoint: string, data: any) => {
-    const baseUrl = config.public.strapiBaseUrl
+    const baseUrl = config.public.strapiApiUrl
     const token = tokenCookie.value
 
     if (!baseUrl) {
@@ -63,7 +66,7 @@ export const useStrapi = () => {
   }
 
   const putToStrapi = async (endpoint: string, data: any) => {
-    const baseUrl = config.public.strapiBaseUrl
+    const baseUrl = config.public.strapiApiUrl
     const token = tokenCookie.value
 
     if (!baseUrl) {

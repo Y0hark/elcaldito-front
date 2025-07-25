@@ -383,7 +383,7 @@ const { data: userData, pending, error } = useAsyncData(
       return Promise.resolve(null)
     }
     return $fetch(`/api/users/me?populate[commandes][populate]=event`, {
-      baseURL: config.public.strapiBaseUrl,
+      baseURL: config.public.strapiApiUrl,
       headers: { Authorization: `Bearer ${token.value}` },
     })
   },

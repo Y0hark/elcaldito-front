@@ -144,9 +144,7 @@ const formatDate = (date) => {
 // Get image URL with proper format
 const getImageUrl = (image) => {
   if (!image) return ''
-  // Use large format if available, otherwise fallback to original
-  const imageUrl = image.formats?.large?.url || image.url
-  return `${config.public.strapiBaseUrl}${imageUrl}`
+  return image.formats?.large?.url || image.formats?.medium?.url || image.url
 }
 
 // Share functions

@@ -6,7 +6,7 @@ export function useAuth() {
   const user = useState<any>('user', () => null)
   const token = useCookie('token', { 
     sameSite: 'lax',
-    secure: false, // Désactiver secure en développement
+    secure: process.env.NODE_ENV === 'production', // Secure en production
     maxAge: 60 * 60 * 24 * 7, // 7 jours
     path: '/',
     httpOnly: false, // Permettre l'accès côté client
@@ -32,7 +32,7 @@ export function useAuth() {
         let fetchError = null
         
         try {
-          userData = await $fetch(`${config.public.strapiBaseUrl}/api/users/me?populate[userInfo]=*`, {
+          userData = await $fetch(`${config.public.strapiApiUrl}/api/users/me?populate[userInfo]=*`, {
             method: 'GET',
             headers: {
               Authorization: `Bearer ${token.value}`,
@@ -40,6 +40,7 @@ export function useAuth() {
           })
         } catch (meError) {
           fetchError = meError
+          console.error('❌ Erreur détaillée lors de la récupération utilisateur:', meError)
         }
         
         if (fetchError) {
@@ -59,7 +60,7 @@ export function useAuth() {
                 ;(userData as any).userInfo = userInfoResult.data
               }
             } catch (userInfoError) {
-              // Erreur silencieuse pour la récupération des userInfo
+              console.warn('⚠️ Erreur lors de la récupération des userInfo:', userInfoError)
             }
           }
           
@@ -111,7 +112,7 @@ export function useAuth() {
     try {
       const { data, error } = await useFetch('/api/auth/local', {
         method: 'POST',
-        baseURL: useRuntimeConfig().public.strapiBaseUrl,
+        baseURL: useRuntimeConfig().public.strapiApiUrl,
         body: { identifier: email, password },
         watch: false,
         server: false,
@@ -136,7 +137,7 @@ export function useAuth() {
   const register = async (email: string, password: string, username: string) => {
     try {
       // Créer l'utilisateur sans téléphone (sera ajouté dans l'étape 2)
-      const response = await $fetch(`${config.public.strapiBaseUrl}/api/auth/local/register`, {
+      const response = await $fetch(`${config.public.strapiApiUrl}/api/auth/local/register`, {
         method: 'POST',
         body: {
           email,

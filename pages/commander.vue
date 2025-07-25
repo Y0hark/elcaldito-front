@@ -148,7 +148,7 @@
       @click.self="closeOrderPanel"
     >
       <div 
-        class="bg-crema w-full max-w-lg mobiledesktop:max-w-4xl rounded-t-2xl mobiledesktop:rounded-2xl transform transition-transform duration-300 mobiledesktop:max-h-[90vh] mobiledesktop:overflow-y-auto"
+        class="order-panel-popup bg-crema w-full max-w-lg mobiledesktop:max-w-4xl transform transition-transform duration-300"
         :class="{ 'translate-y-0': isOrderPanelOpen, 'translate-y-full mobiledesktop:translate-y-0 mobiledesktop:scale-95': !isOrderPanelOpen }"
       >
         <div class="p-4 mobiledesktop:p-6">
@@ -390,7 +390,7 @@ const fetchUserOrdersForCurrentDistribution = async () => {
   try {
     const token = useCookie('token').value
     const res = await fetch(
-      `${config.public.strapiBaseUrl}/api/users/me?populate[commandes][populate]=event`,
+      `${config.public.strapiApiUrl}/api/users/me?populate[commandes][populate]=event`,
       {
         headers: { Authorization: `Bearer ${token}` }
       }
@@ -634,9 +634,8 @@ const handlePaymentError = async (error) => {
 // Get image URL with proper format
 const getImageUrl = (image) => {
   if (!image) return ''
-  // Use medium format if available, otherwise fallback to original
-  const imageUrl = image.formats?.medium?.url || image.url
-  return `${config.public.strapiBaseUrl}${imageUrl}`
+  // Utilise le format medium/large si dispo, sinon l'original
+  return image.formats?.medium?.url || image.formats?.large?.url || image.url
 }
 
 // Fonction pour formater la date en français
@@ -852,5 +851,30 @@ button:focus-visible {
 
 .mobiledesktop\:overflow-y-auto::-webkit-scrollbar {
   display: none;  /* Safari and Chrome */
+}
+</style> 
+
+<style scoped>
+.order-panel-popup {
+  max-height: 95vh;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  border-radius: 1.25rem 1.25rem 0 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE 10+ */
+}
+.order-panel-popup::-webkit-scrollbar {
+  display: none;              /* Chrome, Safari, Opera */
+}
+@media (min-width: 768px) {
+  .order-panel-popup {
+    max-height: 90vh;
+    border-radius: 1.25rem;
+    padding: 2rem 2.5rem;
+  }
 }
 </style> 

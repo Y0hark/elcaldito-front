@@ -23,15 +23,15 @@
       </div>
       <!-- Séparateur mobile -->
       <div class="w-full border-t border-crema/20 mobiledesktop:hidden"></div>
-      <!-- Réseaux sociaux -->
-      <div class="flex flex-col items-center mobiledesktop:items-start">
+      <!-- Réseaux sociaux -- TODO -- Set up social media profiles --> 
+      <!-- <div class="flex flex-col items-center mobiledesktop:items-start">
         <h3 class="text-base font-semibold mb-3">{{ t('footer.followUs') }}</h3>
         <div class="flex justify-center gap-6 mobiledesktop:justify-start">
           <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.instagram') }}</a>
           <a href="#" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.whatsapp') }}</a>
           <a href="mailto:contact@elcaldito.fr" class="hover:text-accent transition-all duration-200 text-lg focus:outline-none">{{ t('footer.email') }}</a>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="max-w-5xl mx-auto pt-8 mt-8 border-t border-crema/20 text-xs text-center">
       {{ t('footer.copyright') }}

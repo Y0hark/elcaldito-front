@@ -127,7 +127,8 @@ const {
   createElements, 
   createCardElement, 
   createPaymentIntent,
-  processPaymentWithCommande, 
+  confirmStripePayment,
+  createCommandeWithPayment,
   cleanup 
 } = useStripePayment()
 
@@ -149,7 +150,7 @@ onMounted(async () => {
     await initializeStripe()
     
     // Créer un Payment Intent pour obtenir le clientSecret
-    const paymentIntentData = await createPaymentIntent(totalAmount.value * 100)
+    const paymentIntentData = await createPaymentIntent(totalAmount.value)
     
     // Créer les éléments avec le clientSecret
     createElements(paymentIntentData.clientSecret)
@@ -212,23 +213,54 @@ const handlePayment = async () => {
   error.value = ''
 
   try {
-    const result = await processPaymentWithCommande(
-      totalAmount.value * 100, // Stripe utilise les centimes
-      props.commandeData,
+    // 1. Créer le PaymentIntent
+    const paymentIntentData = await createPaymentIntent(totalAmount.value)
+
+    // 2. Confirmer le paiement Stripe côté front
+    const paymentResult = await confirmStripePayment(
+      paymentIntentData.clientSecret,
       billingName.value,
       billingEmail.value
     )
 
-    if (result.success) {
-      emit('success', result)
-    } else {
-      error.value = result.error || 'Erreur lors du paiement'
-      emit('error', result.error)
+    if (!paymentResult.success) {
+      error.value = paymentResult.error || t('order.stripe.paymentError')
+      return
     }
+
+    // 3. Créer la commande liée au PaymentIntent
+    const commandeResult = await createCommandeWithPayment(
+      props.commandeData,
+      paymentIntentData.paymentIntentId
+    )
+
+    // Afficher une alerte de succès et fermer le formulaire
+    emit('success', commandeResult)
   } catch (err) {
     error.value = t('order.stripe.paymentError')
-    emit('error', error.value)
     console.error('Erreur paiement:', err)
   }
 }
 </script> 
+
+<style scoped>
+.stripe-popup {
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  background: white;
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  position: relative;
+}
+@media (max-width: 640px) {
+  .stripe-popup {
+    max-height: 95vh;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+  }
+}
+</style> 

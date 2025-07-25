@@ -158,9 +158,7 @@ const formatDate = (date) => {
 // Get image URL with proper format
 const getImageUrl = (image) => {
   if (!image) return ''
-  // Use medium format if available, otherwise fallback to original
-  const imageUrl = image.formats?.medium?.url || image.url
-  return `${config.public.strapiBaseUrl}${imageUrl}`
+  return image.formats?.medium?.url || image.formats?.large?.url || image.url
 }
 
 onMounted(() => {

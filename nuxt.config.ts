@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       }
     ],
     defaultLocale: 'fr',
-    strategy: 'prefix',
+    strategy: 'prefix_except_default',
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
@@ -38,11 +38,10 @@ export default defineNuxtConfig({
   },
   
   runtimeConfig: {
-    strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
+    strapiApiUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
     strapiToken: process.env.STRAPI_API_TOKEN,
-    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
     public: {
-      strapiBaseUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
+      strapiApiUrl: process.env.STRAPI_BASE_URL || 'http://localhost:1337',
       strapiToken: process.env.STRAPI_API_TOKEN,
       stripePublishableKey: process.env.STRIPE_PUBLISHABLE_KEY,
     }

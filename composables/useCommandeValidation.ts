@@ -97,7 +97,7 @@ export const useCommandeValidation = () => {
     }
 
     const response = await fetch(
-      `${config.public.strapiBaseUrl}/api/users/me?populate[commandes][populate]=event`,
+      `${config.public.strapiApiUrl}/api/users/me?populate[commandes][populate]=event`,
       {
         headers: { 
           Authorization: `Bearer ${token}`,

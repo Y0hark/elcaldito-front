@@ -39,11 +39,20 @@
         <div v-if="articles.length === 0" class="text-center text-primary/60 py-8">{{ $t('order.blog.noArticles') }}</div>
         <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
           <div v-for="article in articles" :key="article.id" class="bg-white border border-primary/10 rounded-xl p-6 shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col min-h-[420px]">
-            <img :src="`${config.public.strapiBaseUrl}${article.cover?.url}`" 
+            <img :src="getImageUrl(article.cover)" 
                  :alt="article.cover?.alternativeText || article.title" 
                  class="w-full h-48 object-cover rounded-xl mb-4" />
             <h2 class="text-2xl font-semibold text-primary mb-2">{{ article.title }}</h2>
-            <p class="text-primary/80 mb-4">{{ article.content[0]?.children[0]?.text || '' }}</p>
+            <div class="text-primary/80 mb-4">
+              <template v-for="(block, i) in article.content" :key="i">
+                <p v-if="block.type === 'paragraph'">
+                  <template v-for="(child, j) in block.children" :key="j">
+                    {{ child.text }}
+                  </template>
+                </p>
+              </template>
+            </div>
+            <pre class="text-xs text-red-600 mb-2">slug: {{ article.slug }}</pre>
             <div class="flex justify-between items-center mt-auto">
               <NuxtLink :to="`/blog/${article.slug}`" 
                         class="px-4 py-2 bg-primary text-crema rounded-xl font-semibold shadow hover:bg-accent hover:text-crema transition-colors duration-300">
@@ -76,4 +85,9 @@ const { fetchFromStrapi } = useStrapi()
 
 const { data: articlesData, pending, error, refresh } = await fetchFromStrapi('/articles?populate=*')
 const articles = articlesData.value?.data || []
+
+const getImageUrl = (image) => {
+  if (!image) return ''
+  return image.formats?.medium?.url || image.formats?.large?.url || image.url
+}
 </script> 

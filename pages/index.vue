@@ -101,7 +101,12 @@
     <section class="w-full max-w-screen-sm mx-auto mobiledesktop:max-w-screen-lg bg-white border border-primary/10 rounded-xl p-4 mobiledesktop:p-10 shadow-xl flex flex-col items-center mb-8 mobiledesktop:mb-10 animate-on-scroll">
       <h3 class="text-lg font-semibold text-primary mb-2 mobiledesktop:text-2xl">{{ $t('home.contact.title') }}</h3>
       <p class="text-primary/90 text-center mb-4 text-sm mobiledesktop:text-base">{{ $t('home.contact.description') }}</p>
-      <a href="mailto:contact@elcaldito.fr" class="px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">{{ $t('home.contact.emailButton') }}</a>
+      <NuxtLink
+        :to="localePath('/contact')"
+        class="px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md"
+      >
+        {{ $t('home.contact.emailButton') }}
+      </NuxtLink>
     </section>
   </div>
 </template>
@@ -112,6 +117,8 @@ import { useHead } from '#app'
 import { ref, onMounted, onUnmounted, computed, nextTick } from 'vue'
 import { useScrollAnimation } from '../composables/useScrollAnimation'
 import LoadingSpinner from '~/components/LoadingSpinner.vue'
+import { useLocalePath } from '#i18n'
+const localePath = useLocalePath()
 const config = useRuntimeConfig()
 const { fetchFromStrapi } = useStrapi()
 const { animateOnScroll, addStaggeredAnimation } = useScrollAnimation()

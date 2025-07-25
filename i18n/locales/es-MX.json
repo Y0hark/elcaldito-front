@@ -14,7 +14,7 @@
         "seconds": "Segundos",
         "limited": "⏳ Porciones limitadas: ¡{count} tazones disponibles!"
       },
-      "orderButton": "Ordenar"
+      "orderButton": "Pedir"
     },
     "presentation": {
       "title": "Bienvenidos a El Caldito",
@@ -44,7 +44,7 @@
     },
     "contact": {
       "title": "Contacto y Pedidos",
-      "description": "¿Listo para probar la experiencia El Caldito? ¡Ordena en línea o contáctanos para cualquier pregunta!",
+      "description": "¿Listo para probar la experiencia El Caldito? ¡Pide en línea o contáctanos para cualquier pregunta!",
       "emailButton": "Escribirnos",
       "pageTitle": "Contáctanos",
       "subtitle": "¿Una pregunta, una solicitud especial o simplemente ganas de decirnos hola? Completa el formulario de abajo o escríbenos directamente a",
@@ -126,7 +126,7 @@
   },
   "nav": {
     "home": "Inicio",
-    "order": "Ordenar",
+    "order": "Pedir",
     "blog": "Blog",
     "news": "Noticias",
     "about": "Acerca de",
@@ -142,126 +142,126 @@
     "followUs": "Síguenos",
     "instagram": "Instagram",
     "whatsapp": "WhatsApp",
-    "email": "Correo electrónico",
-    "copyright": "© 2025 El Caldito – Hecho en casa por Viviana & Samuel con ❤️ desde Marsella 🌶️"
+    "email": "Email",
+    "copyright": "© 2025 El Caldito – Hecho con amor en casa por Viviana & Samuel desde Marsella 🌶️"
   },
   "login": {
     "title": "Iniciar sesión",
-    "email": "Correo electrónico",
+    "email": "Email",
     "password": "Contraseña",
     "loading": "Conectando...",
     "submit": "Entrar",
     "noAccount": "¿Aún no tienes cuenta?",
     "createAccount": "Crear una cuenta",
-    "error": "Error de conexión"
+    "error": "Error al iniciar sesión"
   },
   "register": {
     "title": "Crear una cuenta",
-    "finalizing": "Finalizando tu registro...",
-    "pleaseWait": "Por favor espera mientras finalizamos tu cuenta.",
+    "finalizing": "Terminando tu registro...",
+    "pleaseWait": "Espera un momento mientras preparamos tu cuenta.",
     "hasAccount": "¿Ya tienes cuenta?",
     "login": "Iniciar sesión",
     "accountError": "Error al crear la cuenta",
-    "finalizationError": "Error al finalizar el registro"
+    "finalizationError": "Hubo un problema al terminar el registro"
   },
   "order": {
-    "title": "Reserva tu tazón de felicidad",
-    "subtitle": "Nuestro pozole sale de la olla una o dos veces al mes. Cada servicio es limitado: cuando se llena, cerramos los pedidos para que siga sabiendo a hogar.",
-    "loading": "Cargando disponibilidades...",
-    "error": "Ocurrió un error al cargar las disponibilidades.",
-    "retry": "Reintentar",
-    "noDistribution": "No hay distribuciones previstas por el momento.",
-    "noDistributionHint": "¡Vuelve pronto para descubrir nuestras próximas cocciones!",
+    "title": "Reserva tu plato de felicidad",
+    "subtitle": "Nuestro pozole sale de la olla una o dos veces al mes. Cada tanda es limitada: cuando se llena, cerramos los pedidos para que siga sabiendo a hogar.",
+    "loading": "Cargando fechas disponibles...",
+    "error": "Hubo un error al cargar las fechas.",
+    "retry": "Intentar de nuevo",
+    "noDistribution": "Por ahora no hay cocinadas planeadas.",
+    "noDistributionHint": "¡Vuelve pronto para conocer nuestras próximas fechas!",
     "reserveNow": "Reservar ahora",
     "soldOut": "Agotado",
     "howTitle": "¿Cómo funciona el pedido?",
     "step1Title": "Elige la fecha disponible",
-    "step1Desc": "y reserva tu tazón.",
-    "step2Title": "Indica la cantidad de porciones",
+    "step1Desc": "y aparta tu plato.",
+    "step2Title": "Indica cuántos platos quieres",
     "step2Desc": "(máx: 6 por persona).",
     "step3Title": "Paga en línea o en efectivo",
     "step3Desc": "(tarjeta vía Stripe, pronto PayPal).",
-    "step4Title": "Recibe tu confirmación",
-    "step4Desc": "por email + SMS.",
+    "step4Title": "Recibe la confirmación",
+    "step4Desc": "por email y mensaje.",
     "step5Title": "Disfruta",
-    "step5Desc": "el día D: Samuel llega directo hasta tu puerta.",
-    "infoTitle": "Información práctica",
+    "step5Desc": "el mero día: Samuel llega hasta tu puerta.",
+    "infoTitle": "Información útil",
     "allergensTitle": "Alérgenos",
     "deliveryZoneTitle": "Zona de entrega",
-    "loveDeclaration": "Cada tazón de pozole es una declaración de amor a nuestras raíces y a nuestra ciudad.",
-    "quantity": "Cantidad de tazones",
+    "loveDeclaration": "Cada plato de pozole es una declaración de amor a nuestras raíces y a nuestra ciudad.",
+    "quantity": "Cantidad de platos",
     "name": "Nombre",
-    "email": "Correo electrónico",
+    "email": "Email",
     "homeDelivery": "Entrega a domicilio",
     "comment": "Comentario (opcional)",
-    "commentPlaceholder": "¿Un mensaje para Viviana & Samuel o una precisión sobre la entrega?",
+    "commentPlaceholder": "¿Algún mensaje para Viviana & Samuel o detalle sobre la entrega?",
     "paymentMethod": "Método de pago",
     "cashNotAvailableTitle": "Pago en efectivo no disponible",
-    "cashNotAvailableMessage": "Has alcanzado el límite de 2 tazones en efectivo para esta olla. Por favor, utiliza el pago con tarjeta.",
-    "switchToCard": "Cambiar a pago con tarjeta",
+    "cashNotAvailableMessage": "Ya alcanzaste el límite de 2 platos en efectivo para esta tanda. Por favor, usa tarjeta.",
+    "switchToCard": "Cambiar a tarjeta",
     "cashPayment": "Pago en efectivo",
     "checking": "Verificando...",
-    "payOnDelivery": "Paga el día de la entrega",
-    "cashLimitReached": "Límite alcanzado: máximo 2 tazones en efectivo por olla",
+    "payOnDelivery": "Paga cuando te llegue",
+    "cashLimitReached": "Límite alcanzado: máximo 2 platos en efectivo por tanda",
     "cardPayment": "Pago con tarjeta",
     "secureStripe": "Pago seguro vía Stripe",
     "paymentRulesTitle": "Reglas de pago:",
-    "max6PerPerson": "Máximo 6 tazones por persona por olla",
-    "max2Cash": "Pago en efectivo limitado a 2 tazones por persona por olla",
-    "cardRequired": "A partir de ahí, pago con tarjeta obligatorio",
-    "submit": "Validar el pedido",
+    "max6PerPerson": "Máximo 6 platos por persona por tanda",
+    "max2Cash": "Solo hasta 2 platos en efectivo por persona por tanda",
+    "cardRequired": "Después de eso, solo con tarjeta",
+    "submit": "Confirmar pedido",
     "summaryTitle": "Resumen de tu pedido",
-    "bowls": "tazones",
-    "bowl": "tazón",
+    "bowls": "platos",
+    "bowl": "plato",
     "deliveryFee": "Entrega a domicilio",
     "stripe": {
       "securePayment": "Pago seguro",
-      "securePaymentDesc": "Tu información de pago está protegida por Stripe. Nunca almacenamos los datos de tu tarjeta.",
-      "cardInfo": "Información de tarjeta",
+      "securePaymentDesc": "Tu info está protegida por Stripe. Nunca guardamos tu tarjeta.",
+      "cardInfo": "Datos de tu tarjeta",
       "secureByStripe": "Pago seguro por Stripe",
       "fullName": "Nombre completo",
       "fullNamePlaceholder": "Nombre y apellido",
-      "email": "Correo electrónico",
+      "email": "Email",
       "emailPlaceholder": "tu email",
       "pay": "Pagar",
       "processing": "Procesando...",
-      "initError": "Error al inicializar el sistema de pago",
-      "fillFieldsError": "Por favor, completa todos los campos requeridos",
+      "initError": "Hubo un error al iniciar el pago",
+      "fillFieldsError": "Completa todos los campos requeridos",
       "paymentError": "Error al procesar el pago",
       "cardNumber": "Número de tarjeta",
       "expiryDate": "MM/AA",
       "cvc": "CVC",
       "glutenFree": "Sin gluten",
-      "spicyWarning": "Puede contener trazas de chile picante",
-      "deliveryZone": "Marsella únicamente",
-      "deliveryNote": "Podemos agrupar pedidos en un punto de recogida según las disponibilidades."
+      "spicyWarning": "Puede tener trazas de chile picante",
+      "deliveryZone": "Solo Marsella",
+      "deliveryNote": "Podemos agrupar entregas en un punto según disponibilidad"
     },
     "blog": {
       "title": "El caldero y el teclado",
-      "subtitle": "Entre dos tomas de las niñas y un remover de caldo, escribimos aquí:",
+      "subtitle": "Entre tomas de las niñas y vueltas al caldo, aquí escribimos:",
       "topics": {
-        "ingredients": "Historias de ingredientes mexicanos difíciles de hallar en Le Panier",
-        "travel": "Cuadernos de viaje culinario entre Querétaro y la Bonne Mère",
-        "garniture": "Consejos para preparar tu guarnición de pozole perfecta (rábano, orégano, limón verde)",
-        "couple": "Notas de humor sobre la vida de pareja mixta en la cocina"
+        "ingredients": "Relatos de ingredientes mexicanos difíciles de encontrar en Le Panier",
+        "travel": "Bitácoras de viaje entre Querétaro y la Bonne Mère",
+        "garniture": "Tips para acompañar tu pozole (rábano, orégano, limón)",
+        "couple": "Anécdotas de cocinar en pareja intercultural"
       },
-      "invitation": "Toma una cuchara, sírvete un artículo y deja un comentario – ¡siempre respondemos!",
+      "invitation": "Sirve un artículo y déjanos un comentario – ¡nos encanta leerte!",
       "loading": "Cargando artículos...",
       "error": "Error al cargar los artículos.",
       "retry": "Reintentar",
-      "noArticles": "No hay artículos por el momento.",
-      "readArticle": "Leer el artículo",
-      "feedback": "Vuestros comentarios cuentan muchísimo para nosotros. Si una receta os ha tocado, escribidnos ❤️"
+      "noArticles": "Aún no hay artículos disponibles.",
+      "readArticle": "Leer artículo",
+      "feedback": "Tus comentarios significan muchísimo para nosotros. Si una receta te llegó, escríbenos ❤️"
     },
     "news": {
-      "title": "El rincón de las noticias frescas (y bien calientes)",
-      "subtitle": "Sigue la actualidad de El Caldito en tiempo real",
-      "loading": "Cargando actualidades...",
-      "error": "Ocurrió un error al cargar las actualidades.",
+      "title": "Noticias calientitas",
+      "subtitle": "Sigue las novedades de El Caldito en tiempo real",
+      "loading": "Cargando noticias...",
+      "error": "Error al cargar noticias.",
       "retry": "Reintentar",
-      "noNews": "No hay actualidades por el momento.",
-      "noNewsHint": "¡Vuelve pronto para descubrir nuestras últimas noticias!",
-      "readMore": "Saber más"
+      "noNews": "Por ahora no hay noticias.",
+      "noNewsHint": "¡Vuelve pronto para enterarte de todo!",
+      "readMore": "Ver más"
     },
     "about": {
       "title": "Acerca de",
@@ -270,37 +270,37 @@
         "title": "Nuestra historia",
         "viviana": {
           "name": "Viviana",
-          "description": "Nacida en México, criada con pozole rojo, licenciada en comercio internacional y chef en ciernes desde que sostiene una cuchara. Desde 2024, ostenta con orgullo el título de \"Mejor Chef del Universo\" otorgado por la Revista Culinaria de Samuel."
+          "description": "Nacida en México, criada a pozole rojo, licenciada en comercio internacional y cocinera de corazón desde que sostiene una cuchara. En 2024 recibió el título de \"Mejor Chef del Universo\" (otorgado por la Revista Culinaria de Samuel)."
         },
         "samuel": {
           "name": "Samuel",
-          "description": "Nacido en Marsella, creció en el campo y regresó bajo la protección de la buena madre para estudiar. Posteriormente se enamora perdidamente de Viviana… y de México."
+          "description": "Marsellés de nacimiento, criado en el campo, regresó bajo el cobijo de la Bonne Mère para estudiar. Luego se enamoró perdidamente de Viviana… y de México."
         },
         "meeting": {
-          "name": "Encuentro",
-          "description": "Francia 2023. Amor a primera vista picante (Habanero)."
+          "name": "Cómo empezó",
+          "description": "Francia 2023. Amor a primera cucharada picante (Habanero)."
         },
         "today": {
           "name": "Hoy",
-          "description": "Prometidos, padres de gemelas (futuras catadoras oficiales). Él le da al código, ella al cucharoncito. Juntos sirven el alma de México en tazones."
+          "description": "Prometidos, papás de gemelas (futuras catadoras oficiales). Él le entra al código, ella al caldito. Juntos sirven México en cada plato."
         }
       },
       "mission": {
         "title": "Nuestra misión",
-        "description": "Compartir un caldito que une: un sorbo... y las fronteras se disuelven."
+        "description": "Compartir un caldito que conecta: un sorbo... y las fronteras se disuelven."
       },
       "values": {
         "title": "Nuestros valores",
         "authenticity": "Autenticidad",
         "generosity": "Generosidad",
         "conviviality": "Convivencia",
-        "slowFood": "Slow Food",
-        "familyFirst": "Familia ante todo"
+        "slowFood": "Comida lenta y con cariño",
+        "familyFirst": "La familia es primero"
       },
       "cta": {
-        "question": "¿Listo para probar el alma de México?",
-        "button": "Ordenar ahora"
+        "question": "¿Ya se te antojó el alma de México?",
+        "button": "Pedir ahora"
       }
     }
   }
-} 
+}
