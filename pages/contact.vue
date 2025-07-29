@@ -51,14 +51,14 @@
                 <span class="text-2xl mr-3">📧</span>
                 <span>contact@elcaldito.fr</span>
               </li> -->
-            <li class="flex items-center">
+            <!-- <li class="flex items-center">
               <span class="text-2xl mr-3">📱</span>
               <span>{{ $t('home.contact.info.whatsapp') }}</span>
             </li>
             <li class="flex items-center">
               <span class="text-2xl mr-3">📷</span>
               <span>{{ $t('home.contact.info.instagram') }}</span>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
