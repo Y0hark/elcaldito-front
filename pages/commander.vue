@@ -426,7 +426,8 @@ const nextDistribution = computed(() => {
 const totalPrice = computed(() => {
   const prix = nextDistribution.value?.prix || 0
   const quantite = orderForm.value.quantite || 0
-  return prix * quantite
+  const livraison = orderForm.value.livraison
+  return livraison ? prix * quantite + 2 : prix * quantite;  
 })
 
 // Order form state
