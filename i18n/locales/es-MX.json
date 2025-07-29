@@ -14,7 +14,7 @@
         "seconds": "Segundos",
         "limited": "⏳ Porciones limitadas: ¡{count} tazones disponibles!"
       },
-      "orderButton": "Pedir"
+      "orderButton": "Ordenar"
     },
     "presentation": {
       "title": "Bienvenidos a El Caldito",
@@ -47,7 +47,7 @@
       "description": "¿Listo para probar la experiencia El Caldito? ¡Pide en línea o contáctanos para cualquier pregunta!",
       "emailButton": "Escribirnos",
       "pageTitle": "Contáctanos",
-      "subtitle": "¿Una pregunta, una solicitud especial o simplemente ganas de decirnos hola? Completa el formulario de abajo o escríbenos directamente a",
+      "subtitle": "¿Una pregunta, una solicitud especial o simplemente ganas de decirnos hola? Completa el formulario de abajo !",
       "form": {
         "name": "Nombre",
         "firstName": "Nombre",
@@ -126,7 +126,7 @@
   },
   "nav": {
     "home": "Inicio",
-    "order": "Pedir",
+    "order": "Ordenar",
     "blog": "Blog",
     "news": "Noticias",
     "about": "Acerca de",
@@ -299,7 +299,7 @@
       },
       "cta": {
         "question": "¿Ya se te antojó el alma de México?",
-        "button": "Pedir ahora"
+        "button": "Ordenar ahora"
       }
     }
   }

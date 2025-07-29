@@ -6,7 +6,14 @@ export default defineNuxtRouteMiddleware(async (to) => {
   const { isLoggedIn, fetchUser, token } = useAuth()
   const protectedRoutes = ['/commander', '/compte']
   
-  const isProtectedRoute = protectedRoutes.some(path => to.path.startsWith(path))
+  const isProtectedRoute = protectedRoutes.some(path => {
+    const splited = to.path.split("/");
+    if (to.path.startsWith(path) || ("/"+splited[splited.length-1]) == path) {
+      return true;
+    } else {
+      return false;
+    }
+  })
   
   // Si c'est une route protégée et qu'on n'est pas connecté, essayer de récupérer l'utilisateur
   if (isProtectedRoute && !isLoggedIn.value) {
@@ -25,13 +32,11 @@ export default defineNuxtRouteMiddleware(async (to) => {
         
         // Si toujours pas connecté après la tentative, rediriger
         if (!isLoggedIn.value || !fetchSuccess) {
-          console.log('🔒 Auth middleware - Redirection vers login: utilisateur non connecté')
           const localePath = useLocalePath()
           return navigateTo(localePath('/login'))
         }
       } else {
         // Pas de token, rediriger directement
-        console.log('🔒 Auth middleware - Redirection vers login: pas de token')
         const localePath = useLocalePath()
         return navigateTo(localePath('/login'))
       }

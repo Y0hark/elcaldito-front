@@ -46,7 +46,7 @@
       </div>
 
       <p class="text-lg text-primary/80 text-center max-w-2xl mt-2"></p>
-      <NuxtLink to="/commander" class="mt-6 px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">{{ $t('home.hero.orderButton') }}</NuxtLink>
+      <NuxtLink :to="localePath('/commander')" class="mt-6 px-6 py-3 bg-primary text-crema rounded-xl text-base font-semibold shadow-lg hover:bg-accent hover:text-crema transition-colors duration-300 btn-transition w-full max-w-xs text-center mobiledesktop:text-xl mobiledesktop:max-w-md">{{ $t('home.hero.orderButton') }}</NuxtLink>
     </section>
 
     <!-- Présentation Section -->

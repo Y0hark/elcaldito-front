@@ -2,7 +2,7 @@
   <div class="min-h-screen bg-crema font-sans text-primary flex flex-col w-full">
     <div class="max-w-4xl mx-auto px-4 py-12">
       <h1 class="text-4xl font-bold text-primary text-center mb-4">{{ $t('home.contact.pageTitle') }}</h1>
-      <p class="text-lg text-primary/80 text-center mb-8">{{ $t('home.contact.subtitle') }} contact@elcaldito.fr.</p>
+      <p class="text-lg text-primary/80 text-center mb-8">{{ $t('home.contact.subtitle') }}</p>
 
       <div class="md:grid md:grid-cols-2 gap-8">
         <div class="bg-white p-8 rounded-xl shadow-md border border-primary/10">
@@ -47,10 +47,10 @@
               <span class="text-2xl mr-3">📍</span>
               <span>{{ $t('home.contact.info.location') }}</span>
             </li>
-                          <li class="flex items-center">
+                          <!-- <li class="flex items-center">
                 <span class="text-2xl mr-3">📧</span>
                 <span>contact@elcaldito.fr</span>
-              </li>
+              </li> -->
             <li class="flex items-center">
               <span class="text-2xl mr-3">📱</span>
               <span>{{ $t('home.contact.info.whatsapp') }}</span>
